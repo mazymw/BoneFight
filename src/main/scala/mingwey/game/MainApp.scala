@@ -9,6 +9,8 @@ import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
 
 object MainApp extends JFXApp {
+
+
   // transform path of RootLayout.fxml to URI for resource location.
   val rootResource = getClass.getResource("view/RootLayout.fxml")
   // initialize the loader object.
