@@ -1,0 +1,31 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[error] java.lang.IllegalStateException: Application launch must not be called more than once
+[error] 	at com.sun.javafx.application.LauncherImpl.launchApplication(LauncherImpl.java:162)
+[error] 	at com.sun.javafx.application.LauncherImpl.launchApplication(LauncherImpl.java:143)
+[error] 	at javafx.application.Application.launch(Application.java:191)
+[error] 	at scalafx.application.JFXApp.main(JFXApp.scala:294)
+[error] 	at scalafx.application.JFXApp.main$(JFXApp.scala:288)
+[error] 	at mingwey.game.MainApp$.main(MainApp.scala:10)
+[error] 	at mingwey.game.MainApp.main(MainApp.scala)
+[error] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[error] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[error] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[error] 	at java.lang.reflect.Method.invoke(Method.java:498)
+[error] 	at sbt.Run.invokeMain(Run.scala:144)
+[error] 	at sbt.Run.execute$1(Run.scala:94)
+[error] 	at sbt.Run.$anonfun$runWithLoader$5(Run.scala:121)
+[error] 	at sbt.Run$.executeSuccess(Run.scala:187)
+[error] 	at sbt.Run.runWithLoader(Run.scala:121)
+[error] 	at sbt.Defaults$.$anonfun$bgRunTask$6(Defaults.scala:1988)
+[error] 	at sbt.Defaults$.$anonfun$termWrapper$2(Defaults.scala:1927)
+[error] 	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+[error] 	at scala.util.Try$.apply(Try.scala:213)
+[error] 	at sbt.internal.BackgroundThreadPool$BackgroundRunnable.run(DefaultBackgroundJobService.scala:367)
+[error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[error] 	at java.lang.Thread.run(Thread.java:750)
+[error] (Compile / run) java.lang.IllegalStateException: Application launch must not be called more than once
+[error] Total time: 0 s, completed Jul 20, 2024 10:02:12 PM
+[debug] > Exec(idea-shell, None, None)

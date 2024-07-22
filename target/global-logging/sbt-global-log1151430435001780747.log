@@ -1,0 +1,9 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 2 Scala sources to C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes ...
+[info] Non-compiled module 'compiler-bridge_2.12' for Scala 2.12.19. Compiling...
+[info]   Compilation completed in 7.214s.
+[info] done compiling
+[success] Total time: 23 s, completed Jul 20, 2024 10:01:57 PM
+[debug] > Exec(idea-shell, None, None)
