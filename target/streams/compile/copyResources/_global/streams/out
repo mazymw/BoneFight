@@ -1,2 +1,11 @@
 [debug] Copy resource mappings: 
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\Image\cat.png,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\cat.png)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\Image\dog.png,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\dog.png)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\Image\gameBackground.png,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\gameBackground.png)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\Image\notificationBoard.png,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\notificationBoard.png)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\Image\poison.png,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\poison.png)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\mingwey\game\view\Css.css,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Css.css)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\mingwey\game\view\Difficulty.fxml,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Difficulty.fxml)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\mingwey\game\view\Game.fxml,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Game.fxml)
+[debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\mingwey\game\view\Home.fxml,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Home.fxml)
 [debug] 	(C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\resources\mingwey\game\view\RootLayout.fxml,C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\RootLayout.fxml)

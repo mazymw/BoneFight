@@ -1,0 +1,49 @@
+[debug] > Exec(run, None, None)
+[debug] Evaluating tasks: Compile / run
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[info] compiling 6 Scala sources to C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes ...
+[info] done compiling
+[error] java.lang.RuntimeException: Exception in Application start method
+[error] 	at com.sun.javafx.application.LauncherImpl.launchApplication1(LauncherImpl.java:917)
+[error] 	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication$1(LauncherImpl.java:182)
+[error] 	at java.lang.Thread.run(Thread.java:750)
+[error] Caused by: javafx.fxml.LoadException: No controller specified.
+[error] file:/C:/Users/mazym/IdeaProjects/finalprojectv2-mazymw2/target/bg-jobs/sbt_1c73386a/job-1/target/f856a865/8a082e30/scalafxintro_2.12-0.1.0-SNAPSHOT.jar!/mingwey/game/view/Home.fxml:37
+[error] 
+[error] 	at javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2602)
+[error] 	at javafx.fxml.FXMLLoader.access$100(FXMLLoader.java:103)
+[error] 	at javafx.fxml.FXMLLoader$Element.getControllerMethodHandle(FXMLLoader.java:557)
+[error] 	at javafx.fxml.FXMLLoader$Element.processEventHandlerAttributes(FXMLLoader.java:599)
+[error] 	at javafx.fxml.FXMLLoader$ValueElement.processEndElement(FXMLLoader.java:770)
+[error] 	at javafx.fxml.FXMLLoader.processEndElement(FXMLLoader.java:2858)
+[error] 	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2537)
+[error] 	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2446)
+[error] 	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:2414)
+[error] 	at mingwey.game.MainApp$.showHome(MainApp.scala:30)
+[error] 	at mingwey.game.MainApp$.delayedEndpoint$mingwey$game$MainApp$1(MainApp.scala:35)
+[error] 	at mingwey.game.MainApp$delayedInit$body.apply(MainApp.scala:10)
+[error] 	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+[error] 	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+[error] 	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+[error] 	at scalafx.application.JFXApp.$anonfun$init$1(JFXApp.scala:302)
+[error] 	at scalafx.application.JFXApp.$anonfun$init$1$adapted(JFXApp.scala:302)
+[error] 	at scala.collection.immutable.List.foreach(List.scala:431)
+[error] 	at scala.collection.generic.TraversableForwarder.foreach(TraversableForwarder.scala:38)
+[error] 	at scala.collection.generic.TraversableForwarder.foreach$(TraversableForwarder.scala:38)
+[error] 	at scala.collection.mutable.ListBuffer.foreach(ListBuffer.scala:47)
+[error] 	at scalafx.application.JFXApp.init(JFXApp.scala:302)
+[error] 	at scalafx.application.JFXApp.init$(JFXApp.scala:302)
+[error] 	at mingwey.game.MainApp$.init(MainApp.scala:10)
+[error] 	at scalafx.application.AppHelper.start(AppHelper.scala:33)
+[error] 	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$8(LauncherImpl.java:863)
+[error] 	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$7(PlatformImpl.java:326)
+[error] 	at com.sun.javafx.application.PlatformImpl.lambda$null$5(PlatformImpl.java:295)
+[error] 	at java.security.AccessController.doPrivileged(Native Method)
+[error] 	at com.sun.javafx.application.PlatformImpl.lambda$runLater$6(PlatformImpl.java:294)
+[error] 	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+[error] 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+[error] 	at com.sun.glass.ui.win.WinApplication.lambda$null$4(WinApplication.java:185)
+[error] 	at java.lang.Thread.run(Thread.java:750)
+[error] (Compile / run) Exception in Application start method
+[error] Total time: 11 s, completed Jul 22, 2024 11:57:14 AM
+[debug] > Exec(idea-shell, None, None)

@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="607.0" fitWidth="1000.0" layoutY="-1.0">
@@ -42,17 +41,9 @@
             <ProgressBar prefHeight="44.0" prefWidth="386.0" progress="1.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-       <Button fx:id="poisonButton" layoutX="50.0" layoutY="150.0" styleClass="button poison-button">
-           <graphic>
-               <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-                   <Image url="@../../../Image/poison.png" />
-               </ImageView>
-           </graphic>
-       </Button>
-      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="336.0" layoutY="200.0">
-         <image>
-            <Image url="@../../../Image/poison.png" />
-         </image>
-      </ImageView>
+       <Button fx:id="poisonButton" layoutX="680.0" layoutY="122.0" styleClass="poison-button" />
+         <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="699.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+             <Image url="@../../../Image/poison.png" />
+         </ImageView>
    </children>
 </AnchorPane>

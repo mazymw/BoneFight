@@ -1,1 +1,55 @@
-[debug] Jar uptodate: C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\scalafxintro_2.12-0.1.0-SNAPSHOT.jar
+[debug] Packaging C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\scalafxintro_2.12-0.1.0-SNAPSHOT.jar ...
+[debug] Input file mappings:
+[debug] 	Image
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image
+[debug] 	Image\cat.png
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\cat.png
+[debug] 	Image\dog.png
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\dog.png
+[debug] 	Image\gameBackground.png
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\gameBackground.png
+[debug] 	Image\notificationBoard.png
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\notificationBoard.png
+[debug] 	Image\poison.png
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\Image\poison.png
+[debug] 	mingwey
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey
+[debug] 	mingwey\game
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game
+[debug] 	mingwey\game\MainApp$$anon$1$$anon$2.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\MainApp$$anon$1$$anon$2.class
+[debug] 	mingwey\game\MainApp$$anon$1.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\MainApp$$anon$1.class
+[debug] 	mingwey\game\MainApp$.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\MainApp$.class
+[debug] 	mingwey\game\MainApp$delayedInit$body.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\MainApp$delayedInit$body.class
+[debug] 	mingwey\game\MainApp.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\MainApp.class
+[debug] 	mingwey\game\view
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view
+[debug] 	mingwey\game\view\Css.css
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Css.css
+[debug] 	mingwey\game\view\Difficulty.fxml
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Difficulty.fxml
+[debug] 	mingwey\game\view\DifficultyController$Controller.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\DifficultyController$Controller.class
+[debug] 	mingwey\game\view\DifficultyController.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\DifficultyController.class
+[debug] 	mingwey\game\view\Game.fxml
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Game.fxml
+[debug] 	mingwey\game\view\GameController.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\GameController.class
+[debug] 	mingwey\game\view\Home.fxml
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\Home.fxml
+[debug] 	mingwey\game\view\HomeController$Controller.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\HomeController$Controller.class
+[debug] 	mingwey\game\view\HomeController.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\HomeController.class
+[debug] 	mingwey\game\view\RootLayout.fxml
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\RootLayout.fxml
+[debug] 	mingwey\game\view\RootLayoutController$Controller.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\RootLayoutController$Controller.class
+[debug] 	mingwey\game\view\RootLayoutController.class
+[debug] 	  C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes\mingwey\game\view\RootLayoutController.class
+[debug] Done packaging.
