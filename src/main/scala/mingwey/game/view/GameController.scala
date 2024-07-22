@@ -1,69 +1,34 @@
+
 package mingwey.game.view
-import mingwey.game.MainApp
-import scalafx.scene.image.ImageView
-import scalafx.scene.text.Text
+
+import scalafx.scene.input.MouseEvent
+import scalafx.scene.layout.AnchorPane
+import scalafx.scene.shape.Circle
 import scalafxml.core.macros.sfxml
 
+import java.time.Instant
+
+
 @sfxml
-class GameController(){
+class GameController( private val circle: Circle,
+                    ){
+  var clicked = true
 
-
-  object ProjectileMotionApp extends JFXApp {
-    // Constants for projectile motion
-    val g = 9.81  // Acceleration due to gravity
-    val v0 = 50.0 // Initial velocity (m/s)
-    val angle = 45.0 // Launch angle (degrees)
-
-    // Convert angle to radians
-    val angleRad = Math.toRadians(angle)
-
-    // Initial velocity components
-    val v0x = v0 * Math.cos(angleRad)
-    val v0y = v0 * Math.sin(angleRad)
-
-    // Create a circle to represent the projectile
-    val projectile = new Circle {
-      radius = 5
-      fill = Color.Red
-      centerX = 0
-      centerY = 0
+    var pressTime = 0f
+    var releaseTime = 0f
+    circle.onMousePressed = e => {
+      pressTime = System.nanoTime()
+      println(pressTime)
     }
 
-    // Timeline to animate the projectile
-    val animation = new Timeline {
-      cycleCount = Timeline.Indefinite
-      autoReverse = false
-      keyFrames = Seq(
-        new KeyFrame(Duration(0), new EventHandler[ActionEvent] {
-          override def handle(event: ActionEvent): Unit = {
-            projectile.centerX = 0
-            projectile.centerY = 0
-          }
-        }),
-        new KeyFrame(Duration(10000), new EventHandler[ActionEvent] {
-          override def handle(event: ActionEvent): Unit = {
-            val t = 10.0 // Time in seconds (adjust as needed)
-            val x = v0x * t
-            val y = v0y * t - 0.5 * g * t * t
-            projectile.centerX = x
-            projectile.centerY = y
-          }
-        })
-      )
+    circle.onMouseReleased = e => {
+      releaseTime = System.nanoTime()
+      val duration = (releaseTime - pressTime) / 1000000000
+      println(releaseTime)
+      println
+      println(duration)
+      println
     }
-
-    stage = new JFXApp.PrimaryStage {
-      title = "Projectile Motion"
-      scene = new Scene(800, 600) {
-        fill = Color.White
-        content = projectile
-      }
-    }
-
-    // Start the animation
-    animation.play()
-  }
-
 
 
 

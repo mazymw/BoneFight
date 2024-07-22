@@ -46,6 +46,6 @@
          <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="699.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
              <Image url="@../../../Image/poison.png" />
          </ImageView>
-      <Circle fill="DODGERBLUE" layoutX="241.0" layoutY="303.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="208.0" layoutY="300.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
