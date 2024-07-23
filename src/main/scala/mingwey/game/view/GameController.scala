@@ -48,7 +48,7 @@ class GameController( private val circle: Circle,
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
 
-  def handleCharacterCoordite(): Unit = {
+  def handleCoordinates(): Unit = {
     val playerXCoor = (charImage1.layoutX.value, charImage1.layoutX.value + charImage1.getFitWidth)
     val playerYCoor = (charImage1.layoutY.value - charImage1.getFitHeight, charImage1.layoutY.value)
     game.setPlayerCoor(playerXCoor,playerYCoor)
@@ -56,6 +56,17 @@ class GameController( private val circle: Circle,
     val ComputerXCoor = (charImage2.layoutX.value, charImage2.layoutX.value + charImage2.getFitWidth)
     val ComputerYCoor = (charImage2.layoutY.value - charImage2.getFitHeight, charImage2.layoutY.value)
     game.setComputerCoor(ComputerXCoor, ComputerYCoor)
+
+
+    game.player.bone.xCoordinate(0) = bone1.layoutX.value
+    game.player.bone.xCoordinate(1) = bone1.layoutX.value + bone1.getFitWidth
+    game.player.bone.yCoordinate(0) = bone1.layoutY.value - bone1.getFitHeight
+    game.player.bone.yCoordinate(1) = bone1.layoutY.value
+
+    game.computer.bone.xCoordinate(0) = bone2.layoutX.value
+    game.computer.bone.xCoordinate(1) = bone2.layoutX.value + bone2.getFitWidth
+    game.computer.bone.yCoordinate(0) = bone2.layoutY.value - bone2.getFitHeight
+    game.computer.bone.yCoordinate(1) = bone2.layoutY.value
   }
 
 
@@ -88,7 +99,7 @@ class GameController( private val circle: Circle,
   }
 
   handlePlayerShot()
-  handleCharacterCoordite()
+  handleCoordinates()
   player.bone.checkIntersects(computer)
 }
 

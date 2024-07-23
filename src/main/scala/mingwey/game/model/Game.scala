@@ -3,7 +3,7 @@ package mingwey.game.model
 import scalafx.beans.property.{StringProperty, ObjectProperty}
 import java.time.LocalDate
 
-class Game(val player : Character, computer: Character) {
+class Game(val player : Character, val computer: Character) {
   var playerTurn: Boolean = true
   var gameState : Boolean = true
 
