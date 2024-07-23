@@ -52,6 +52,7 @@ object MainApp extends JFXApp {
 
 
 
+
   // call to display home when app start
   showHome()
 

@@ -7,12 +7,14 @@ class Game(val player : Character, computer: Character) {
   var playerTurn: Boolean = true
   var gameState : Boolean = true
 
-  def setPlayerCoor(xCoordinate : Int, yCoordinate : Int): Unit = {
+  def setPlayerCoor(xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
     player.x_coordinate = xCoordinate
     player.y_coordinate = yCoordinate
+    println(player.x_coordinate)
+    println(player.y_coordinate)
   }
 
-  def setComputerCoor(xCoordinate : Int, yCoordinate : Int): Unit = {
+  def setComputerCoor(xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
     computer.x_coordinate = xCoordinate
     computer.y_coordinate = yCoordinate
   }
@@ -33,7 +35,7 @@ class Game(val player : Character, computer: Character) {
 
     while (time < flightTime){
       var coodinate = shooter.bone.arc(velocity, time)
-      if (coodinate._2  <= target. )
+//      if (coodinate._2  <= target. )
     }
   }
 
