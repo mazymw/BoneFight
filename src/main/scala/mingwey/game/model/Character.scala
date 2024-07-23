@@ -10,8 +10,9 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   var stat: ObjectProperty[charStat] = ObjectProperty(stats)
   val img: ObjectProperty[String] = ObjectProperty(image)
   val bone  = new Bone()
-  var x_coordinate :(Double, Double) = (0,0)
-  var y_coordinate :(Double, Double) = (0,0)
+  var xCoordinate :(Double, Double) = (0,0)
+  var yCoordinate :(Double, Double) = (0,0)
+
 
 
   def takeDamage(amount: Int): Unit = {
@@ -22,6 +23,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   def performAttack(target: Character, distance: Double): Unit = {
 
   }
+
 
 
 }

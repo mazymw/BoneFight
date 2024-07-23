@@ -8,15 +8,17 @@ class Game(val player : Character, computer: Character) {
   var gameState : Boolean = true
 
   def setPlayerCoor(xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
-    player.x_coordinate = xCoordinate
-    player.y_coordinate = yCoordinate
-    println(player.x_coordinate)
-    println(player.y_coordinate)
+    player.xCoordinate = xCoordinate
+    player.yCoordinate = yCoordinate
+    println(player.xCoordinate)
+    println(player.yCoordinate)
   }
 
   def setComputerCoor(xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
-    computer.x_coordinate = xCoordinate
-    computer.y_coordinate = yCoordinate
+    computer.xCoordinate = xCoordinate
+    computer.yCoordinate = yCoordinate
+    println(computer.xCoordinate)
+    println(computer.yCoordinate)
   }
 
   def checkGameState() : Boolean = {

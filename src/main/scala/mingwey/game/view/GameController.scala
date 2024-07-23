@@ -50,11 +50,11 @@ class GameController( private val circle: Circle,
 
   def handleCharacterCoordite(): Unit = {
     val playerXCoor = (charImage1.layoutX.value, charImage1.layoutX.value + charImage1.getFitWidth)
-    val playerYCoor = (charImage1.layoutY.value, charImage1.layoutY.value + charImage1.getFitHeight)
+    val playerYCoor = (charImage1.layoutY.value - charImage1.getFitHeight, charImage1.layoutY.value)
     game.setPlayerCoor(playerXCoor,playerYCoor)
 
     val ComputerXCoor = (charImage2.layoutX.value, charImage2.layoutX.value + charImage2.getFitWidth)
-    val ComputerYCoor = (charImage2.layoutY.value, charImage2.layoutY.value + charImage2.getFitHeight)
+    val ComputerYCoor = (charImage2.layoutY.value - charImage2.getFitHeight, charImage2.layoutY.value)
     game.setComputerCoor(ComputerXCoor, ComputerYCoor)
   }
 
@@ -89,6 +89,7 @@ class GameController( private val circle: Circle,
 
   handlePlayerShot()
   handleCharacterCoordite()
+  player.bone.checkIntersects(computer)
 }
 
 
