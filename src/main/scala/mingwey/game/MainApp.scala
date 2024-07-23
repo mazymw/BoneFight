@@ -45,10 +45,10 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
 
-  val character1 = Character.blueCat
-  val character2 = Character.bulldog
+  val player = Character.blueCat
+  val computer = Character.bulldog
 
-  val game = new Game(character1,character2)
+  val game = new Game(player,computer)
 
 
 

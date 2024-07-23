@@ -6,11 +6,12 @@ import scalafx.beans.property.{StringProperty, ObjectProperty}
 case class charStat(hp: Int, atk: Int)
 
 class Character(val nameS: String, val stats: charStat, val image: String) {
-  var Name: StringProperty = new StringProperty(nameS)
+  val Name: StringProperty = new StringProperty(nameS)
   var stat: ObjectProperty[charStat] = ObjectProperty(stats)
-  var img: ObjectProperty[String] = ObjectProperty(image)
-  var bone  = new Bone()
-
+  val img: ObjectProperty[String] = ObjectProperty(image)
+  val bone  = new Bone()
+  var x_coordinate = 0
+  var y_coordinate = 0
 
 
   def takeDamage(amount: Int): Unit = {

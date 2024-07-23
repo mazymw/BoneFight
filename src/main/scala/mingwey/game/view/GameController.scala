@@ -41,20 +41,20 @@ class GameController( private val circle: Circle,
   }
 
   // Load the character image
-  val characterImage1 = new Image(getClass.getResourceAsStream(character1.img.value))
-  val characterImage2 = new Image(getClass.getResourceAsStream(character2.img.value))
-  val character1Bone = new Image(getClass.getResourceAsStream(character1.bone.img.value))
-  val character2Bone = new Image(getClass.getResourceAsStream(character2.bone.img.value))
-  charImage1.setImage(characterImage1)
-  charImage2.setImage(characterImage2)
+  val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
+  val computerImage = new Image(getClass.getResourceAsStream(computer.img.value))
+  val playerBone = new Image(getClass.getResourceAsStream(player.bone.img.value))
+  val computerBone = new Image(getClass.getResourceAsStream(computer.bone.img.value))
+  charImage1.setImage(playerImage)
+  charImage2.setImage(computerImage)
+
+
 
   private def handlePlayerShot(): Unit = {
     if (game.playerTurn) {
       println("Player shoots!")
-      bone1.setImage(character1Bone)
+      bone1.setImage(playerBone)
       mousePressedDuration()
-
-
 
 
       // Switch to computer's turn
@@ -72,7 +72,7 @@ class GameController( private val circle: Circle,
   private def handleComputerShot(): Unit = {
     // Perform computer's shooting action
     println("Computer shoots!")
-    bone2.setImage(character2Bone)
+    bone2.setImage(computerBone)
 
     // Switch back to player's turn
     game.playerTurn = true
