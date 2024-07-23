@@ -17,16 +17,6 @@
             <Image url="@../../../Image/gameBackground.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="196.0" fitWidth="200.0" layoutX="67.0" layoutY="343.0">
-         <image>
-            <Image url="@../../../Image/cat.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="144.0" fitWidth="200.0" layoutX="713.0" layoutY="395.0">
-         <image>
-            <Image url="@../../../Image/dog.png" />
-         </image>
-      </ImageView>
       <GridPane layoutY="7.0" prefHeight="89.0" prefWidth="1000.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,7 +36,10 @@
          <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="699.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
              <Image url="@../../../Image/poison.png" />
          </ImageView>
-      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="208.0" layoutY="300.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fx:id="charImage" fitHeight="150.0" fitWidth="200.0" layoutX="277.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="597.0" layoutY="539.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fx:id="charImage1" fitHeight="150.0" fitWidth="200.0" layoutX="76.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="charImage2" fitHeight="150.0" fitWidth="200.0" layoutX="713.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bone1" fitHeight="42.0" fitWidth="50.0" layoutX="276.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bone2" fitHeight="42.0" fitWidth="50.0" layoutX="663.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

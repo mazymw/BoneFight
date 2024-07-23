@@ -1,5 +1,5 @@
 package mingwey.game.model
-import mingwey.game.model.Bone
+
 import scalafx.beans.property.{StringProperty, ObjectProperty}
 
 
@@ -11,13 +11,15 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   var img: ObjectProperty[String] = ObjectProperty(image)
   var bone  = new Bone()
 
+
+
   def takeDamage(amount: Int): Unit = {
     val updatedHP = math.max(0, stat.value.hp - amount)
     stat = ObjectProperty(stat.value.copy(hp = updatedHP))
   }
 
   def performAttack(target: Character, distance: Double): Unit = {
-    bone.throwBone(target, distance)
+
   }
 
 
