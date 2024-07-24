@@ -62,12 +62,18 @@ class GameController( private val circle: Circle,
     game.player.bone.xCoordinate(1) = bone1.layoutX.value + bone1.getFitWidth
     game.player.bone.yCoordinate(0) = bone1.layoutY.value - bone1.getFitHeight
     game.player.bone.yCoordinate(1) = bone1.layoutY.value
+    game.player.bone.boneWidth = bone1.getFitWidth
+    game.player.bone.boneHeight = bone1.getFitHeight
 
     game.computer.bone.xCoordinate(0) = bone2.layoutX.value
     game.computer.bone.xCoordinate(1) = bone2.layoutX.value + bone2.getFitWidth
     game.computer.bone.yCoordinate(0) = bone2.layoutY.value - bone2.getFitHeight
     game.computer.bone.yCoordinate(1) = bone2.layoutY.value
+    game.computer.bone.boneWidth = bone2.getFitWidth
+    game.computer.bone.boneHeight = bone2.getFitHeight
+    game.checkHit(player, computer, 90)
   }
+
 
 
   def handlePlayerShot(): Unit = {
@@ -100,7 +106,7 @@ class GameController( private val circle: Circle,
 
   handlePlayerShot()
   handleCoordinates()
-  player.bone.checkIntersects(computer)
+
 }
 
 

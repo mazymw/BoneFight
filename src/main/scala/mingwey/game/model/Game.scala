@@ -32,12 +32,13 @@ class Game(val player : Character, val computer: Character) {
   }
 
   def checkHit(shooter: Character, target: Character, velocity: Double) = {
-    val time = 0
+    var time:Double = 0
     val flightTime = shooter.bone.getFlightTime(velocity)
 
-    while (time < flightTime){
-      var coodinate = shooter.bone.arc(velocity, time)
-//      if (coodinate._2  <= target. )
+    while (time < flightTime ){
+      shooter.bone.checkIntersectsAndPrint(target,velocity, time)
+      println()
+      time = time + 0.5
     }
   }
 
