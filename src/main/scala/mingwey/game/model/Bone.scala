@@ -4,7 +4,6 @@ import scalafx.beans.property.ObjectProperty
 import scala.collection.mutable.ArrayBuffer
 
 class Bone() {
-  val damage: Int = 100
   var img: ObjectProperty[String] = ObjectProperty("/Image/bone.png")
   val angle = 75
   var gravitational_force = 10
@@ -12,6 +11,7 @@ class Bone() {
   var yCoordinate: ArrayBuffer[Double] = ArrayBuffer(0,0)
   var boneWidth: Double = 0
   var boneHeight: Double  = 0
+  var isIntercept: Boolean = false
 
   def getFlightTime(velocity: Double): Double = {
     // Convert angle from degrees to radians
@@ -29,7 +29,6 @@ class Bone() {
     // Total flight time
     timeMaxHeight  + timeFall
   }
-
 
 
   def simulateArc(velocity : Double, time: Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {

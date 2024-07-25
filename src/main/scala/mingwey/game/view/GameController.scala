@@ -22,22 +22,53 @@ class GameController(private val circle: Circle,
                      private val bone1: ImageView,
                      private val bone2: ImageView) {
 
-  def mousePressedDuration(): Unit = {
-    var pressTime = 0f
-    var releaseTime = 0f
-    circle.onMousePressed = e => {
-      pressTime = System.nanoTime()
-      println(pressTime)
-    }
 
-    circle.onMouseReleased = e => {
-      releaseTime = System.nanoTime()
-      val duration = (releaseTime - pressTime) / 1000000000
-      println(releaseTime)
-      println(duration)
-      println()
-    }
-  }
+//  def test(): Double = {
+//    var pressStartTime: Double = 0
+//    var pressEndTime: Double = 0
+//    var isPressed: Boolean = false
+//
+//    circle.onMousePressed = event => {
+//      pressStartTime = System.currentTimeMillis()
+//      isPressed = true
+//    }
+//    circle.onMouseReleased = event => {
+//      pressEndTime = System.currentTimeMillis()
+//      isPressed = false
+//    }
+//
+//    def getPressDuration: Double = {
+//      if (isPressed) {
+//        System.currentTimeMillis() - pressStartTime
+//      } else {
+//        pressEndTime - pressStartTime
+//      }
+//    }
+//    getPressDuration
+//  }
+
+
+//  def mousePressedDuration(): Unit = {
+//    var pressTime = 0f
+//    var releaseTime = 0f
+//    var duration = 0f
+//    val upperBound = 10// change if needed
+//    val MaxVelocity = 120
+//
+//    circle.onMousePressed = e => {
+//      pressTime = System.nanoTime()
+//    }
+//
+//    circle.onMouseReleased = e => {
+//      releaseTime = System.nanoTime()
+//      duration = (releaseTime - pressTime) / 1000000000
+//      if (duration > upperBound) {
+//        duration = upperBound
+//      }
+//      println(duration)
+//      duration / upperBound * 120
+//    }
+//  }
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -73,47 +104,18 @@ class GameController(private val circle: Circle,
   }
 
 
-  def animateMovement(shooter: Character, target: Character, velocity: Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
-    var time: Double = 0
-    val flightTime = shooter.bone.getFlightTime(velocity)
-    val xCoordinates: ArrayBuffer[Double] = ArrayBuffer()
-    val yCoordinates: ArrayBuffer[Double] = ArrayBuffer()
-
-    breakable {
-      while (time < flightTime) {
-        val (simulatedXCoordinate, simulatedYCoordinate) = shooter.bone.simulateArc(velocity, time)
-
-        time += 0.1
-
-        if(shooter.bone.checkIntersects(target, velocity, time)){
-          break()
-        }
-
-        if (simulatedXCoordinate(1) > (background.layoutX.value + background.fitWidth.value) ||
-          simulatedYCoordinate(1) < background.layoutY.value)
-        {
-          break()
-        }
-        xCoordinates.append(simulatedXCoordinate(0))
-        yCoordinates.append(simulatedYCoordinate(0))
-      }
-      println(xCoordinates)
-      println(yCoordinates)
-    }
-    (xCoordinates, yCoordinates)
-  }
-
   def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
     imageView.layoutX = (imageView.layoutX + amountX).doubleValue()
     imageView.layoutY = (imageView.layoutY + amountY).doubleValue()
   }
 
-  def createTranslateTransition(): Unit = {
-    val (xCoordinates, yCoordinates) = animateMovement(player, computer, 100)
+  def createTranslateTransition(x: ArrayBuffer[Double], y: ArrayBuffer[Double]): Unit = {
+    val (xCoordinates, yCoordinates) = (x,y)
     var index = 0
 
     def nextTransition(): Unit = {
       if (index < xCoordinates.length - 1) {
+
         val xDiff = xCoordinates(index + 1) - xCoordinates(index)
         val yDiff = -(yCoordinates(index + 1) - yCoordinates(index))
 
@@ -131,9 +133,85 @@ class GameController(private val circle: Circle,
       }
     }
     nextTransition()
+
+  }
+
+  def getUserInput(callback: Double => Unit): Unit = {
+    // Variables to track mouse press duration
+    var pressTime: Long = 0
+    var releaseTime: Long = 0
+
+    // Mouse event handlers
+    circle.onMousePressed = e => {
+      pressTime = System.nanoTime()
+    }
+
+    circle.onMouseReleased = e => {
+      releaseTime = System.nanoTime()
+
+      // Calculate the duration in seconds
+      val duration = (releaseTime - pressTime).toDouble / 1e9
+      val upperBound = 2 // Upper bound for normalization
+      val maxVelocity = 120
+
+      // Normalize duration
+      val normalizedDuration = Math.min(duration, upperBound) / upperBound * maxVelocity
+      callback(normalizedDuration)
+    }
+  }
+
+  def getComputerInput(): Double = {
+
+
+  }
+
+  def handleTurn(): Unit = {
+    if (game.currentPlayer == game.player) {
+      // Use getUserInput with a callback
+      getUserInput { normalizedDuration =>
+        val velocity = normalizedDuration
+        game.takeTurn(velocity)
+      }
+    } else {
+      val velocity = getComputerInput()
+      game.takeTurn(velocity)
+
+    }
   }
 
 
+  def turn(): Unit = {
+    if (game.currentPlayer == player) {
+      println("Player shoots!")
+      bone1.setImage(playerBone)
+
+
+
+        val (x, y) = game.player.throwBone(computer, normalizedDuration)
+        // Create the translate transition
+        createTranslateTransition(x, y)
+
+
+    }
+  }
+
+  turn()
+
+//
+//  val catHpBar = new ProgressBar {
+//    progress <== Bindings.createDoubleBinding(
+//      () => game.cat.hp.value / 100.0,
+//      game.cat.hp
+//    )
+//  }
+//
+//  val dogHpBar = new ProgressBar {
+//    progress <== Bindings.createDoubleBinding(
+//      () => game.dog.hp.value / 100.0,
+//      game.dog.hp
+//    )
+//  }
+//
 
 
 //  def handlePlayerShot(): Unit = {
@@ -167,5 +245,5 @@ class GameController(private val circle: Circle,
   bone1.setImage(playerBone)
   handleCoordinates()
 
-  createTranslateTransition()
+
 }

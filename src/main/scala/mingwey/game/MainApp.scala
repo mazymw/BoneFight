@@ -6,6 +6,7 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.Includes._
+import scalafx.stage.StageStyle
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
 
@@ -23,6 +24,7 @@ object MainApp extends JFXApp {
   // initialize stage
   stage = new PrimaryStage {
     title = "AddressApp"
+    initStyle(StageStyle.Undecorated)
     scene = new Scene {
       root = roots
     }
@@ -45,7 +47,7 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
   }
 
-  val player = Character.blueCat
+  val player = Character.dinosaur
   val computer = Character.bulldog
 
   val game = new Game(player,computer)
