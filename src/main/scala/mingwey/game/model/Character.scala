@@ -27,6 +27,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     val yCoordinates: ArrayBuffer[Double] = ArrayBuffer()
 
     breakable {
+      println(flightTime)
       while (time < flightTime) {
         val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time,direction : Double)
 
@@ -34,12 +35,14 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
         if(bone.checkIntersects(target, velocity, time,direction : Double)){
           bone.isIntercept = true
+          val interceptTime = time
           break()
         }
         xCoordinates.append(simulatedXCoordinate(0))
         yCoordinates.append(simulatedYCoordinate(0))
       }
     }
+    println(xCoordinates)
     (xCoordinates, yCoordinates)
   }
 
@@ -57,6 +60,6 @@ object Character{
   def apply(nameS: String, stats: charStat, image: String) = new Character(nameS, stats, image)
   val blueCat = Character("Cat", charStat(100, 10), "/Image/cat.png")
   val bulldog = Character("dog", charStat(30, 20), "/Image/dog.png")
-  val dinosaur = Character("dinosaur", charStat(200, 20), "/Image/dinosaur.png")
+  val dinosaur = Character("dinosaur", charStat(200, 10), "/Image/dinosaur.png")
 }
 

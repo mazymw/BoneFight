@@ -28,11 +28,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ProgressBar prefHeight="44.0" prefWidth="341.0" progress="1.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <ProgressBar prefHeight="44.0" prefWidth="386.0" progress="1.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="playerHpBar" prefHeight="44.0" prefWidth="341.0" progress="1.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <ProgressBar fx:id="computerHpBar" prefHeight="44.0" prefWidth="386.0" progress="1.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-       <Button fx:id="poisonButton" layoutX="680.0" layoutY="122.0" styleClass="poison-button">
+       <Button fx:id="poisonButton" layoutX="14.0" layoutY="121.0" styleClass="poison-button">
          <graphic>
                <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                    <Image url="@../../../Image/poison.png" />

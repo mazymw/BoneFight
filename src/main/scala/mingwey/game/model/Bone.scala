@@ -33,7 +33,6 @@ class Bone() {
     flightTime =  timeMaxHeight  + timeFall
     // Total flight time
     timeMaxHeight  + timeFall
-
   }
 
 
@@ -57,6 +56,18 @@ class Bone() {
     val overlapY = simulatedYCoordinate(0) < target.yCoordinate._2 && simulatedYCoordinate(1) > target.yCoordinate._1
     overlapX && overlapY
   }
+
+//  def findIntersectionTime(target: Character, velocity: Double, direction: Double, timeStep: Double = 0.01): Option[Double] = {
+//    val totalFlightTime = getFlightTime(velocity)
+//    var time = 0.0
+//    while (time <= totalFlightTime) {
+//      if (checkIntersects(target, velocity, time, direction)) {
+//        return Some(time)
+//      }
+//      time += timeStep
+//    }
+//    None
+//  }
 
   // might not need this(Just for checking)
   def checkIntersectsAndPrint(target: Character, velocity: Double, time: Double,direction : Double): Unit = {

@@ -29,10 +29,12 @@ class GameController(
                       private val bone1: ImageView,
                       private val bone2: ImageView,
                       private val playerHpBar: ProgressBar,
+                      private val computerHpBar: ProgressBar
+
                     ) {
 
 
-  val maxVelocity = 110
+  val maxVelocity = 120
   var turnInProgress = false
 
   // Load the character image
@@ -42,6 +44,12 @@ class GameController(
   val computerBone = new Image(getClass.getResourceAsStream(computer.bone.img.value))
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
+
+  def initialize(): Unit = {
+    handleCoordinates()
+    handleTurns()
+    bindProgressBar()
+  }
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
     val xCoor = (imageView.layoutX.value, imageView.layoutX.value + imageView.getFitWidth)
@@ -90,6 +98,7 @@ class GameController(
     val (xCoordinates, yCoordinates) = (x,y)
     var index = 0
 
+
     def nextTransition(): Unit = {
       if (index < xCoordinates.length - 1) {
 
@@ -113,12 +122,19 @@ class GameController(
 
   }
 
-//  def bindProgressBar(): Unit = {
-//    playerHpBar.progress.value =  0.5
-//  }
+  def bindProgressBar(character: Character): Unit = {
+    // Add listener to update progress bar when hp changes
+    player.hp.addListener((_, _, newValue) => {
+        playerHpBar.setProgress(newValue.doubleValue() / player.stats.hp)
 
+    })
 
+    computer.hp.addListener((_, _, newValue) => {
+        computerHpBar.setProgress(newValue.doubleValue() / computer.stats.hp)
 
+    })
+
+  }
 
 
 
@@ -164,7 +180,6 @@ class GameController(
   }
 
   def handlePlayerTurn(): Future[Unit] = {
-//    bindProgressBar()
     turnInProgress = true
     bone2.visible = false
     bone1.visible = true
@@ -177,6 +192,7 @@ class GameController(
       val velocity = normalizedDuration
       val (x, y) = game.takeTurn(velocity,1)
       createTranslateTransition(bone1, x, y)
+//      changeProgressBar(player)
       playerTurnPromise.success(())
     }
     playerTurnPromise.future
@@ -193,6 +209,7 @@ class GameController(
     val velocity = getComputerInput()
     val (x, y) = game.takeTurn(velocity, -1)
     createTranslateTransition(bone2, x, y)
+//    changeProgressBar(computer)
     Future.successful(())
 
   }
@@ -238,9 +255,8 @@ class GameController(
       println("Game over!")
     }
   }
-  handleCoordinates()
-  handleTurns()
 
 
+  initialize()
 
 }
