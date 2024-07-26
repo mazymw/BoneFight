@@ -18,6 +18,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Random, Success}
 import scala.concurrent.ExecutionContext._
+import scala.concurrent.duration.{DurationInt, FiniteDuration}
 
 @sfxml
 class GameController(
@@ -72,12 +73,20 @@ class GameController(
     game.backgroundHeight = background.layoutY.value + background.fitHeight.value
   }
 
+  def resetBonePosition(): Unit = {
+      bone1.layoutX = player.bone.xCoordinate(0)
+      bone1.layoutY = player.bone.yCoordinate(0)
+
+      bone2.layoutX = computer.bone.xCoordinate(0)
+      bone2.layoutY = computer.bone.yCoordinate(0)
+  }
+
   def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
     imageView.layoutX = (imageView.layoutX + amountX).doubleValue()
     imageView.layoutY = (imageView.layoutY + amountY).doubleValue()
   }
 
-  def createTranslateTransition(x: ArrayBuffer[Double], y: ArrayBuffer[Double]): Unit = {
+  def createTranslateTransition(imageView: ImageView, x: ArrayBuffer[Double], y: ArrayBuffer[Double]): Unit = {
     val (xCoordinates, yCoordinates) = (x,y)
     var index = 0
 
@@ -90,8 +99,8 @@ class GameController(
         val timeline = new Timeline {
           cycleCount = 1
           keyFrames = Seq(
-            KeyFrame(Duration(5), onFinished = _ => {
-              moveImageView(bone1, xDiff, yDiff)
+            KeyFrame(Duration(1), onFinished = _ => {
+              moveImageView(imageView, xDiff, yDiff)
               index += 1
               nextTransition()
             })
@@ -103,6 +112,15 @@ class GameController(
     nextTransition()
 
   }
+
+//  def bindProgressBar(): Unit = {
+//    playerHpBar.progress.value =  0.5
+//  }
+
+
+
+
+
 
   def getUserInput(): Future[Double] = {
     // Variables to track mouse press duration
@@ -146,15 +164,19 @@ class GameController(
   }
 
   def handlePlayerTurn(): Future[Unit] = {
+//    bindProgressBar()
     turnInProgress = true
+    bone2.visible = false
+    bone1.visible = true
+    circle.visible = true
     println("Player shoots!")
-    bone1.setImage(playerBone)
 
+    bone1.setImage(playerBone)
     val playerTurnPromise = Promise[Unit]()
     getUserInput().map { normalizedDuration =>
       val velocity = normalizedDuration
-      val (x, y) = game.takeTurn(velocity)
-      createTranslateTransition(x, y)
+      val (x, y) = game.takeTurn(velocity,1)
+      createTranslateTransition(bone1, x, y)
       playerTurnPromise.success(())
     }
     playerTurnPromise.future
@@ -162,34 +184,57 @@ class GameController(
 
   def handleComputerTurn(): Future[Unit] = {
     println("Computer shoots!")
+    bone2.visible = true
+    bone1.visible = false
+    circle.visible = false
     bone2.setImage(computerBone)
+    println(computer.hp)
     turnInProgress = true
     val velocity = getComputerInput()
-    val (x, y) = game.takeTurn(velocity)
-    createTranslateTransition(x, y)
+    val (x, y) = game.takeTurn(velocity, -1)
+    createTranslateTransition(bone2, x, y)
     Future.successful(())
 
   }
 
+  def waitFor(duration: FiniteDuration): Future[Unit] = {
+    val promise = Promise[Unit]()
+    Future {
+      Thread.sleep(duration.toMillis)
+      promise.success(())
+    }
+    promise.future
+  }
+
   def handleTurns(): Unit = {
     if (game.checkGameState()) {
-      if (game.currentPlayer == game.player) {
-
+      if (game.currentPlayer == player) {
         handlePlayerTurn().onComplete {
           case Success(_) =>
             game.switchTurn()
-            handleTurns()
-            turnInProgress = false
+
+            waitFor((5).second).onComplete {
+              case Success(_) =>
+                turnInProgress = false
+                handleTurns()
+            }
         }
-      } else {
+      }
+      else {
         handleComputerTurn().onComplete {
           case Success(_) =>
             game.switchTurn()
-            handleTurns()
-            turnInProgress = false
+            waitFor((5).second).onComplete {
+              case Success(_) =>
+                turnInProgress = false
+                resetBonePosition()
+                handleTurns()
+            }
+
         }
       }
-    } else {
+    }
+    else {
       println("Game over!")
     }
   }

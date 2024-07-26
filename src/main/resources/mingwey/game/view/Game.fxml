@@ -32,10 +32,12 @@
             <ProgressBar prefHeight="44.0" prefWidth="386.0" progress="1.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-       <Button fx:id="poisonButton" layoutX="680.0" layoutY="122.0" styleClass="poison-button" />
-         <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="699.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
-             <Image url="@../../../Image/poison.png" />
-         </ImageView>
+       <Button fx:id="poisonButton" layoutX="680.0" layoutY="122.0" styleClass="poison-button">
+         <graphic>
+               <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                   <Image url="@../../../Image/poison.png" />
+               </ImageView>
+         </graphic></Button>
       <Circle fx:id="circle" fill="DODGERBLUE" layoutX="405.0" layoutY="527.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="charImage1" fitHeight="97.0" fitWidth="142.0" layoutX="116.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="charImage2" fitHeight="97.0" fitWidth="142.0" layoutX="713.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />

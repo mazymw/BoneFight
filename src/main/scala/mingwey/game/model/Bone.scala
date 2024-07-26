@@ -7,13 +7,16 @@ import scala.collection.mutable.ArrayBuffer
 
 class Bone() {
   var img: ObjectProperty[String] = ObjectProperty("/Image/bone.png")
-  val angle = 75
-  var gravitational_force = 10
+//  var initialXCoordinate: ArrayBuffer[Double] = ArrayBuffer(0,0)
+//  val initialYCoordinate: ArrayBuffer[Double] = ArrayBuffer(0,0)
   var xCoordinate: ArrayBuffer[Double] = ArrayBuffer(0,0)
   var yCoordinate: ArrayBuffer[Double] = ArrayBuffer(0,0)
   var boneWidth: Double = 0
   var boneHeight: Double  = 0
+  val angle = 75
+  var gravitational_force = 10
   var isIntercept: Boolean = false
+  var flightTime: Double = 0
 
 
   def getFlightTime(velocity: Double): Double = {
@@ -27,14 +30,15 @@ class Bone() {
 
     // Time to fall from maximum height
     val timeFall = Math.sqrt(2 * hMax / gravitational_force)
-
+    flightTime =  timeMaxHeight  + timeFall
     // Total flight time
     timeMaxHeight  + timeFall
+
   }
 
 
-  def simulateArc(velocity : Double, time: Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
-    val horizontal_velocity = velocity * Math.cos(Math.toRadians(angle))
+  def simulateArc(velocity : Double, time: Double , direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
+    val horizontal_velocity = velocity * Math.cos(Math.toRadians(angle)) * direction
     val vertical_velocity = velocity * Math.sin(Math.toRadians(angle))
 
     val simulatedXCoordinate = ArrayBuffer[Double](xCoordinate(0), xCoordinate(1))
@@ -47,16 +51,16 @@ class Bone() {
     (simulatedXCoordinate, simulatedYCoordinate)
   }
 
-  def checkIntersects(target: Character, velocity: Double, time: Double): Boolean = {
-    val (simulatedXCoordinate, simulatedYCoordinate) = simulateArc(velocity, time)
+  def checkIntersects(target: Character, velocity: Double, time: Double,direction : Double): Boolean = {
+    val (simulatedXCoordinate, simulatedYCoordinate) = simulateArc(velocity, time, direction : Double)
     val overlapX = simulatedXCoordinate(0) < target.xCoordinate._2 && simulatedXCoordinate(1) > target.xCoordinate._1
     val overlapY = simulatedYCoordinate(0) < target.yCoordinate._2 && simulatedYCoordinate(1) > target.yCoordinate._1
     overlapX && overlapY
   }
 
   // might not need this(Just for checking)
-  def checkIntersectsAndPrint(target: Character, velocity: Double, time: Double): Unit = {
-    if (checkIntersects(target, velocity, time)){
+  def checkIntersectsAndPrint(target: Character, velocity: Double, time: Double,direction : Double): Unit = {
+    if (checkIntersects(target, velocity, time,direction : Double)){
       println("Target is hit")
     } else {
       println("Target is not hit")
