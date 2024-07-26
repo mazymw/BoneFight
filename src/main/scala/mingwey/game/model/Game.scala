@@ -9,6 +9,7 @@ import scala.util.control.Breaks.{break, breakable}
 class Game(val player : Character, val computer: Character) {
   var currentPlayer: Character = player
   var gameState : Boolean = true
+  var backgroundHeight: Double = 0
 
   def setCharCoor(character: Character,xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
     character.xCoordinate = xCoordinate
@@ -21,6 +22,10 @@ class Game(val player : Character, val computer: Character) {
     character.bone.boneWidth = boneWidth
     character.bone.boneHeight = boneHeight
 
+  }
+  def switchTurn(): Unit = {
+    currentPlayer = if (currentPlayer == player) computer else player
+    println(s"Turn switched. Current player: ${currentPlayer.nameS}")
   }
 
 
@@ -41,7 +46,6 @@ class Game(val player : Character, val computer: Character) {
       target.takeDamage(1)
       currentPlayer.bone.isIntercept = false
     }
-    currentPlayer = target
     (x,y)
   }
 

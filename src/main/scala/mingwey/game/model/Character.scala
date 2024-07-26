@@ -25,7 +25,6 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     val yCoordinates: ArrayBuffer[Double] = ArrayBuffer()
 
     breakable {
-      println(flightTime)
       while (time < flightTime) {
         val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time)
 

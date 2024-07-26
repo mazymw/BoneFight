@@ -1,6 +1,8 @@
 package mingwey.game.model
+import mingwey.game.MainApp.game
 import mingwey.game.view.GameController
 import scalafx.beans.property.ObjectProperty
+
 import scala.collection.mutable.ArrayBuffer
 
 class Bone() {
@@ -14,7 +16,6 @@ class Bone() {
   var isIntercept: Boolean = false
 
 
-
   def getFlightTime(velocity: Double): Double = {
     val vertical_velocity = velocity * Math.sin(Math.toRadians(angle))
 
@@ -22,8 +23,7 @@ class Bone() {
     val timeMaxHeight =  vertical_velocity / gravitational_force
 
     // Maximum height
-    println(this.yCoordinate(0))
-    val hMax = 700 - this.yCoordinate(0) + (Math.pow( vertical_velocity, 2) / (2 * gravitational_force))
+    val hMax = (game.backgroundHeight - 50) - this.yCoordinate(0) + (Math.pow( vertical_velocity, 2) / (2 * gravitational_force))
 
     // Time to fall from maximum height
     val timeFall = Math.sqrt(2 * hMax / gravitational_force)

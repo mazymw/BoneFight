@@ -14,7 +14,10 @@ import scalafxml.core.macros.sfxml
 import scala.util.control.Breaks._
 import java.time.Instant
 import scala.collection.mutable.ArrayBuffer
-import scala.util.Random
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{Future, Promise}
+import scala.util.{Failure, Random, Success}
+import scala.concurrent.ExecutionContext._
 
 @sfxml
 class GameController(
@@ -29,6 +32,7 @@ class GameController(
 
 
   val maxVelocity = 110
+  var turnInProgress = false
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -64,6 +68,8 @@ class GameController(
 
     val (computerBoneXCoor, computerBoneYCoor, computerBoneWidth, computerBoneHeight) = getBoneCoordinates(bone2)
     game.setCharBoneCoor(computer, computerBoneXCoor, computerBoneYCoor, computerBoneWidth, computerBoneHeight)
+
+    game.backgroundHeight = background.layoutY.value + background.fitHeight.value
   }
 
   def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
@@ -98,28 +104,37 @@ class GameController(
 
   }
 
-  def getUserInput(callback: Double => Unit): Unit = {
+  def getUserInput(): Future[Double] = {
     // Variables to track mouse press duration
+    val userInputPromise = Promise[Double]()
     var pressTime: Long = 0
     var releaseTime: Long = 0
 
     // Mouse event handlers
     circle.onMousePressed = e => {
-      pressTime = System.nanoTime()
+      if (turnInProgress  && game.currentPlayer == player){
+        println("Circle pressed")
+        pressTime = System.nanoTime()
+      }
+
     }
 
     circle.onMouseReleased = e => {
-      releaseTime = System.nanoTime()
+      if (turnInProgress){
+        println("Circle Released")
+        releaseTime = System.nanoTime()
 
-      // Calculate the duration in seconds
-      val duration = (releaseTime - pressTime).toDouble / 1e9
-      val upperBound = 2 // Upper bound for normalization
+        // Calculate the duration in seconds
+        val duration = (releaseTime - pressTime).toDouble / 1e9
+        val upperBound = 2 // Upper bound for normalization
 
-
-      // Normalize duration
-      val normalizedDuration = Math.min(duration, upperBound) / upperBound * maxVelocity
-      callback(normalizedDuration)
+        // Normalize duration
+        val normalizedDuration = Math.min(duration, upperBound) / upperBound * maxVelocity
+        turnInProgress = false
+        userInputPromise.success(normalizedDuration)
+      }
     }
+    userInputPromise.future
   }
 
   def getComputerInput(): Double = {
@@ -130,92 +145,57 @@ class GameController(
     randomNumber
   }
 
-  def handleTurn(): Unit = {
-    if (game.currentPlayer == game.player) {
-      println("Player shoots!")
-      bone1.setImage(playerBone)
-      println(background.layoutY.value + background.fitHeight.value)
+  def handlePlayerTurn(): Future[Unit] = {
+    turnInProgress = true
+    println("Player shoots!")
+    bone1.setImage(playerBone)
 
-      // Use getUserInput with a callback
-      getUserInput { normalizedDuration =>
-        val velocity = normalizedDuration
-        val (x,y) = game.takeTurn(velocity)
+    val playerTurnPromise = Promise[Unit]()
+    getUserInput().map { normalizedDuration =>
+      val velocity = normalizedDuration
+      val (x, y) = game.takeTurn(velocity)
+      createTranslateTransition(x, y)
+      playerTurnPromise.success(())
+    }
+    playerTurnPromise.future
+  }
 
-        createTranslateTransition(x, y)
+  def handleComputerTurn(): Future[Unit] = {
+    println("Computer shoots!")
+    bone2.setImage(computerBone)
+    turnInProgress = true
+    val velocity = getComputerInput()
+    val (x, y) = game.takeTurn(velocity)
+    createTranslateTransition(x, y)
+    Future.successful(())
+
+  }
+
+  def handleTurns(): Unit = {
+    if (game.checkGameState()) {
+      if (game.currentPlayer == game.player) {
+
+        handlePlayerTurn().onComplete {
+          case Success(_) =>
+            game.switchTurn()
+            handleTurns()
+            turnInProgress = false
+        }
+      } else {
+        handleComputerTurn().onComplete {
+          case Success(_) =>
+            game.switchTurn()
+            handleTurns()
+            turnInProgress = false
+        }
       }
     } else {
-      println("Computer shoots!")
-      bone2.setImage(computerBone)
-      val velocity = getComputerInput()
-      game.takeTurn(velocity)
-      val (x,y) = game.takeTurn(velocity)
-      createTranslateTransition(x, y)
-
+      println("Game over!")
     }
   }
-  handleTurn()
-
-
-//  def turn(): Unit = {
-//    if (game.currentPlayer == player) {
-//      println("Player shoots!")
-//      bone1.setImage(playerBone)
-//
-//
-//
-//        val (x, y) = game.player.throwBone(computer, normalizedDuration)
-//        // Create the translate transition
-//        createTranslateTransition(x, y)
-//
-//
-//    }
-//  }
-
-//  turn()
-
-//  def bindHPBars(): Unit = {
-//    game.player.hp <== playerHpBar
-//  }
-//
-//  val dogHpBar = new ProgressBar {
-//    progress <== Bindings.createDoubleBinding(
-//      () => game.dog.hp.value / 100.0,
-//      game.dog.hp
-//    )
-//  }
-
-
-
-//  def handlePlayerShot(): Unit = {
-//    if (game.playerTurn) {
-//      println("Player shoots!")
-//      bone1.setImage(playerBone)
-//      mousePressedDuration()
-//
-//      // Switch to computer's turn
-//      game.playerTurn = false
-//
-//      // Handle computer's turn after a delay
-//      new java.util.Timer().schedule(new java.util.TimerTask {
-//        def run(): Unit = {
-//          javafx.application.Platform.runLater(() => handleComputerShot())
-//        }
-//      }, 1000)
-//    }
-//  }
-//
-//  def handleComputerShot(): Unit = {
-//    // Perform computer's shooting action
-//    println("Computer shoots!")
-////    bone2.setImage(computerBone)
-//
-//    // Switch back to player's turn
-//    game.playerTurn = true
-//  }
-//
-//  handlePlayerShot()
-  bone1.setImage(playerBone)
   handleCoordinates()
+  handleTurns()
+
 
 
 }
