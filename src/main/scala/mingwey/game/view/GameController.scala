@@ -3,6 +3,7 @@ package mingwey.game.view
 import mingwey.game.model.Character
 import mingwey.game.MainApp._
 import scalafx.animation.{KeyFrame, Timeline, TranslateTransition}
+import scalafx.scene.control.ProgressBar
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.AnchorPane
@@ -13,62 +14,21 @@ import scalafxml.core.macros.sfxml
 import scala.util.control.Breaks._
 import java.time.Instant
 import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
 @sfxml
-class GameController(private val circle: Circle,
-                     private val background: ImageView,
-                     private val charImage1: ImageView,
-                     private val charImage2: ImageView,
-                     private val bone1: ImageView,
-                     private val bone2: ImageView) {
+class GameController(
+                      private val circle: Circle,
+                      private val background: ImageView,
+                      private val charImage1: ImageView,
+                      private val charImage2: ImageView,
+                      private val bone1: ImageView,
+                      private val bone2: ImageView,
+                      private val playerHpBar: ProgressBar,
+                    ) {
 
 
-//  def test(): Double = {
-//    var pressStartTime: Double = 0
-//    var pressEndTime: Double = 0
-//    var isPressed: Boolean = false
-//
-//    circle.onMousePressed = event => {
-//      pressStartTime = System.currentTimeMillis()
-//      isPressed = true
-//    }
-//    circle.onMouseReleased = event => {
-//      pressEndTime = System.currentTimeMillis()
-//      isPressed = false
-//    }
-//
-//    def getPressDuration: Double = {
-//      if (isPressed) {
-//        System.currentTimeMillis() - pressStartTime
-//      } else {
-//        pressEndTime - pressStartTime
-//      }
-//    }
-//    getPressDuration
-//  }
-
-
-//  def mousePressedDuration(): Unit = {
-//    var pressTime = 0f
-//    var releaseTime = 0f
-//    var duration = 0f
-//    val upperBound = 10// change if needed
-//    val MaxVelocity = 120
-//
-//    circle.onMousePressed = e => {
-//      pressTime = System.nanoTime()
-//    }
-//
-//    circle.onMouseReleased = e => {
-//      releaseTime = System.nanoTime()
-//      duration = (releaseTime - pressTime) / 1000000000
-//      if (duration > upperBound) {
-//        duration = upperBound
-//      }
-//      println(duration)
-//      duration / upperBound * 120
-//    }
-//  }
+  val maxVelocity = 110
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -78,31 +38,33 @@ class GameController(private val circle: Circle,
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
 
-  def handleCoordinates(): Unit = {
-    val playerXCoor = (charImage1.layoutX.value, charImage1.layoutX.value + charImage1.getFitWidth)
-    val playerYCoor = (charImage1.layoutY.value - charImage1.getFitHeight, charImage1.layoutY.value)
-    game.setPlayerCoor(playerXCoor, playerYCoor)
-
-    val computerXCoor = (charImage2.layoutX.value, charImage2.layoutX.value + charImage2.getFitWidth)
-    val computerYCoor = (charImage2.layoutY.value - charImage2.getFitHeight, charImage2.layoutY.value)
-    game.setComputerCoor(computerXCoor, computerYCoor)
-
-    game.player.bone.xCoordinate(0) = bone1.layoutX.value
-    game.player.bone.xCoordinate(1) = bone1.layoutX.value + bone1.getFitWidth
-    game.player.bone.yCoordinate(0) = bone1.layoutY.value - bone1.getFitHeight
-    game.player.bone.yCoordinate(1) = bone1.layoutY.value
-    game.player.bone.boneWidth = bone1.getFitWidth
-    game.player.bone.boneHeight = bone1.getFitHeight
-
-    game.computer.bone.xCoordinate(0) = bone2.layoutX.value
-    game.computer.bone.xCoordinate(1) = bone2.layoutX.value + bone2.getFitWidth
-    game.computer.bone.yCoordinate(0) = bone2.layoutY.value - bone2.getFitHeight
-    game.computer.bone.yCoordinate(1) = bone2.layoutY.value
-    game.computer.bone.boneWidth = bone2.getFitWidth
-    game.computer.bone.boneHeight = bone2.getFitHeight
-    //    game.checkHit(player, computer, 90)
+  private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
+    val xCoor = (imageView.layoutX.value, imageView.layoutX.value + imageView.getFitWidth)
+    val yCoor = (imageView.layoutY.value - imageView.getFitHeight, imageView.layoutY.value)
+    (xCoor, yCoor)
   }
 
+  private def getBoneCoordinates(bone: ImageView): (ArrayBuffer[Double], ArrayBuffer[Double], Double, Double) = {
+    val xCoor = ArrayBuffer(bone.layoutX.value, bone.layoutX.value + bone.getFitWidth)
+    val yCoor = ArrayBuffer(bone.layoutY.value, bone.layoutY.value + bone.getFitHeight)
+    val width = bone.getFitWidth
+    val height = bone.getFitHeight
+    (xCoor, yCoor, width, height)
+  }
+
+  def handleCoordinates(): Unit = {
+    val (playerXCoor, playerYCoor) = getCharCoordinates(charImage1)
+    game.setCharCoor(player, playerXCoor, playerYCoor)
+
+    val (computerXCoor, computerYCoor) = getCharCoordinates(charImage2)
+    game.setCharCoor(computer, computerXCoor, computerYCoor)
+
+    val (playerBoneXCoor, playerBoneYCoor, playerBoneWidth, playerBoneHeight) = getBoneCoordinates(bone1)
+    game.setCharBoneCoor(player, playerBoneXCoor, playerBoneYCoor, playerBoneWidth, playerBoneHeight)
+
+    val (computerBoneXCoor, computerBoneYCoor, computerBoneWidth, computerBoneHeight) = getBoneCoordinates(bone2)
+    game.setCharBoneCoor(computer, computerBoneXCoor, computerBoneYCoor, computerBoneWidth, computerBoneHeight)
+  }
 
   def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
     imageView.layoutX = (imageView.layoutX + amountX).doubleValue()
@@ -152,7 +114,7 @@ class GameController(private val circle: Circle,
       // Calculate the duration in seconds
       val duration = (releaseTime - pressTime).toDouble / 1e9
       val upperBound = 2 // Upper bound for normalization
-      val maxVelocity = 120
+
 
       // Normalize duration
       val normalizedDuration = Math.min(duration, upperBound) / upperBound * maxVelocity
@@ -161,48 +123,58 @@ class GameController(private val circle: Circle,
   }
 
   def getComputerInput(): Double = {
-
-
+    val random = new Random()
+    val start = 70
+    val end = maxVelocity
+    val randomNumber = start + random.nextInt( (end - start) + 1 )
+    randomNumber
   }
 
   def handleTurn(): Unit = {
     if (game.currentPlayer == game.player) {
+      println("Player shoots!")
+      bone1.setImage(playerBone)
+      println(background.layoutY.value + background.fitHeight.value)
+
       // Use getUserInput with a callback
       getUserInput { normalizedDuration =>
         val velocity = normalizedDuration
-        game.takeTurn(velocity)
+        val (x,y) = game.takeTurn(velocity)
+
+        createTranslateTransition(x, y)
       }
     } else {
+      println("Computer shoots!")
+      bone2.setImage(computerBone)
       val velocity = getComputerInput()
       game.takeTurn(velocity)
+      val (x,y) = game.takeTurn(velocity)
+      createTranslateTransition(x, y)
 
     }
   }
+  handleTurn()
 
 
-  def turn(): Unit = {
-    if (game.currentPlayer == player) {
-      println("Player shoots!")
-      bone1.setImage(playerBone)
-
-
-
-        val (x, y) = game.player.throwBone(computer, normalizedDuration)
-        // Create the translate transition
-        createTranslateTransition(x, y)
-
-
-    }
-  }
-
-  turn()
-
+//  def turn(): Unit = {
+//    if (game.currentPlayer == player) {
+//      println("Player shoots!")
+//      bone1.setImage(playerBone)
 //
-//  val catHpBar = new ProgressBar {
-//    progress <== Bindings.createDoubleBinding(
-//      () => game.cat.hp.value / 100.0,
-//      game.cat.hp
-//    )
+//
+//
+//        val (x, y) = game.player.throwBone(computer, normalizedDuration)
+//        // Create the translate transition
+//        createTranslateTransition(x, y)
+//
+//
+//    }
+//  }
+
+//  turn()
+
+//  def bindHPBars(): Unit = {
+//    game.player.hp <== playerHpBar
 //  }
 //
 //  val dogHpBar = new ProgressBar {
@@ -211,7 +183,7 @@ class GameController(private val circle: Circle,
 //      game.dog.hp
 //    )
 //  }
-//
+
 
 
 //  def handlePlayerShot(): Unit = {

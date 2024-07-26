@@ -10,18 +10,17 @@ class Game(val player : Character, val computer: Character) {
   var currentPlayer: Character = player
   var gameState : Boolean = true
 
-  def setPlayerCoor(xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
-    player.xCoordinate = xCoordinate
-    player.yCoordinate = yCoordinate
-    println(player.xCoordinate)
-    println(player.yCoordinate)
+  def setCharCoor(character: Character,xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
+    character.xCoordinate = xCoordinate
+    character.yCoordinate = yCoordinate
   }
 
-  def setComputerCoor(xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
-    computer.xCoordinate = xCoordinate
-    computer.yCoordinate = yCoordinate
-    println(computer.xCoordinate)
-    println(computer.yCoordinate)
+  def setCharBoneCoor(character: Character, xCoordinate : ArrayBuffer[Double], yCoordinate : ArrayBuffer[Double], boneWidth: Double, boneHeight: Double): Unit = {
+    character.bone.xCoordinate = xCoordinate
+    character.bone.yCoordinate = yCoordinate
+    character.bone.boneWidth = boneWidth
+    character.bone.boneHeight = boneHeight
+
   }
 
 
@@ -35,14 +34,15 @@ class Game(val player : Character, val computer: Character) {
   }
 
 
-  def takeTurn(velocity: Double): Unit = {
+  def takeTurn(velocity: Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     val target = if (currentPlayer == player) computer else player
-    currentPlayer.throwBone(target, velocity)
+    val (x, y) =currentPlayer.throwBone(target, velocity)
     if (currentPlayer.bone.isIntercept) {
       target.takeDamage(1)
+      currentPlayer.bone.isIntercept = false
     }
-
     currentPlayer = target
+    (x,y)
   }
 
 

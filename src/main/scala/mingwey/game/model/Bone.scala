@@ -13,15 +13,17 @@ class Bone() {
   var boneHeight: Double  = 0
   var isIntercept: Boolean = false
 
+
+
   def getFlightTime(velocity: Double): Double = {
-    // Convert angle from degrees to radians
     val vertical_velocity = velocity * Math.sin(Math.toRadians(angle))
 
     // Time to reach maximum height
     val timeMaxHeight =  vertical_velocity / gravitational_force
 
     // Maximum height
-    val hMax = this.xCoordinate(0) + (Math.pow( vertical_velocity, 2) / (2 * gravitational_force))
+    println(this.yCoordinate(0))
+    val hMax = 700 - this.yCoordinate(0) + (Math.pow( vertical_velocity, 2) / (2 * gravitational_force))
 
     // Time to fall from maximum height
     val timeFall = Math.sqrt(2 * hMax / gravitational_force)

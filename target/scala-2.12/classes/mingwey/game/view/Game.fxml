@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mingwey.game.view.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mingwey.game.view.GameController">
    <children>
-      <ImageView fx:id="background" fitHeight="607.0" fitWidth="1000.0">
+      <ImageView fx:id="background" fitHeight="800.0" fitWidth="1000.0">
          <image>
             <Image url="@../../../Image/gameBackground.png" />
          </image>

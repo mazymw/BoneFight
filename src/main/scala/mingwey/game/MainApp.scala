@@ -24,7 +24,7 @@ object MainApp extends JFXApp {
   // initialize stage
   stage = new PrimaryStage {
     title = "AddressApp"
-    initStyle(StageStyle.Undecorated)
+//    initStyle(StageStyle.Undecorated)
     scene = new Scene {
       root = roots
     }
