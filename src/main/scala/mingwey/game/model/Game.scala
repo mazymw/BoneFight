@@ -43,11 +43,15 @@ class Game(val player : Character, val computer: Character) {
     val target = if (currentPlayer == player) computer else player
     val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double)
     if (currentPlayer.bone.isIntercept) {
-      target.takeDamage(1)
+      println(currentPlayer.atk)
+      target.takeDamage(currentPlayer.atk)
       currentPlayer.bone.isIntercept = false
     }
     (x,y)
   }
+
+
+
 
 
 

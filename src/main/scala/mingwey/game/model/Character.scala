@@ -17,6 +17,8 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   var xCoordinate :(Double, Double) = (0,0)
   var yCoordinate :(Double, Double) = (0,0)
   val hp: DoubleProperty = DoubleProperty(stats.hp)
+  var atk: Int = stats.atk
+  val superpowers: ArrayBuffer[Superpower] = ArrayBuffer(new DamageBoostSuperpower, new HealingSuperpower(10))
 
   def isAlive: Boolean = hp.value > 0
 
@@ -27,7 +29,6 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     val yCoordinates: ArrayBuffer[Double] = ArrayBuffer()
 
     breakable {
-      println(flightTime)
       while (time < flightTime) {
         val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time,direction : Double)
 
@@ -42,17 +43,31 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
         yCoordinates.append(simulatedYCoordinate(0))
       }
     }
-    println(xCoordinates)
+
     (xCoordinates, yCoordinates)
   }
 
 
-  def takeDamage(multiplier: Double): Unit = {
-    hp.value -= stats.atk * multiplier
+  def takeDamage(dmg : Int): Unit = {
+    hp.value -= dmg
     if (hp.value < 0) hp.value = 0
   }
 
+  def addSuperpower(superpower: Superpower): Unit = {
+    superpowers.append(superpower)
+  }
 
+  def useSuperpower(index: Int): Unit = {
+    if (index >= 0 && index < superpowers.length) {
+      superpowers(index).activate(this)
+    }
+  }
+
+  def deactivateSuperpower(index: Int): Unit = {
+    if (index >= 0 && index < superpowers.length) {
+      superpowers(index).deactivate(this)
+    }
+  }
 
 }
 

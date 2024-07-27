@@ -3,7 +3,7 @@ package mingwey.game.view
 import mingwey.game.model.Character
 import mingwey.game.MainApp._
 import scalafx.animation.{KeyFrame, Timeline, TranslateTransition}
-import scalafx.scene.control.ProgressBar
+import scalafx.scene.control.{Button, ProgressBar}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.AnchorPane
@@ -29,13 +29,16 @@ class GameController(
                       private val bone1: ImageView,
                       private val bone2: ImageView,
                       private val playerHpBar: ProgressBar,
-                      private val computerHpBar: ProgressBar
+                      private val computerHpBar: ProgressBar,
+                      private val poisonButton: Button
 
                     ) {
 
 
   val maxVelocity = 120
   var turnInProgress = false
+  var userActionPhase = false
+  var poisonButtonClicked = false
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -49,6 +52,7 @@ class GameController(
     handleCoordinates()
     handleTurns()
     bindProgressBar()
+    bindPoisonButton()
   }
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
@@ -118,11 +122,12 @@ class GameController(
         timeline.play()
       }
     }
+    println(xCoordinates.length)
     nextTransition()
 
   }
 
-  def bindProgressBar(character: Character): Unit = {
+  def bindProgressBar(): Unit = {
     // Add listener to update progress bar when hp changes
     player.hp.addListener((_, _, newValue) => {
         playerHpBar.setProgress(newValue.doubleValue() / player.stats.hp)
@@ -134,6 +139,15 @@ class GameController(
 
     })
 
+  }
+
+  def bindPoisonButton(): Unit = {
+    poisonButton.onMouseClicked = e => {
+      if (userActionPhase && game.currentPlayer == player) {
+        poisonButtonClicked = true
+        poisonButton.disable = true
+      }
+    }
   }
 
 
@@ -164,7 +178,7 @@ class GameController(
 
         // Normalize duration
         val normalizedDuration = Math.min(duration, upperBound) / upperBound * maxVelocity
-        turnInProgress = false
+//        turnInProgress = false
         userInputPromise.success(normalizedDuration)
       }
     }
@@ -181,16 +195,27 @@ class GameController(
 
   def handlePlayerTurn(): Future[Unit] = {
     turnInProgress = true
+    userActionPhase = true
     bone2.visible = false
     bone1.visible = true
     circle.visible = true
     println("Player shoots!")
 
     bone1.setImage(playerBone)
+
     val playerTurnPromise = Promise[Unit]()
     getUserInput().map { normalizedDuration =>
       val velocity = normalizedDuration
+      if (poisonButtonClicked) {
+        println(game.currentPlayer.atk)
+        game.currentPlayer.useSuperpower(0)
+      }
       val (x, y) = game.takeTurn(velocity,1)
+      if (poisonButtonClicked) {
+        poisonButtonClicked = false
+        game.currentPlayer.deactivateSuperpower(0)
+      }
+      userActionPhase = false
       createTranslateTransition(bone1, x, y)
 //      changeProgressBar(player)
       playerTurnPromise.success(())
@@ -199,13 +224,13 @@ class GameController(
   }
 
   def handleComputerTurn(): Future[Unit] = {
+    turnInProgress = true
     println("Computer shoots!")
     bone2.visible = true
     bone1.visible = false
     circle.visible = false
     bone2.setImage(computerBone)
     println(computer.hp)
-    turnInProgress = true
     val velocity = getComputerInput()
     val (x, y) = game.takeTurn(velocity, -1)
     createTranslateTransition(bone2, x, y)
@@ -228,10 +253,10 @@ class GameController(
       if (game.currentPlayer == player) {
         handlePlayerTurn().onComplete {
           case Success(_) =>
-            game.switchTurn()
 
             waitFor((5).second).onComplete {
               case Success(_) =>
+                game.switchTurn()
                 turnInProgress = false
                 handleTurns()
             }
@@ -240,9 +265,10 @@ class GameController(
       else {
         handleComputerTurn().onComplete {
           case Success(_) =>
-            game.switchTurn()
+
             waitFor((5).second).onComplete {
               case Success(_) =>
+                game.switchTurn()
                 turnInProgress = false
                 resetBonePosition()
                 handleTurns()
