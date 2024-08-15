@@ -48,10 +48,9 @@ class Game(val player : Character, val computer: Character) {
 
   def applyDamage(): Unit = {
     val target = if (currentPlayer == player) computer else player
-    if (currentPlayer.bone.isIntercept) {
-      target.takeDamage(currentPlayer.atk)
-      currentPlayer.bone.isIntercept = false
-    }
+    target.takeDamage(currentPlayer.atk)
+    currentPlayer.bone.isIntercept = false
+
   }
 
 

@@ -4,10 +4,12 @@ import mingwey.game.model.Character
 import mingwey.game.MainApp._
 import scalafx.animation.{KeyFrame, Timeline, TranslateTransition}
 import scalafx.scene.control.{Button, ProgressBar}
+import scalafx.scene.effect.{Blend, BlendMode, ColorAdjust, ColorInput}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.AnchorPane
-import scalafx.scene.shape.Circle
+import scalafx.scene.paint.Color
+import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.util.Duration
 import scalafxml.core.macros.sfxml
 
@@ -18,7 +20,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Random, Success}
 import scala.concurrent.ExecutionContext._
-import scala.concurrent.duration.{DurationInt, FiniteDuration}
+import scala.concurrent.duration.{DurationDouble, DurationInt, FiniteDuration}
 
 @sfxml
 class GameController(
@@ -103,8 +105,7 @@ class GameController(
     val (xCoordinates, yCoordinates) = (x,y)
     var index = 0
     val duration = 1.0
-    boneInterceptTime = (xCoordinates.length * duration) / 50
-    println(s"Total animation duration: $boneInterceptTime seconds")
+    boneInterceptTime = (xCoordinates.length * duration) / 60
 
     def nextTransition(): Unit = {
       if (index < xCoordinates.length - 1) {
@@ -190,11 +191,40 @@ class GameController(
 
   def getComputerInput(): Double = {
     val random = new Random()
-    val start = 70
-    val end = maxVelocity
+    val start = 100
+    val end = 100
     val randomNumber = start + random.nextInt( (end - start) + 1 )
     randomNumber
   }
+
+  def applyDamageEffect(imageView: ImageView): Unit = {
+    // Create a semi-transparent red rectangle overlay
+    val redOverlay = new ColorInput {
+      x = 0
+      y = 0
+      width <== imageView.fitWidth
+      height <== imageView.fitHeight
+      paint = Color.Red
+    }
+
+    // Create a blend effect to apply the red overlay
+    val blend = new Blend {
+      mode = BlendMode.SrcAtop
+      opacity = 0.50
+      topInput = redOverlay
+    }
+
+    imageView.effect = blend
+
+    val timeline = new Timeline {
+      keyFrames = Seq(
+        KeyFrame(Duration(1000), onFinished = _ => imageView.effect = null)
+      )
+    }
+
+    timeline.play()
+  }
+
 
   def handlePlayerTurn(): Future[Unit] = {
     turnInProgress = true
@@ -251,14 +281,18 @@ class GameController(
     promise.future
   }
 
+
   def handleTurns(): Unit = {
     if (game.checkGameState()) {
       if (game.currentPlayer == player) {
         handlePlayerTurn().onComplete {
           case Success(_) =>
-            waitFor((boneInterceptTime).toInt.second).onComplete {
+            waitFor((boneInterceptTime).seconds).onComplete {
               case Success(_) =>
-                game.applyDamage()
+                if (game.currentPlayer.bone.isIntercept){
+                  game.applyDamage()
+                  applyDamageEffect(charImage2)
+                }
                 waitFor(1.second).onComplete{
                   case Success(_)=>
                     game.switchTurn()
@@ -271,13 +305,19 @@ class GameController(
       else {
         handleComputerTurn().onComplete {
           case Success(_) =>
-
-            waitFor((boneInterceptTime + 1).toInt.second).onComplete {
+            waitFor((boneInterceptTime).seconds).onComplete {
               case Success(_) =>
-                game.switchTurn()
-                turnInProgress = false
-                resetBonePosition()
-                handleTurns()
+                if (game.currentPlayer.bone.isIntercept){
+                  game.applyDamage()
+                  applyDamageEffect(charImage1)
+                }
+                waitFor(1.second).onComplete{
+                  case Success(_)=>
+                    game.switchTurn()
+                    turnInProgress = false
+                    resetBonePosition()
+                    handleTurns()
+                }
             }
 
         }
