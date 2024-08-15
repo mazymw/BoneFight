@@ -42,12 +42,16 @@ class Game(val player : Character, val computer: Character) {
   def takeTurn(velocity: Double,direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     val target = if (currentPlayer == player) computer else player
     val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double)
+
+    (x,y)
+  }
+
+  def applyDamage(): Unit = {
+    val target = if (currentPlayer == player) computer else player
     if (currentPlayer.bone.isIntercept) {
-      println(currentPlayer.atk)
       target.takeDamage(currentPlayer.atk)
       currentPlayer.bone.isIntercept = false
     }
-    (x,y)
   }
 
 

@@ -39,6 +39,7 @@ class GameController(
   var turnInProgress = false
   var userActionPhase = false
   var poisonButtonClicked = false
+  var boneInterceptTime : Double = 0
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -101,7 +102,9 @@ class GameController(
   def createTranslateTransition(imageView: ImageView, x: ArrayBuffer[Double], y: ArrayBuffer[Double]): Unit = {
     val (xCoordinates, yCoordinates) = (x,y)
     var index = 0
-
+    val duration = 1.0
+    boneInterceptTime = (xCoordinates.length * duration) / 50
+    println(s"Total animation duration: $boneInterceptTime seconds")
 
     def nextTransition(): Unit = {
       if (index < xCoordinates.length - 1) {
@@ -112,7 +115,7 @@ class GameController(
         val timeline = new Timeline {
           cycleCount = 1
           keyFrames = Seq(
-            KeyFrame(Duration(1), onFinished = _ => {
+            KeyFrame(Duration(duration), onFinished = _ => {
               moveImageView(imageView, xDiff, yDiff)
               index += 1
               nextTransition()
@@ -217,7 +220,7 @@ class GameController(
       }
       userActionPhase = false
       createTranslateTransition(bone1, x, y)
-//      changeProgressBar(player)
+
       playerTurnPromise.success(())
     }
     playerTurnPromise.future
@@ -253,12 +256,15 @@ class GameController(
       if (game.currentPlayer == player) {
         handlePlayerTurn().onComplete {
           case Success(_) =>
-
-            waitFor((5).second).onComplete {
+            waitFor((boneInterceptTime).toInt.second).onComplete {
               case Success(_) =>
-                game.switchTurn()
-                turnInProgress = false
-                handleTurns()
+                game.applyDamage()
+                waitFor(1.second).onComplete{
+                  case Success(_)=>
+                    game.switchTurn()
+                    turnInProgress = false
+                    handleTurns()
+                }
             }
         }
       }
@@ -266,7 +272,7 @@ class GameController(
         handleComputerTurn().onComplete {
           case Success(_) =>
 
-            waitFor((5).second).onComplete {
+            waitFor((boneInterceptTime + 1).toInt.second).onComplete {
               case Success(_) =>
                 game.switchTurn()
                 turnInProgress = false
