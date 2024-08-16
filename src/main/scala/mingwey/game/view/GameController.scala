@@ -32,7 +32,9 @@ class GameController(
                       private val bone2: ImageView,
                       private val playerHpBar: ProgressBar,
                       private val computerHpBar: ProgressBar,
-                      private val poisonButton: Button
+                      private val poisonButton: Button,
+                      private val HealButton: Button
+
 
                     ) {
 
@@ -135,12 +137,10 @@ class GameController(
     // Add listener to update progress bar when hp changes
     player.hp.addListener((_, _, newValue) => {
         playerHpBar.setProgress(newValue.doubleValue() / player.stats.hp)
-
     })
 
     computer.hp.addListener((_, _, newValue) => {
         computerHpBar.setProgress(newValue.doubleValue() / computer.stats.hp)
-
     })
 
   }
@@ -153,7 +153,6 @@ class GameController(
       }
     }
   }
-
 
 
   def getUserInput(): Future[Double] = {
@@ -225,53 +224,6 @@ class GameController(
     timeline.play()
   }
 
-
-  def handlePlayerTurn(): Future[Unit] = {
-    turnInProgress = true
-    userActionPhase = true
-    bone2.visible = false
-    bone1.visible = true
-    circle.visible = true
-    println("Player shoots!")
-
-    bone1.setImage(playerBone)
-
-    val playerTurnPromise = Promise[Unit]()
-    getUserInput().map { normalizedDuration =>
-      val velocity = normalizedDuration
-      if (poisonButtonClicked) {
-        println(game.currentPlayer.atk)
-        game.currentPlayer.useSuperpower(0)
-      }
-      val (x, y) = game.takeTurn(velocity,1)
-      if (poisonButtonClicked) {
-        poisonButtonClicked = false
-        game.currentPlayer.deactivateSuperpower(0)
-      }
-      userActionPhase = false
-      createTranslateTransition(bone1, x, y)
-
-      playerTurnPromise.success(())
-    }
-    playerTurnPromise.future
-  }
-
-  def handleComputerTurn(): Future[Unit] = {
-    turnInProgress = true
-    println("Computer shoots!")
-    bone2.visible = true
-    bone1.visible = false
-    circle.visible = false
-    bone2.setImage(computerBone)
-    println(computer.hp)
-    val velocity = getComputerInput()
-    val (x, y) = game.takeTurn(velocity, -1)
-    createTranslateTransition(bone2, x, y)
-//    changeProgressBar(computer)
-    Future.successful(())
-
-  }
-
   def waitFor(duration: FiniteDuration): Future[Unit] = {
     val promise = Promise[Unit]()
     Future {
@@ -282,45 +234,88 @@ class GameController(
   }
 
 
+  def handlePlayerTurn(): Future[Unit] = {
+      turnInProgress = true
+      userActionPhase = true
+      bone2.visible = false
+      bone1.visible = true
+      circle.visible = true
+      println("Player shoots!")
+      println(player.hp)
+
+      bone1.setImage(playerBone)
+
+      getUserInput().flatMap { normalizedDuration =>
+        val velocity = normalizedDuration
+        if (poisonButtonClicked) {
+          game.currentPlayer.useSuperpower(0)
+        }
+        val (x, y) = game.takeTurn(velocity, 1)
+        createTranslateTransition(bone1, x, y)
+
+        waitFor(boneInterceptTime.seconds).map { _ =>
+          if (game.currentPlayer.bone.isIntercept) {
+            game.applyDamage()
+            applyDamageEffect(charImage2)
+          }
+          if (poisonButtonClicked) {
+            poisonButtonClicked = false
+            game.currentPlayer.deactivateSuperpower(0)
+          }
+          userActionPhase = false
+        }
+      }
+  }
+
+  def handleComputerTurn(): Future[Unit] = {
+    turnInProgress = true
+    println("Computer shoots!")
+    bone2.visible = true
+    bone1.visible = false
+    circle.visible = false
+    bone2.setImage(computerBone)
+    println(computer.hp)
+
+    val velocity = getComputerInput()
+    val (x, y) = game.takeTurn(velocity, -1)
+//    println(game.currentPlayer.bone.isIntercept)
+
+    createTranslateTransition(bone2, x, y)
+//    println(game.currentPlayer.bone.isIntercept)
+
+    waitFor(boneInterceptTime.seconds).map { _ =>
+      if (game.currentPlayer.bone.isIntercept) {
+        game.applyDamage()
+        applyDamageEffect(charImage1)
+      }
+    }
+  }
+
   def handleTurns(): Unit = {
     if (game.checkGameState()) {
       if (game.currentPlayer == player) {
         handlePlayerTurn().onComplete {
           case Success(_) =>
-            waitFor((boneInterceptTime).seconds).onComplete {
+            waitFor(2.seconds).onComplete {
               case Success(_) =>
-                if (game.currentPlayer.bone.isIntercept){
-                  game.applyDamage()
-                  applyDamageEffect(charImage2)
-                }
-                waitFor(1.second).onComplete{
-                  case Success(_)=>
-                    game.switchTurn()
-                    turnInProgress = false
-                    handleTurns()
-                }
+                game.switchTurn()
+                turnInProgress = false
+                handleTurns()
             }
         }
       }
       else {
         handleComputerTurn().onComplete {
           case Success(_) =>
-            waitFor((boneInterceptTime).seconds).onComplete {
+            waitFor(2.seconds).onComplete {
               case Success(_) =>
-                if (game.currentPlayer.bone.isIntercept){
-                  game.applyDamage()
-                  applyDamageEffect(charImage1)
-                }
-                waitFor(1.second).onComplete{
-                  case Success(_)=>
-                    game.switchTurn()
-                    turnInProgress = false
-                    resetBonePosition()
-                    handleTurns()
-                }
+                game.switchTurn()
+                turnInProgress = false
+                resetBonePosition()
+                handleTurns()
+            }
             }
 
-        }
       }
     }
     else {

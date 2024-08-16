@@ -33,3 +33,16 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 0); /* Shadow effect */
 }
 
+.Heal-button {
+    -fx-background-color: linear-gradient(to bottom, #90EE90, #32CD32); /* Lighter green to darker green gradient */
+    -fx-border-width: 2px;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-min-width: 50px; /* Minimum width for circular shape */
+    -fx-min-height: 50px; /* Minimum height for circular shape */
+    -fx-max-width: 100px; /* Maximum width for circular shape */
+    -fx-max-height: 100px; /* Maximum height for circular shape */
+    -fx-alignment: center; /* Center the content */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 0); /* Shadow effect */
+}
+

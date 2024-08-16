@@ -43,5 +43,14 @@
       <ImageView fx:id="charImage2" fitHeight="97.0" fitWidth="142.0" layoutX="713.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bone1" fitHeight="42.0" fitWidth="50.0" layoutX="269.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bone2" fitHeight="42.0" fitWidth="50.0" layoutX="663.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="HealButton" layoutX="93.0" layoutY="121.0" styleClass="Heal-button">
+         <graphic>
+            <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Image/Heart%20Healing.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
