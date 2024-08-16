@@ -40,17 +40,6 @@ class Game(val player : Character, val computer: Character) {
   }
 
 
-//  def takeTurn(velocity: Double,direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
-//    val target = if (currentPlayer == player) computer else player
-//    val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double)
-//    if (currentPlayer.bone.isIntercept) {
-//      target.takeDamage(currentPlayer.atk)
-//      currentPlayer.bone.isIntercept = false
-//    }
-//    (x,y)
-//  }
-
-
   def takeTurn(velocity: Double,direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     val target = if (currentPlayer == player) computer else player
     val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double)
@@ -67,6 +56,15 @@ class Game(val player : Character, val computer: Character) {
   }
 
 
+  //  def takeTurn(velocity: Double,direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
+  //    val target = if (currentPlayer == player) computer else player
+  //    val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double)
+  //    if (currentPlayer.bone.isIntercept) {
+  //      target.takeDamage(currentPlayer.atk)
+  //      currentPlayer.bone.isIntercept = false
+  //    }
+  //    (x,y)
+  //  }
 
 
 

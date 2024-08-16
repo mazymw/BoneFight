@@ -1,7 +1,7 @@
 package mingwey.game.model
 
 import javafx.beans.property.SimpleDoubleProperty
-import mingwey.game.MainApp.computer
+import mingwey.game.MainApp.{computer, game}
 import scalafx.beans.property.{DoubleProperty, IntegerProperty, ObjectProperty, StringProperty}
 
 import scala.collection.mutable.ArrayBuffer
@@ -18,7 +18,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   var yCoordinate :(Double, Double) = (0,0)
   val hp: DoubleProperty = DoubleProperty(stats.hp)
   var atk: Int = stats.atk
-  val superpowers: ArrayBuffer[Superpower] = ArrayBuffer(new DamageBoostSuperpower, new HealingSuperpower(10))
+  val superpowers: ArrayBuffer[Superpower] = ArrayBuffer(new DamageBoostSuperpower, new HealingSuperpower(this.stats.hp * 10 / 100))
 
   def isAlive: Boolean = hp.value > 0
 
@@ -27,6 +27,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     val flightTime = bone.getFlightTime(velocity)
     val xCoordinates: ArrayBuffer[Double] = ArrayBuffer()
     val yCoordinates: ArrayBuffer[Double] = ArrayBuffer()
+
 
     breakable {
       while (time < flightTime) {
@@ -53,9 +54,6 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     if (hp.value < 0) hp.value = 0
   }
 
-  def addSuperpower(superpower: Superpower): Unit = {
-    superpowers.append(superpower)
-  }
 
   def useSuperpower(index: Int): Unit = {
     if (index >= 0 && index < superpowers.length) {

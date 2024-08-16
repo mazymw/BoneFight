@@ -33,7 +33,7 @@ class GameController(
                       private val playerHpBar: ProgressBar,
                       private val computerHpBar: ProgressBar,
                       private val poisonButton: Button,
-                      private val HealButton: Button
+                      private val healButton: Button
 
 
                     ) {
@@ -43,6 +43,7 @@ class GameController(
   var turnInProgress = false
   var userActionPhase = false
   var poisonButtonClicked = false
+  var healButtonClicked = false
   var boneInterceptTime : Double = 0
 
   // Load the character image
@@ -58,6 +59,7 @@ class GameController(
     handleTurns()
     bindProgressBar()
     bindPoisonButton()
+    bindHealButton()
   }
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
@@ -154,6 +156,17 @@ class GameController(
     }
   }
 
+  def bindHealButton(): Unit = {
+    healButton.onMouseClicked = e => {
+      if (userActionPhase && game.currentPlayer == player) {
+        println("Heal button clicked")
+        game.currentPlayer.useSuperpower(1)
+        healButtonClicked = true
+        healButton.disable = true
+      }
+    }
+  }
+
 
   def getUserInput(): Future[Double] = {
     // Variables to track mouse press duration
@@ -245,11 +258,13 @@ class GameController(
 
       bone1.setImage(playerBone)
 
+
       getUserInput().flatMap { normalizedDuration =>
         val velocity = normalizedDuration
         if (poisonButtonClicked) {
           game.currentPlayer.useSuperpower(0)
         }
+
         val (x, y) = game.takeTurn(velocity, 1)
         createTranslateTransition(bone1, x, y)
 
@@ -278,10 +293,8 @@ class GameController(
 
     val velocity = getComputerInput()
     val (x, y) = game.takeTurn(velocity, -1)
-//    println(game.currentPlayer.bone.isIntercept)
 
     createTranslateTransition(bone2, x, y)
-//    println(game.currentPlayer.bone.isIntercept)
 
     waitFor(boneInterceptTime.seconds).map { _ =>
       if (game.currentPlayer.bone.isIntercept) {
