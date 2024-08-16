@@ -33,8 +33,9 @@ class GameController(
                       private val playerHpBar: ProgressBar,
                       private val computerHpBar: ProgressBar,
                       private val poisonButton: Button,
-                      private val healButton: Button
-
+                      private val healButton: Button,
+                      private val leftWindBar: ProgressBar,
+                      private val rightWindBar: ProgressBar,
 
                     ) {
 
@@ -45,6 +46,7 @@ class GameController(
   var poisonButtonClicked = false
   var healButtonClicked = false
   var boneInterceptTime : Double = 0
+  val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -144,6 +146,22 @@ class GameController(
     computer.hp.addListener((_, _, newValue) => {
         computerHpBar.setProgress(newValue.doubleValue() / computer.stats.hp)
     })
+
+  }
+
+  def updateWindBar(wind : Double): Unit = {
+    if (wind < 0){
+      leftWindBar.setProgress(-wind / windValues.max)
+      rightWindBar.setProgress(0)
+    }
+    else if(wind == 0) {
+      leftWindBar.setProgress(0)
+      rightWindBar.setProgress(0)
+    }
+    else{
+      leftWindBar.setProgress(0)
+      rightWindBar.setProgress(wind / windValues.max)
+    }
 
   }
 
@@ -256,10 +274,10 @@ class GameController(
       println(player.hp)
 
       bone1.setImage(playerBone)
-      val windValues = Seq(10, 20, 30, 40, 50)
+
       val wind = windValues(Random.nextInt(windValues.length))
       println("Wind is" + wind)
-
+      updateWindBar(wind)
 
       getUserInput().flatMap { normalizedDuration =>
         val velocity = normalizedDuration

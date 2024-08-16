@@ -1,5 +1,5 @@
 package mingwey.game.model
-import mingwey.game.MainApp.game
+import mingwey.game.MainApp.{game, player}
 import mingwey.game.view.GameController
 import scalafx.beans.property.ObjectProperty
 
@@ -37,8 +37,17 @@ class Bone() {
 
 
   def simulateArc(velocity : Double, time: Double , direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
-    val horizontal_velocity = velocity * Math.cos(Math.toRadians(angle)) * direction
+    var horizontal_velocity = velocity * Math.cos(Math.toRadians(angle)) * direction
     val vertical_velocity = velocity * Math.sin(Math.toRadians(angle))
+    println("horizontal velocity is" + horizontal_velocity)
+
+    if (game.currentPlayer == player){
+      horizontal_velocity = horizontal_velocity + wind
+      if(horizontal_velocity < 0){
+        horizontal_velocity = 0
+      }
+    }
+
 
     val simulatedXCoordinate = ArrayBuffer[Double](xCoordinate(0), xCoordinate(1))
     val simulatedYCoordinate = ArrayBuffer[Double](yCoordinate(0), yCoordinate(1))
