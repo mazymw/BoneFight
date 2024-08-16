@@ -34,6 +34,7 @@ class GameController(
                       private val computerHpBar: ProgressBar,
                       private val poisonButton: Button,
                       private val healButton: Button,
+                      private val aimButton: Button,
                       private val leftWindBar: ProgressBar,
                       private val rightWindBar: ProgressBar,
 
@@ -45,6 +46,7 @@ class GameController(
   var userActionPhase = false
   var poisonButtonClicked = false
   var healButtonClicked = false
+  var aimButtonClicked = false
   var boneInterceptTime : Double = 0
   val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
 
@@ -62,6 +64,7 @@ class GameController(
     bindProgressBar()
     bindPoisonButton()
     bindHealButton()
+    bindAimButton()
   }
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
@@ -168,8 +171,11 @@ class GameController(
   def bindPoisonButton(): Unit = {
     poisonButton.onMouseClicked = e => {
       if (userActionPhase && game.currentPlayer == player) {
-        poisonButtonClicked = true
-        poisonButton.disable = true
+        game.currentPlayer.useSuperpower(0)
+        if (game.currentPlayer.superpowers(0).isActive) {
+          poisonButtonClicked = true
+          poisonButton.disable = true
+        }
       }
     }
   }
@@ -179,8 +185,24 @@ class GameController(
       if (userActionPhase && game.currentPlayer == player) {
         println("Heal button clicked")
         game.currentPlayer.useSuperpower(1)
-        healButtonClicked = true
-        healButton.disable = true
+        if (game.currentPlayer.superpowers(1).isActive){
+          healButtonClicked = true
+          healButton.disable = true
+        }
+
+      }
+    }
+  }
+
+  def bindAimButton(): Unit = {
+    aimButton.onMouseClicked = e => {
+      if (userActionPhase && game.currentPlayer == player) {
+        println("Aim button clicked")
+        game.currentPlayer.useSuperpower(2)
+        if (game.currentPlayer.superpowers(2).isActive){
+          aimButtonClicked = true
+          aimButton.disable = true
+        }
       }
     }
   }
@@ -224,6 +246,15 @@ class GameController(
     val end = 100
     val randomNumber = start + random.nextInt( (end - start) + 1 )
     randomNumber
+  }
+
+  def resetSuperpowerState(): Unit = {
+    poisonButtonClicked = false
+    healButtonClicked = false
+    aimButtonClicked = false
+    for (i <- 0 to game.currentPlayer.superpowers.length){
+      game.currentPlayer.deactivateSuperpower(i)
+    }
   }
 
   def applyDamageEffect(imageView: ImageView): Unit = {
@@ -281,23 +312,25 @@ class GameController(
 
       getUserInput().flatMap { normalizedDuration =>
         val velocity = normalizedDuration
-        if (poisonButtonClicked) {
-          game.currentPlayer.useSuperpower(0)
+
+        if (aimButtonClicked){
+          val (x, y) = game.takeTurn(100, 1, 0)
+          createTranslateTransition(bone1, x, y)
+        }
+        else{
+          val (x, y) = game.takeTurn(velocity, 1, wind)
+          createTranslateTransition(bone1, x, y)
         }
 
-        val (x, y) = game.takeTurn(velocity, 1, wind)
-        createTranslateTransition(bone1, x, y)
-
+        userActionPhase = false
         waitFor(boneInterceptTime.seconds).map { _ =>
           if (game.currentPlayer.bone.isIntercept) {
             game.applyDamage()
             applyDamageEffect(charImage2)
           }
-          if (poisonButtonClicked) {
-            poisonButtonClicked = false
-            game.currentPlayer.deactivateSuperpower(0)
-          }
-          userActionPhase = false
+
+          resetSuperpowerState()
+
         }
       }
   }

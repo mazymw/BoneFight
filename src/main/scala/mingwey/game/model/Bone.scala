@@ -39,7 +39,7 @@ class Bone() {
   def simulateArc(velocity : Double, time: Double , direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     var horizontal_velocity = velocity * Math.cos(Math.toRadians(angle)) * direction
     val vertical_velocity = velocity * Math.sin(Math.toRadians(angle))
-    println("horizontal velocity is" + horizontal_velocity)
+
 
     if (game.currentPlayer == player){
       horizontal_velocity = horizontal_velocity + wind

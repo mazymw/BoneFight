@@ -35,11 +35,28 @@ class HealingSuperpower(healAmount: Int) extends Superpower {
       println("heal effect applied")
       character.hp.value += healAmount
       if (character.hp.value > character.stats.hp) {
-        character.hp.value = character.stats.hp // Cap the HP to maximum
-        number = number - 1
+        character.hp.value = character.stats.hp
       }
+      number = number - 1
       isActive = true
     }
+  }
+
+  def deactivate(character: Character): Unit = {
+    if (isActive) {
+      isActive = false
+    }
+  }
+}
+
+class AimSuperpower() extends Superpower {
+
+  def activate(character: Character): Unit = {
+    if (!isActive && number > 0) {
+      number = number - 1
+      isActive = true
+    }
+
   }
 
   def deactivate(character: Character): Unit = {

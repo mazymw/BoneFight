@@ -18,7 +18,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   var yCoordinate :(Double, Double) = (0,0)
   val hp: DoubleProperty = DoubleProperty(stats.hp)
   var atk: Int = stats.atk
-  val superpowers: ArrayBuffer[Superpower] = ArrayBuffer(new DamageBoostSuperpower, new HealingSuperpower(this.stats.hp * 10 / 100))
+  val superpowers: ArrayBuffer[Superpower] = ArrayBuffer(new DamageBoostSuperpower, new HealingSuperpower(this.stats.hp * 10 / 100), new AimSuperpower())
 
   def isAlive: Boolean = hp.value > 0
 
@@ -72,7 +72,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 object Character{
   def apply(nameS: String, stats: charStat, image: String) = new Character(nameS, stats, image)
   val blueCat = Character("Cat", charStat(100, 10), "/Image/cat.png")
-  val bulldog = Character("dog", charStat(30, 20), "/Image/dog.png")
+  val bulldog = Character("dog", charStat(40, 20), "/Image/dog.png")
   val dinosaur = Character("dinosaur", charStat(200, 10), "/Image/dinosaur.png")
 }
 
