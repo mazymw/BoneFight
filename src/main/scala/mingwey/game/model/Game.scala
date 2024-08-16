@@ -10,6 +10,7 @@ class Game(val player : Character, val computer: Character) {
   var currentPlayer: Character = player
   var gameState : Boolean = true
   var backgroundHeight: Double = 0
+  var difficultyLevel: String = "Medium"
 
 
   def setCharCoor(character: Character,xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {

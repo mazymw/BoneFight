@@ -8,8 +8,14 @@ import scalafxml.core.macros.sfxml
 class HomeController( private val title: Text,
                       private val catImage: ImageView
                     ){
+
   def startGame(): Unit = {
+
     MainApp.showGame()
+  }
+
+  def initialize(): Unit = {
+
   }
 
 

@@ -40,6 +40,15 @@ class GameController(
 
                     ) {
 
+  def initialize(): Unit = {
+    handleCoordinates()
+    handleTurns()
+    bindProgressBar()
+    bindPoisonButton()
+    bindHealButton()
+    bindAimButton()
+  }
+
   val random = new Random()
   val maxVelocity = 120
   var turnInProgress = false
@@ -58,14 +67,6 @@ class GameController(
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
 
-  def initialize(): Unit = {
-    handleCoordinates()
-    handleTurns()
-    bindProgressBar()
-    bindPoisonButton()
-    bindHealButton()
-    bindAimButton()
-  }
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
     val xCoor = (imageView.layoutX.value, imageView.layoutX.value + imageView.getFitWidth)
@@ -135,7 +136,7 @@ class GameController(
         timeline.play()
       }
     }
-    println(xCoordinates.length)
+
     nextTransition()
 
   }
@@ -220,9 +221,7 @@ class GameController(
         println("Circle pressed")
         pressTime = System.nanoTime()
       }
-
     }
-
     circle.onMouseReleased = e => {
       if (turnInProgress){
         println("Circle Released")
@@ -241,11 +240,25 @@ class GameController(
     userInputPromise.future
   }
 
-  def getComputerInput(): Double = {
-    val start = 100
-    val end = 100
-    val randomNumber = start + random.nextInt( (end - start) + 1 )
-    randomNumber
+  def getComputerInput(): Double = game.difficultyLevel match {
+    case "Easy" =>
+      val start = 100
+      val end = 100
+      val randomNumber = start + random.nextInt( (end - start) + 1 )
+      randomNumber
+
+    case "Medium" =>
+      val start = 100
+      val end = 100
+      val randomNumber = start + random.nextInt( (end - start) + 1 )
+      randomNumber
+
+    case "Hard" =>
+      val start = 100
+      val end = 100
+      val randomNumber = start + random.nextInt( (end - start) + 1 )
+      randomNumber
+
   }
 
   def resetSuperpowerState(): Unit = {
@@ -307,7 +320,6 @@ class GameController(
       bone1.setImage(playerBone)
 
       val wind = windValues(Random.nextInt(windValues.length))
-      println("Wind is" + wind)
       updateWindBar(wind)
 
       getUserInput().flatMap { normalizedDuration =>
@@ -389,7 +401,5 @@ class GameController(
     }
   }
 
-
-  initialize()
 
 }
