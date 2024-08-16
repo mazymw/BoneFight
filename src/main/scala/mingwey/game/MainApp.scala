@@ -37,7 +37,9 @@ object MainApp extends JFXApp {
     val loader = new FXMLLoader(resource, NoDependencyResolver)
     loader.load()
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
+
     this.roots.setCenter(roots)
+
     val controller = loader.getController[HomeController#Controller]
     controller.initialize()
   }
@@ -56,7 +58,7 @@ object MainApp extends JFXApp {
   def showDifficulty(): Unit = {
     val resource = getClass.getResource("view/Difficulty.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
-    loader.load();
+    loader.load()
     val roots = loader.getRoot[jfxs.layout.AnchorPane]
     //this refer to main app ( refers to the border pane up there)
     this.roots.setCenter(roots)

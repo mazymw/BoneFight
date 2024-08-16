@@ -242,18 +242,21 @@ class GameController(
 
   def getComputerInput(): Double = game.difficultyLevel match {
     case "Easy" =>
+      println("THIS IS EASY MODE")
       val start = 100
       val end = 100
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Medium" =>
+      println("THIS IS MEDIUM MODE")
       val start = 100
       val end = 100
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Hard" =>
+      println("THIS IS HARD MODE")
       val start = 100
       val end = 100
       val randomNumber = start + random.nextInt( (end - start) + 1 )
