@@ -40,9 +40,9 @@ class Game(val player : Character, val computer: Character) {
   }
 
 
-  def takeTurn(velocity: Double,direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
+  def takeTurn(velocity: Double,direction : Double, wind: Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     val target = if (currentPlayer == player) computer else player
-    val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double)
+    val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double, wind)
     (x,y)
   }
 

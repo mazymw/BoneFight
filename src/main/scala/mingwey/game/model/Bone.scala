@@ -36,7 +36,7 @@ class Bone() {
   }
 
 
-  def simulateArc(velocity : Double, time: Double , direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
+  def simulateArc(velocity : Double, time: Double , direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     val horizontal_velocity = velocity * Math.cos(Math.toRadians(angle)) * direction
     val vertical_velocity = velocity * Math.sin(Math.toRadians(angle))
 
@@ -50,8 +50,8 @@ class Bone() {
     (simulatedXCoordinate, simulatedYCoordinate)
   }
 
-  def checkIntersects(target: Character, velocity: Double, time: Double,direction : Double): Boolean = {
-    val (simulatedXCoordinate, simulatedYCoordinate) = simulateArc(velocity, time, direction : Double)
+  def checkIntersects(target: Character, velocity: Double, time: Double,direction : Double, wind: Double): Boolean = {
+    val (simulatedXCoordinate, simulatedYCoordinate) = simulateArc(velocity, time, direction : Double, wind)
     val overlapX = simulatedXCoordinate(0) < target.xCoordinate._2 && simulatedXCoordinate(1) > target.xCoordinate._1
     val overlapY = simulatedYCoordinate(0) < target.yCoordinate._2 && simulatedYCoordinate(1) > target.yCoordinate._1
     overlapX && overlapY
@@ -69,12 +69,12 @@ class Bone() {
 //    None
 //  }
 
-  // might not need this(Just for checking)
-  def checkIntersectsAndPrint(target: Character, velocity: Double, time: Double,direction : Double): Unit = {
-    if (checkIntersects(target, velocity, time,direction : Double)){
-      println("Target is hit")
-    } else {
-      println("Target is not hit")
-    }
-  }
+//  // might not need this(Just for checking)
+//  def checkIntersectsAndPrint(target: Character, velocity: Double, time: Double,direction : Double): Unit = {
+//    if (checkIntersects(target, velocity, time,direction : Double)){
+//      println("Target is hit")
+//    } else {
+//      println("Target is not hit")
+//    }
+//  }
 }

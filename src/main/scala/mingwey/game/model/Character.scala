@@ -22,7 +22,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
   def isAlive: Boolean = hp.value > 0
 
-  def throwBone(target: Character, velocity: Double,direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
+  def throwBone(target: Character, velocity: Double,direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     var time: Double = 0
     val flightTime = bone.getFlightTime(velocity)
     val xCoordinates: ArrayBuffer[Double] = ArrayBuffer()
@@ -31,11 +31,11 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
     breakable {
       while (time < flightTime) {
-        val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time,direction : Double)
+        val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time,direction : Double, wind)
 
         time += 0.1
 
-        if(bone.checkIntersects(target, velocity, time,direction : Double)){
+        if(bone.checkIntersects(target, velocity, time,direction : Double, wind)){
           bone.isIntercept = true
           val interceptTime = time
           break()

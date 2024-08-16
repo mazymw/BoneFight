@@ -38,7 +38,7 @@ class GameController(
 
                     ) {
 
-
+  val random = new Random()
   val maxVelocity = 120
   var turnInProgress = false
   var userActionPhase = false
@@ -202,7 +202,6 @@ class GameController(
   }
 
   def getComputerInput(): Double = {
-    val random = new Random()
     val start = 100
     val end = 100
     val randomNumber = start + random.nextInt( (end - start) + 1 )
@@ -257,6 +256,9 @@ class GameController(
       println(player.hp)
 
       bone1.setImage(playerBone)
+      val windValues = Seq(10, 20, 30, 40, 50)
+      val wind = windValues(Random.nextInt(windValues.length))
+      println("Wind is" + wind)
 
 
       getUserInput().flatMap { normalizedDuration =>
@@ -265,7 +267,7 @@ class GameController(
           game.currentPlayer.useSuperpower(0)
         }
 
-        val (x, y) = game.takeTurn(velocity, 1)
+        val (x, y) = game.takeTurn(velocity, 1, wind)
         createTranslateTransition(bone1, x, y)
 
         waitFor(boneInterceptTime.seconds).map { _ =>
@@ -292,7 +294,7 @@ class GameController(
     println(computer.hp)
 
     val velocity = getComputerInput()
-    val (x, y) = game.takeTurn(velocity, -1)
+    val (x, y) = game.takeTurn(velocity, -1, 0)
 
     createTranslateTransition(bone2, x, y)
 
