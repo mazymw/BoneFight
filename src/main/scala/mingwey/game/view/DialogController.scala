@@ -15,16 +15,21 @@ class DialogController(
                       )
 {
   var dialogStage : Stage  = null
-  game.resetVariables()
+
 
   def playAgain(): Unit = {
     MainApp.showDifficulty()
+    game.resetVariables()
     dialogStage.close()
   }
 
   def exit(): Unit = {
     MainApp.showHome()
+    game.resetVariables()
+    dialogStage.close()
+  }
 
+  def continueGame(): Unit = {
     dialogStage.close()
   }
 

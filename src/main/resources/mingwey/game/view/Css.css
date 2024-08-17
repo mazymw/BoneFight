@@ -34,6 +34,13 @@
     -fx-border-width: 4;
 }
 
+.pause-button{
+    -fx-pref-width: 45px;
+    -fx-pref-height: 27px;
+    -fx-background-color: #ae4c4c;
+
+}
+
 
 .button:hover {
     -fx-border-color: #b30808;
@@ -99,8 +106,8 @@
 .play-again-button {
     -fx-background-color: green; /* Green background */
     -fx-text-fill: white; /* White text color */
-    -fx-pref-width: 100px; /* Set button width */
-    -fx-pref-height: 40px; /* Set button height */
+    -fx-pref-width: 110px; /* Set button width */
+    -fx-pref-height: 50px; /* Set button height */
     -fx-font-size: 12px; /* Font size */
     -fx-border-radius: 5px; /* Rounded corners */
     -fx-background-radius: 5px; /* Match background radius to border */
@@ -109,12 +116,80 @@
 .exit-button {
     -fx-background-color: #b30808; /* Red background */
     -fx-text-fill: white; /* White text color */
-    -fx-pref-width: 100px; /* Set button width */
-    -fx-pref-height: 40px; /* Set button height */
+    -fx-pref-width: 110px; /* Set button width */
+    -fx-pref-height: 50px; /* Set button height */
     -fx-font-size: 12px; /* Font size */
     -fx-border-radius: 5px; /* Rounded corners */
     -fx-background-radius: 5px; /* Match background radius to border */
 }
+
+
+.pause-title-text{
+    -fx-font-family: "Comic Sans MS"; /* Fun, playful font suitable for a game */
+    -fx-font-size: 50px; /* Set a default font size */
+    -fx-fill: #6c6a36; /* Dark gray color for text */
+    -fx-font-weight: bold; /* Make text bold */
+}
+.pause-continue-button {
+    -fx-background-color: green; /* Green background */
+    -fx-text-fill: white; /* White text color */
+    -fx-pref-width: 110px; /* Set button width */
+    -fx-pref-height: 50px; /* Set button height */
+    -fx-font-size: 12px; /* Font size */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Match background radius to border */
+}
+
+.pause-play-again-button {
+    -fx-background-color: orange; /* Green background */
+    -fx-text-fill: white; /* White text color */
+    -fx-pref-width: 110px; /* Set button width */
+    -fx-pref-height: 50px; /* Set button height */
+    -fx-font-size: 12px; /* Font size */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Match background radius to border */
+}
+
+.start-game-button {
+    -fx-background-color: #FFDD99;  /* Light orange background */
+    -fx-background-radius: 15;       /* Rounded corners */
+    -fx-border-color: #333333;       /* Dark border */
+    -fx-border-width: 2;             /* Border thickness */
+    -fx-border-radius: 15;           /* Match the background radius */
+    -fx-text-fill: #333333;          /* Dark text color */
+    -fx-font-size: 40px;
+    -fx-font-family: "Comic Sans MS", "Arial", sans-serif; /* Playful font */
+    -fx-padding: 10 20 10 20;        /* Padding for the button */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 4, 0, 0, 2); /* Subtle shadow for depth */
+}
+
+
+.start-game-button:hover {
+    -fx-background-color: #FFCC66;  /* Slightly darker shade on hover */
+    -fx-cursor: hand;               /* Pointer cursor on hover */
+}
+
+.start-game-button:pressed {
+    -fx-background-color: #FFBB33;  /* Even darker shade when pressed */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 2, 0, 0, 1); /* Reduced shadow on press */
+}
+
+.how-to-play-button{
+    -fx-background-color: #FFDD99;  /* Light orange background */
+    -fx-background-radius: 15;       /* Rounded corners */
+    -fx-border-color: #333333;       /* Dark border */
+    -fx-border-width: 2;             /* Border thickness */
+    -fx-border-radius: 15;           /* Match the background radius */
+    -fx-text-fill: #333333;          /* Dark text color */
+    -fx-font-size: 10 px;             /* Font size for readability */
+    -fx-font-family: "Comic Sans MS", "Arial", sans-serif; /* Playful font */
+    -fx-padding: 10 20 10 20;        /* Padding for the button */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 4, 0, 0, 2); /* Subtle shadow for depth */
+}
+
+
+
+
 
 
 

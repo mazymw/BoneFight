@@ -85,6 +85,24 @@ object MainApp extends JFXApp {
     controller.initialize()
   }
 
+  def showPauseDialog(): Unit = {
+    val resource = getClass.getResource("view/PauseDialog.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots2 = loader.getRoot[jfxs.layout.AnchorPane]
+    val controller = loader.getController[DialogController#Controller]
+    val dialog = new Stage() {
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      initStyle(StageStyle.Undecorated)
+      scene = new Scene {
+        root = roots2
+      }
+    }
+    controller.dialogStage = dialog
+    dialog.showAndWait()
+  }
+
   def showVictoryDialog(): Unit = {
     val resource = getClass.getResource("view/VictoryDialog.fxml")
     val loader = new FXMLLoader(resource, NoDependencyResolver)
@@ -118,7 +136,6 @@ object MainApp extends JFXApp {
         root = roots2
       }
     }
-
     controller.dialogStage = dialog
     dialog.showAndWait()
   }

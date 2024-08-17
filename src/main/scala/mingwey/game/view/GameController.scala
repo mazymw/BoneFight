@@ -63,12 +63,9 @@ class GameController(
   val maxDuration = 2
 
   var turnInProgress = false
-
-
-
   var aimButtonClicked = false
   var boneInterceptTime : Double = 0
-  val windValues = Seq(-12, - 9, -6,12)
+  val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9,12)
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -293,6 +290,13 @@ class GameController(
       randomNumber
 
   }
+
+  def pause(): Unit = {
+    MainApp.showPauseDialog()
+
+  }
+
+
 
   def resetSuperpowerState(): Unit = {
     for (i <- 0 to game.currentPlayer.superpowers.length){
