@@ -12,11 +12,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="1000.0" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mingwey.game.view.GameController">
    <children>
-      <ImageView fx:id="background" fitHeight="607.0" fitWidth="1000.0" styleClass="Aim-button">
+      <ImageView fx:id="background" fitHeight="607.0" fitWidth="1000.0" styleClass="Aim-button" AnchorPane.topAnchor="5.0">
          <image>
             <Image url="@../../../Image/gameBackground.png" />
          </image>
@@ -40,13 +41,16 @@
                   <ProgressBar fx:id="rightWindBar" prefWidth="100.0" progress="0.0" />
                </children>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wind" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wind" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font name="Comic Sans MS" size="16.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="character-text" text="Player">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Computer" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="character-text" text="Computer" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
@@ -91,11 +95,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <StackPane fx:id="circlePane" layoutX="319.0" layoutY="491.0" prefHeight="97.0" prefWidth="128.0">
+      <StackPane fx:id="circlePane" layoutX="324.0" layoutY="478.0" prefHeight="97.0" prefWidth="128.0">
          <children>
             <Circle fx:id="circle" fill="DODGERBLUE" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="HOLD" />
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="character-text" text="HOLD" />
          </children>
       </StackPane>
+      <ProgressBar fx:id="pressDurationBar" layoutX="35.0" layoutY="418.0" prefHeight="18.0" prefWidth="100.0" progress="0.0" rotate="-90.0" visible="false" />
    </children>
 </AnchorPane>

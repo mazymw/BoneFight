@@ -1,6 +1,6 @@
 package mingwey.game.model
 
-import scalafx.beans.property.{ObjectProperty, StringProperty}
+import scalafx.beans.property.{DoubleProperty, ObjectProperty, StringProperty}
 
 import java.time.LocalDate
 import scala.collection.mutable.ArrayBuffer
@@ -8,10 +8,16 @@ import scala.util.control.Breaks.{break, breakable}
 
 class Game(val player : Character, val computer: Character) {
   var currentPlayer: Character = player
-  var gameState : Boolean = true
   var backgroundHeight: Double = 0
   var difficultyLevel: String = "Medium"
 
+
+  def resetVariables(): Unit = {
+    player.hp = DoubleProperty(player.stats.hp)
+    computer.hp = DoubleProperty(computer.stats.hp)
+    player.resetSuperpowers()
+    currentPlayer = player
+  }
 
   def setCharCoor(character: Character,xCoordinate : (Double, Double), yCoordinate : (Double, Double)): Unit = {
     character.xCoordinate = xCoordinate

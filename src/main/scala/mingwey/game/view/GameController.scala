@@ -1,8 +1,11 @@
 package mingwey.game.view
 
+import mingwey.game.MainApp
 import mingwey.game.model.Character
 import mingwey.game.MainApp._
 import scalafx.animation.{KeyFrame, Timeline, TranslateTransition}
+import scalafx.application.Platform
+import scalafx.beans.property.DoubleProperty
 import scalafx.scene.control.{Button, ProgressBar}
 import scalafx.scene.effect.{Blend, BlendMode, ColorAdjust, ColorInput}
 import scalafx.scene.image.{Image, ImageView}
@@ -40,6 +43,7 @@ class GameController(
                       private val rightWindBar: ProgressBar,
                       private val leftBubbleText: ImageView,
                       private val rightBubbleText: ImageView,
+                      private val pressDurationBar: ProgressBar,
 
                     ) {
 
@@ -50,17 +54,21 @@ class GameController(
     bindPoisonButton()
     bindHealButton()
     bindAimButton()
+    resetBonePosition()
+    resetSuperpowerState()
   }
 
   val random = new Random()
-  val maxVelocity = 120
+  val maxVelocity = 135
+  val maxDuration = 2
+
   var turnInProgress = false
-  var userActionPhase = false
-  var poisonButtonClicked = false
-  var healButtonClicked = false
+
+
+
   var aimButtonClicked = false
   var boneInterceptTime : Double = 0
-  val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
+  val windValues = Seq(-12, - 9, -6,12)
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -174,10 +182,10 @@ class GameController(
 
   def bindPoisonButton(): Unit = {
     poisonButton.onMouseClicked = e => {
-      if (userActionPhase && game.currentPlayer == player) {
+      if (turnInProgress && game.currentPlayer == player) {
         game.currentPlayer.useSuperpower(0)
         if (game.currentPlayer.superpowers(0).isActive) {
-          poisonButtonClicked = true
+
           poisonButton.disable = true
         }
       }
@@ -186,11 +194,10 @@ class GameController(
 
   def bindHealButton(): Unit = {
     healButton.onMouseClicked = e => {
-      if (userActionPhase && game.currentPlayer == player) {
+      if (turnInProgress && game.currentPlayer == player) {
         println("Heal button clicked")
         game.currentPlayer.useSuperpower(1)
         if (game.currentPlayer.superpowers(1).isActive){
-          healButtonClicked = true
           healButton.disable = true
         }
 
@@ -200,7 +207,7 @@ class GameController(
 
   def bindAimButton(): Unit = {
     aimButton.onMouseClicked = e => {
-      if (userActionPhase && game.currentPlayer == player) {
+      if (turnInProgress && game.currentPlayer == player) {
         println("Aim button clicked")
         game.currentPlayer.useSuperpower(2)
         if (game.currentPlayer.superpowers(2).isActive){
@@ -218,25 +225,45 @@ class GameController(
     var pressTime: Long = 0
     var releaseTime: Long = 0
 
+    // Timeline to update the progress bar
+    val updateInterval = Duration(100) // Update every 100ms
+    val timeline = new Timeline {
+      cycleCount = Timeline.Indefinite
+      keyFrames = Seq(
+        KeyFrame(updateInterval, onFinished = _ => {
+          val currentTime = System.nanoTime()
+          val duration = (currentTime - pressTime).toDouble / 1e9
+          val normalizedDuration = Math.min(duration / maxDuration, 1.0)
+          pressDurationBar.progress = normalizedDuration
+        })
+      )
+    }
+
     // Mouse event handlers
     circle.onMousePressed = e => {
       if (turnInProgress  && game.currentPlayer == player){
         println("Circle pressed")
         pressTime = System.nanoTime()
+        pressDurationBar.progress = 0
+        pressDurationBar.visible = true
+        timeline.play()
+
       }
     }
     circle.onMouseReleased = e => {
       if (turnInProgress){
+        timeline.stop()
         println("Circle Released")
         releaseTime = System.nanoTime()
 
         // Calculate the duration in seconds
         val duration = (releaseTime - pressTime).toDouble / 1e9
-        val upperBound = 2 // Upper bound for normalization
+        val upperBound = maxDuration // Upper bound for normalization
 
         // Normalize duration
         val normalizedDuration = Math.min(duration, upperBound) / upperBound * maxVelocity
-//        turnInProgress = false
+        turnInProgress = false
+        pressDurationBar.visible = false
         userInputPromise.success(normalizedDuration)
       }
     }
@@ -247,30 +274,27 @@ class GameController(
     case "Easy" =>
       println("THIS IS EASY MODE")
       val start = 60
-      val end = maxVelocity
+      val end = maxVelocity - 15
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Medium" =>
       println("THIS IS MEDIUM MODE")
       val start = 80
-      val end = maxVelocity
+      val end = maxVelocity - 15
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Hard" =>
       println("THIS IS HARD MODE")
-      val start = 100
-      val end = 100
+      val start = 95
+      val end = 105
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
   }
 
   def resetSuperpowerState(): Unit = {
-    poisonButtonClicked = false
-    healButtonClicked = false
-    aimButtonClicked = false
     for (i <- 0 to game.currentPlayer.superpowers.length){
       game.currentPlayer.deactivateSuperpower(i)
     }
@@ -331,7 +355,6 @@ class GameController(
 
   def handlePlayerTurn(): Future[Unit] = {
       turnInProgress = true
-      userActionPhase = true
       bone2.visible = false
       bone1.visible = true
       circlePane.visible = true
@@ -354,8 +377,8 @@ class GameController(
           val (x, y) = game.takeTurn(velocity, 1, wind)
           createTranslateTransition(bone1, x, y)
         }
+        println("bulldog hp is "+ Character.bulldog.stats.hp)
 
-        userActionPhase = false
         waitFor(boneInterceptTime.seconds).map { _ =>
           if (game.currentPlayer.bone.isIntercept) {
             game.applyDamage()
@@ -384,14 +407,17 @@ class GameController(
     val (x, y) = game.takeTurn(velocity, -1, 0)
 
     createTranslateTransition(bone2, x, y)
+    turnInProgress = false
 
     waitFor(boneInterceptTime.seconds).map { _ =>
-      if (game.currentPlayer.bone.isIntercept) {
-        game.applyDamage()
-        applyDamageEffect(charImage1)
-      }
-      else{
-        laughingAnimation()
+      Platform.runLater {
+        if (game.currentPlayer.bone.isIntercept) {
+          game.applyDamage()
+          applyDamageEffect(charImage1)
+        }
+        else {
+          laughingAnimation()
+        }
       }
     }
   }
@@ -404,8 +430,8 @@ class GameController(
             waitFor(2.seconds).onComplete {
               case Success(_) =>
                 game.switchTurn()
-                turnInProgress = false
-                handleTurns()
+
+                Platform.runLater(handleTurns)
             }
         }
       }
@@ -415,9 +441,8 @@ class GameController(
             waitFor(2.seconds).onComplete {
               case Success(_) =>
                 game.switchTurn()
-                turnInProgress = false
                 resetBonePosition()
-                handleTurns()
+                Platform.runLater(handleTurns)
             }
             }
 
@@ -425,6 +450,12 @@ class GameController(
     }
     else {
       println("Game over!")
+      if (game.player.isAlive){
+        Platform.runLater(() => MainApp.showVictoryDialog())
+      }
+      else{
+        Platform.runLater(() => MainApp.showLoseDialog())
+      }
     }
   }
 

@@ -1,13 +1,13 @@
 package mingwey.game
 import javafx.{scene => jfxs}
 import mingwey.game.model.{Bone, Character, Game}
-import mingwey.game.view.{DifficultyController, GameController, HomeController}
+import mingwey.game.view.{DifficultyController, GameController, HomeController, DialogController}
 import scalafx.Includes._
-import scalafx.application.JFXApp
+import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.Includes._
-import scalafx.stage.StageStyle
+import scalafx.stage.{Modality, Stage, StageStyle}
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
 
@@ -66,10 +66,61 @@ object MainApp extends JFXApp {
     controller.initialize()
   }
 
-  val player = Character.dinosaur
-  val computer = Character.bulldog
+  def showVictoryDialog(): Unit = {
+    val resource = getClass.getResource("view/VictoryDialog.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots2 = loader.getRoot[jfxs.layout.AnchorPane]
+    val controller = loader.getController[DialogController#Controller]
+    val dialog = new Stage() {
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      initStyle(StageStyle.Undecorated)
+      scene = new Scene {
+        root = roots2
+      }
+    }
 
-  val game = new Game(player,computer)
+    controller.dialogStage = dialog
+    dialog.showAndWait()
+  }
+
+  def showLoseDialog(): Unit = {
+    val resource = getClass.getResource("view/LoseDialog.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots2 = loader.getRoot[jfxs.layout.AnchorPane]
+    val controller = loader.getController[DialogController#Controller]
+    val dialog = new Stage() {
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      initStyle(StageStyle.Undecorated)
+      scene = new Scene {
+        root = roots2
+      }
+    }
+
+    controller.dialogStage = dialog
+    dialog.showAndWait()
+  }
+
+  var player = Character.dinosaur
+  var computer = Character.bulldog
+  var game = new Game(player,computer)
+
+
+//  def createGame(): Unit = {
+//    player = Character.dinosaur
+//    computer = Character.bulldog
+//
+//    game = new Game(player,computer)
+//
+//  }
+
+//  val player = Character.dinosaur
+//  val computer = Character.bulldog
+//
+//  val game = new Game(player,computer)
 
 
 

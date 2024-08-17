@@ -16,11 +16,26 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   val bone  = new Bone()
   var xCoordinate :(Double, Double) = (0,0)
   var yCoordinate :(Double, Double) = (0,0)
-  val hp: DoubleProperty = DoubleProperty(stats.hp)
+  var hp: DoubleProperty = DoubleProperty(stats.hp)
   var atk: Int = stats.atk
-  val superpowers: ArrayBuffer[Superpower] = ArrayBuffer(new DamageBoostSuperpower, new HealingSuperpower(this.stats.hp * 10 / 100), new AimSuperpower())
+  val superpowers: ArrayBuffer[Superpower] = createDefaultSuperpowers()
 
   def isAlive: Boolean = hp.value > 0
+
+  // Method to reset superpowers
+  def resetSuperpowers(): Unit = {
+    superpowers.clear()
+    superpowers ++= createDefaultSuperpowers()
+  }
+
+  // To create the default set of superpowers
+  private def createDefaultSuperpowers(): ArrayBuffer[Superpower] = {
+    ArrayBuffer(
+      new DamageBoostSuperpower(),
+      new HealingSuperpower(this.stats.hp * 10 / 100),
+      new AimSuperpower()
+    )
+  }
 
   def throwBone(target: Character, velocity: Double,direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     var time: Double = 0
@@ -54,7 +69,6 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     if (hp.value < 0) hp.value = 0
   }
 
-
   def useSuperpower(index: Int): Unit = {
     if (index >= 0 && index < superpowers.length) {
       superpowers(index).activate(this)
@@ -72,7 +86,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 object Character{
   def apply(nameS: String, stats: charStat, image: String) = new Character(nameS, stats, image)
   val blueCat = Character("Cat", charStat(100, 10), "/Image/cat.png")
-  val bulldog = Character("dog", charStat(40, 20), "/Image/dog.png")
-  val dinosaur = Character("dinosaur", charStat(200, 10), "/Image/dinosaur.png")
+  val bulldog = Character("dog", charStat(60, 20), "/Image/dog.png")
+  val dinosaur = Character("dinosaur", charStat(70, 10), "/Image/dinosaur.png")
 }
 
