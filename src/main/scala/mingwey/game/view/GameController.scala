@@ -37,6 +37,8 @@ class GameController(
                       private val aimButton: Button,
                       private val leftWindBar: ProgressBar,
                       private val rightWindBar: ProgressBar,
+                      private val leftBubbleText: ImageView,
+                      private val rightBubbleText: ImageView,
 
                     ) {
 
@@ -243,15 +245,15 @@ class GameController(
   def getComputerInput(): Double = game.difficultyLevel match {
     case "Easy" =>
       println("THIS IS EASY MODE")
-      val start = 100
-      val end = 100
+      val start = 60
+      val end = maxVelocity
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Medium" =>
       println("THIS IS MEDIUM MODE")
-      val start = 100
-      val end = 100
+      val start = 80
+      val end = maxVelocity
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
@@ -301,6 +303,23 @@ class GameController(
     timeline.play()
   }
 
+  def laughingAnimation(): Unit = {
+    val bubbleText = if (game.currentPlayer == player) rightBubbleText else leftBubbleText
+    showBubbleText(bubbleText)
+  }
+
+  def showBubbleText(bubbleText: ImageView): Unit = {
+    bubbleText.setVisible(true)
+    val timeline = new Timeline {
+      keyFrames = Seq(
+        KeyFrame(Duration(2000), onFinished = _ => bubbleText.setVisible(false))
+      )
+    }
+    timeline.play()
+  }
+
+
+
   def waitFor(duration: FiniteDuration): Future[Unit] = {
     val promise = Promise[Unit]()
     Future {
@@ -343,6 +362,9 @@ class GameController(
             game.applyDamage()
             applyDamageEffect(charImage2)
           }
+          else{
+            laughingAnimation()
+          }
 
           resetSuperpowerState()
 
@@ -368,6 +390,9 @@ class GameController(
       if (game.currentPlayer.bone.isIntercept) {
         game.applyDamage()
         applyDamageEffect(charImage1)
+      }
+      else{
+        laughingAnimation()
       }
     }
   }
