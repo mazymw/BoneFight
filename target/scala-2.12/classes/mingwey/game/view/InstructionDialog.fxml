@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -12,32 +13,32 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1001.0" prefWidth="800.0">
+<ScrollPane accessibleRole="PARENT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="Victory-Anchor-Pane" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mingwey.game.view.DialogController">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1001.0" prefWidth="800.0" stylesheets="@Css.css">
          <children>
-            <GridPane layoutY="230.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="800.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <GridPane layoutX="101.0" layoutY="252.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="598.0" stylesheets="@Css.css">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="214.66668701171875" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="383.33331298828125" minWidth="10.0" prefWidth="383.33331298828125" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <StackPane fx:id="circlePane" prefHeight="97.0" prefWidth="128.0">
+                  <StackPane fx:id="circlePane" prefHeight="97.0" prefWidth="260.0">
                      <children>
                         <Circle fill="DODGERBLUE" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
                         <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="HOLD" />
                      </children>
                   </StackPane>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hold this button to shoot a bone to the opponent " GridPane.columnIndex="1" />
-                  <Button fx:id="poisonButton" styleClass="poison-button" GridPane.rowIndex="1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Hold this button to shoot a bone to the opponent " wrappingWidth="371.109375" GridPane.columnIndex="1" />
+                  <Button styleClass="poison-button" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -46,7 +47,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="healButton" styleClass="Heal-button" GridPane.rowIndex="2">
+                  <Button styleClass="Heal-button" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -55,7 +56,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="aimButton" styleClass="Aim-button" GridPane.rowIndex="3">
+                  <Button fx:id="aimButton" styleClass="Aim-button" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -64,24 +65,38 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Press this button to apply x2 damage on the next attack" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Press this button to heal 10% of your character's health" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Press this button to gurantee hitting the opponent on the next attack" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Press this button to apply x2 damage on the next attack" wrappingWidth="353.3125" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Press this button to heal 10% of your character's health" wrappingWidth="374.140625" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Press this button to gurantee hitting the opponent on the next attack" wrappingWidth="345.076171875" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <GridPane prefHeight="49.0" prefWidth="800.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <GridPane layoutY="14.0" prefHeight="49.0" prefWidth="800.0">
+               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="How To Play" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="How To Play" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onMouseClicked="#exit" prefHeight="47.0" prefWidth="49.0" styleClass="close-button" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets right="40.0" />
+                     </GridPane.margin>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="34.0">
+                           <image>
+                              <Image url="@../../../Image/cross.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </GridPane>
-         </children></AnchorPane>
-  </content>
+            <Text layoutX="42.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Click and hold the mouse button over your character during their turn. The power meter will increase as long as the button is held down. Keep an eye on the wind meter to gauge the strength and direction of your throw. When you're ready, release the mouse button to launch your item toward the opponent." wrappingWidth="715.931640625" />
+         </children>
+      </AnchorPane>
+   </content>
 </ScrollPane>

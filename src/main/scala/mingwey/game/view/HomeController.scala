@@ -17,5 +17,9 @@ class HomeController( private val title: Text,
 
   }
 
+  def showInstruction(): Unit = {
+    MainApp.showInstructionDialog()
+  }
+
 
 }

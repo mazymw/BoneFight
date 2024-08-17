@@ -11,6 +11,13 @@
     -fx-fill: #000000; /* Dark gray color for text */
 }
 
+.title-text{
+    -fx-font-family: "Comic Sans MS"; /* Fun, playful font suitable for a game */
+    -fx-font-size: 30px; /* Set a default font size */
+    -fx-fill: #00008B; /* Dark gray color for text */
+    -fx-font-weight: bold; /* Make text bold */
+}
+
 
 
 .button{
@@ -20,9 +27,16 @@
     -fx-border-width: 4;
 }
 
+.close-button{
+    -fx-background-color: #b30808;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-border-width: 4;
+}
+
 
 .button:hover {
-    -fx-border-color: #ff0000;
+    -fx-border-color: #b30808;
 }
 
 /* Style for the x2 Multiplier Effect button */
