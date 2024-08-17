@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
@@ -52,7 +53,6 @@
             </Text>
          </children>
       </GridPane>
-      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="405.0" layoutY="527.0" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="charImage1" fitHeight="97.0" fitWidth="142.0" layoutX="116.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="charImage2" fitHeight="97.0" fitWidth="142.0" layoutX="713.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bone1" fitHeight="42.0" fitWidth="50.0" layoutX="269.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
@@ -91,5 +91,11 @@
             </ImageView>
          </graphic>
       </Button>
+      <StackPane fx:id="circlePane" layoutX="319.0" layoutY="491.0" prefHeight="97.0" prefWidth="128.0">
+         <children>
+            <Circle fx:id="circle" fill="DODGERBLUE" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="HOLD" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

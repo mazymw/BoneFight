@@ -7,7 +7,7 @@ import scalafx.scene.control.{Button, ProgressBar}
 import scalafx.scene.effect.{Blend, BlendMode, ColorAdjust, ColorInput}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.MouseEvent
-import scalafx.scene.layout.AnchorPane
+import scalafx.scene.layout.{AnchorPane, StackPane}
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.util.Duration
@@ -25,6 +25,7 @@ import scala.concurrent.duration.{DurationDouble, DurationInt, FiniteDuration}
 @sfxml
 class GameController(
                       private val circle: Circle,
+                      private val circlePane: StackPane,
                       private val background: ImageView,
                       private val charImage1: ImageView,
                       private val charImage2: ImageView,
@@ -309,16 +310,14 @@ class GameController(
   }
 
   def showBubbleText(bubbleText: ImageView): Unit = {
-    bubbleText.setVisible(true)
+    bubbleText.visible = true
     val timeline = new Timeline {
       keyFrames = Seq(
-        KeyFrame(Duration(2000), onFinished = _ => bubbleText.setVisible(false))
+        KeyFrame(Duration(2000), onFinished = _ => bubbleText.visible = false)
       )
     }
     timeline.play()
   }
-
-
 
   def waitFor(duration: FiniteDuration): Future[Unit] = {
     val promise = Promise[Unit]()
@@ -335,7 +334,7 @@ class GameController(
       userActionPhase = true
       bone2.visible = false
       bone1.visible = true
-      circle.visible = true
+      circlePane.visible = true
       println("Player shoots!")
       println(player.hp)
 
@@ -377,7 +376,7 @@ class GameController(
     println("Computer shoots!")
     bone2.visible = true
     bone1.visible = false
-    circle.visible = false
+    circlePane.visible = false
     bone2.setImage(computerBone)
     println(computer.hp)
 
