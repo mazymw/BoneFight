@@ -1,7 +1,7 @@
 package mingwey.game
 import javafx.{scene => jfxs}
 import mingwey.game.model.{Bone, Character, Game}
-import mingwey.game.view.{DifficultyController, GameController, HomeController, DialogController}
+import mingwey.game.view.{ChooseCharacterController, DialogController, DifficultyController, GameController, HomeController}
 import scalafx.Includes._
 import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
@@ -71,6 +71,17 @@ object MainApp extends JFXApp {
     //this refer to main app ( refers to the border pane up there)
     this.roots.setCenter(roots)
     val controller = loader.getController[GameController#Controller]
+    controller.initialize()
+  }
+
+  def showChooseCharacter(): Unit = {
+    val resource = getClass.getResource("view/ChooseCharacter.fxml")
+    val loader = new FXMLLoader(resource, NoDependencyResolver)
+    loader.load()
+    val roots = loader.getRoot[jfxs.layout.AnchorPane]
+    //this refer to main app ( refers to the border pane up there)
+    this.roots.setCenter(roots)
+    val controller = loader.getController[ChooseCharacterController#Controller]
     controller.initialize()
   }
 

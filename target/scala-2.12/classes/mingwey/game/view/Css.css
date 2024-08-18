@@ -123,7 +123,43 @@
     -fx-background-radius: 5px; /* Match background radius to border */
 }
 
+.choose-character-gridpane {
+    -fx-background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    -fx-border-color: rgba(0, 0, 0, 0.3); /* Light grayish-black border */
+    -fx-border-width: 2; /* Slightly thicker border */
+    -fx-border-radius: 10; /* Rounded corners */
+    -fx-background-radius: 10; /* Rounded background to match the border */
+    -fx-padding: 10; /* Padding inside the grid to avoid elements touching the border */
+    -fx-hgap: 10; /* Horizontal gap between grid cells */
+    -fx-vgap: 10; /* Vertical gap between grid cells */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0); /* Subtle shadow for depth */
+}
 
+.stack-pane-cell {
+    -fx-border-color: rgba(204, 54, 54, 0.5); /* Border color */
+    -fx-border-width: 2; /* Width f the border */
+    -fx-border-style: solid; /* Solid border style */
+    -fx-background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    -fx-border-radius: 5; /* Rounded corners for the border */
+    -fx-background-radius: 5; /* Match background corners with border radius */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0); /* Subtle drop shadow for depth */
+}
+
+.stack-pane-cell:hover {
+    -fx-background-color: rgba(200, 200, 200, 0.8); /* Darker background on hover */
+}
+
+.stack-pane-cell:pressed {
+    -fx-background-color: rgba(150, 150, 150, 0.8); /* Even darker background on press */
+    -fx-border-color: rgba(0, 0, 0, 0.9); /* Darkest border on press */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0); /* Inner shadow effect when pressed */
+}
+
+.stack-pane-selected {
+    -fx-background-color: rgba(100, 100, 100, 0.8); /* Persistent darker background */
+    -fx-border-color: rgba(0, 0, 0, 1); /* Persistent darkest border */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 0, 0); /* Persistent inner shadow */
+}
 
 .pause-title-text{
     -fx-font-family: "Comic Sans MS"; /* Fun, playful font suitable for a game */
