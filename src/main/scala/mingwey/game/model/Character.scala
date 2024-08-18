@@ -85,8 +85,15 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
 object Character{
   def apply(nameS: String, stats: charStat, image: String) = new Character(nameS, stats, image)
-  val blueCat = Character("Cat", charStat(100, 10), "/Image/cat.png")
-  val bulldog = Character("dog", charStat(20, 20), "/Image/dog.png")
-  val dinosaur = Character("dinosaur", charStat(50, 10), "/Image/dinosaur.png")
+  val bulldog = Character("Dog", charStat(20, 20), "/Image/dog.png")
+  val cat = Character("Cat", charStat(100, 10), "/Image/cat.png")
+  val buffalo = Character("Buffalo",charStat(200, 40), "/Image/buffalo.png")
+  val rat = Character("Rat",charStat(70, 50), "/Image/rat.png")
+  val dinosaur = Character("Dinosaur", charStat(50, 10), "/Image/dinosaur.png")
+  val gorilla = Character("Gorilla", charStat(50, 10), "/Image/gorilla.png")
+  val hyena = Character("Gorilla", charStat(50, 10), "/Image/hyena.png")
+
+  val allCharacters: List[Character] = List(cat, buffalo, rat, dinosaur, gorilla, hyena)
+
 }
 

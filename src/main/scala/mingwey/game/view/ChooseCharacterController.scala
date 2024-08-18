@@ -1,7 +1,7 @@
 package mingwey.game.view
 import mingwey.game.MainApp
-import scalafx.scene.control.Button
-import scalafx.scene.image.ImageView
+import scalafx.scene.control.{Button, ProgressBar}
+import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.text.Text
 import scalafxml.core.macros.sfxml
 import mingwey.game.MainApp._
@@ -18,14 +18,19 @@ import scala.collection.mutable.ArrayBuffer
 @sfxml
 class ChooseCharacterController(
                                  private val gridPane: GridPane,
-
+                                 private val characterName: Text,
+                                 private val hpProgressBar: ProgressBar,
+                                 private val atkProgressBar: ProgressBar,
+                                 private val characterImg: ImageView,
 
                           ){
 
 
-  val characters = List(Character.blueCat, Character.bulldog)
-  private val characterMap: Map[(Int, Int), Character] = createCharacterMap()
+  var selectedCharacter: Character = Character.cat
+  val characters = Character.allCharacters
+  val characterMap: Map[(Int, Int), Character] = createCharacterMap()
   var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()
+
 
   def initialize(): Unit = {
     addClickListenersToStackPanes()
@@ -33,8 +38,8 @@ class ChooseCharacterController(
 
   private def createCharacterMap(): Map[(Int, Int), Character] = {
     characters.zipWithIndex.flatMap { case (character, index) =>
-      val row = index / 3 // Assuming 3 columns
-      val col = index % 3
+      val row = index / 2//two columns
+      val col = index % 2
       Some((row, col) -> character)
     }.toMap
   }
@@ -48,22 +53,18 @@ class ChooseCharacterController(
         println(row + col)
         stackPane.onMouseClicked = e => {
           handleCharacterSelection(row, col,stackPane)
-
-
         }
       case _ =>
     }
   }
 
-  def handleCharacterSelection(row: Int, col: Int,clickedPane: StackPane): Character = {
-    var selectedCharacter: Character = null
+  def handleCharacterSelection(row: Int, col: Int,clickedPane: StackPane): Unit= {
+
     for (stackPane <- allStackPane) {
       stackPane.getStyleClass.remove("stack-pane-selected")
     }
 
     clickedPane.getStyleClass.add("stack-pane-selected")
-
-
 
     characterMap.get((row, col)) match {
       case Some(character) =>
@@ -71,7 +72,22 @@ class ChooseCharacterController(
       case _ =>
 
     }
-    selectedCharacter
+    displaySelectedCharacter()
+
+  }
+
+  def displaySelectedCharacter(): Unit = {
+
+    characterName.text = selectedCharacter.nameS
+    hpProgressBar.progress = selectedCharacter.stats.hp.toDouble / Character.allCharacters.maxBy(_.stats.hp).stats.hp.toDouble
+    atkProgressBar.progress = selectedCharacter.stats.atk.toDouble / Character.allCharacters.maxBy(_.stats.atk).stats.atk.toDouble
+    val characterImage = new Image(getClass.getResourceAsStream(selectedCharacter.img.value))
+    characterImg.setImage(characterImage)
+
+    characterImg.setPreserveRatio(true) // Maintain the aspect ratio
+    characterImg.setFitWidth(characterImg.getFitWidth) // Ensure it fits the width
+    characterImg.setFitHeight(characterImg.getFitHeight)
+
   }
 
 
