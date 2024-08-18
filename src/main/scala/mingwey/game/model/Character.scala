@@ -64,8 +64,8 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   }
 
 
-  def takeDamage(dmg : Int): Unit = {
-    hp.value -= dmg
+  def takeDamage(dmg : Double): Unit = {
+    hp.value -= Math.min(dmg, hp.value)
     if (hp.value < 0) hp.value = 0
   }
 

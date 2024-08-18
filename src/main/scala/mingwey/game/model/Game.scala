@@ -10,6 +10,7 @@ class Game(val player : Character, val computer: Character) {
   var currentPlayer: Character = player
   var backgroundHeight: Double = 0
   var difficultyLevel: String = "Medium"
+  val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
 
 
   def resetVariables(): Unit = {
@@ -31,6 +32,7 @@ class Game(val player : Character, val computer: Character) {
     character.bone.boneHeight = boneHeight
 
   }
+
   def switchTurn(): Unit = {
     currentPlayer = if (currentPlayer == player) computer else player
     println(s"Turn switched. Current player: ${currentPlayer.nameS}")

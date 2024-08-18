@@ -44,6 +44,7 @@ class GameController(
                       private val leftBubbleText: ImageView,
                       private val rightBubbleText: ImageView,
                       private val pressDurationBar: ProgressBar,
+//                      private val testing: Rectangle,
 
                     ) {
 
@@ -65,15 +66,29 @@ class GameController(
   var turnInProgress = false
   var aimButtonClicked = false
   var boneInterceptTime : Double = 0
-  val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9,12)
+
 
   // Load the character image
+
+
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
   val computerImage = new Image(getClass.getResourceAsStream(computer.img.value))
   val playerBone = new Image(getClass.getResourceAsStream(player.bone.img.value))
   val computerBone = new Image(getClass.getResourceAsStream(computer.bone.img.value))
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
+
+  charImage1.fitWidth = playerImage.width.value
+  charImage1.fitHeight = playerImage.height.value
+//  testing.height = playerImage.height.value
+//  testing.width =playerImage.width.value
+  charImage2.fitWidth = computerImage.width.value
+  charImage2.fitHeight = computerImage.height.value
+  bone1.fitWidth = playerBone.width.value
+  bone1.fitHeight = playerBone.height.value
+  bone2.fitWidth = computerBone.width.value
+  bone2.fitHeight = computerBone.height.value
+
 
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
@@ -163,7 +178,7 @@ class GameController(
 
   def updateWindBar(wind : Double): Unit = {
     if (wind < 0){
-      leftWindBar.setProgress(-wind / windValues.max)
+      leftWindBar.setProgress(-wind / game.windValues.max)
       rightWindBar.setProgress(0)
     }
     else if(wind == 0) {
@@ -172,7 +187,7 @@ class GameController(
     }
     else{
       leftWindBar.setProgress(0)
-      rightWindBar.setProgress(wind / windValues.max)
+      rightWindBar.setProgress(wind / game.windValues.max)
     }
 
   }
@@ -367,7 +382,7 @@ class GameController(
 
       bone1.setImage(playerBone)
 
-      val wind = windValues(Random.nextInt(windValues.length))
+      val wind = game.windValues(Random.nextInt(game.windValues.length))
       updateWindBar(wind)
 
       getUserInput().flatMap { normalizedDuration =>
