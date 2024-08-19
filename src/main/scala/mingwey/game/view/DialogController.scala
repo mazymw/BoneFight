@@ -17,7 +17,7 @@ class DialogController(
 
 
   def playAgain(): Unit = {
-    showDifficulty()
+    showChooseCharacter()
     game.resetVariables()
     dialogStage.close()
   }

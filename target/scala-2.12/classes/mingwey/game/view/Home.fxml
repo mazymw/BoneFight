@@ -40,9 +40,9 @@
                   <Insets top="20.0" />
                </GridPane.margin>
             </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="AnimalFight" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Text fill="#0822a8" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: Bold;" text="BoneFight" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
-                  <Font size="36.0" />
+                  <Font size="72.0" />
                </font>
             </Text>
             <ImageView fitHeight="150.0" fitWidth="187.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">

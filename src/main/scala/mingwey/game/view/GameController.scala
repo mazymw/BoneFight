@@ -49,7 +49,6 @@ class GameController(
                     ) {
 
   def initialize(): Unit = {
-    playGameMusic()
     handleCoordinates()
     game.checkPlayerIntersectionRange(computer, player)
     bindProgressBar()
@@ -147,21 +146,6 @@ class GameController(
     imageView.layoutY = (imageView.layoutY + amountY).doubleValue()
   }
 
-//  def checkPlayerIntersectionRange(computer: Character, player: Character): (Int, Int) = {
-//    game.currentPlayer = computer
-//    val hittingVelocities: ArrayBuffer[Int] = ArrayBuffer[Int]()
-//    for (velocity <- 0 to game.maxVelocity) {
-//      val _ = computer.throwBone(player, velocity, -1, 0)
-//
-//      if (computer.bone.isIntercept) {
-//        hittingVelocities.append(velocity)
-//        computer.bone.isIntercept = false
-//      }
-//    }
-//    game.currentPlayer = player
-//    game.playerIntersectionRange = (hittingVelocities.head, hittingVelocities.last)
-//    (hittingVelocities.head, hittingVelocities.last)
-//  }
 
   def createTranslateTransition(imageView: ImageView, x: ArrayBuffer[Double], y: ArrayBuffer[Double]): Unit = {
     val (xCoordinates, yCoordinates) = (x,y)
@@ -224,19 +208,26 @@ class GameController(
   def playIncreaseDamageEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/increaseDamageEffect.wav").toString)
     effect.play()
-
   }
 
   def playHealEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/healEffect.wav").toString)
     effect.play()
-
   }
 
   def playAimEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/aimEffect.wav").toString)
     effect.play()
+  }
 
+  def playInjuredEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/hitEffect.wav").toString)
+    effect.play()
+  }
+
+  def laughEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/laughEffect.wav").toString)
+    effect.play()
   }
 
   def bindPoisonButton(): Unit = {
@@ -455,8 +446,10 @@ class GameController(
         if (game.currentPlayer.bone.isIntercept) {
           game.applyDamage()
           applyDamageEffect(charImage2)
+          playInjuredEffect()
         }
         else{
+          laughEffect()
           laughingAnimation()
         }
 
@@ -489,8 +482,10 @@ class GameController(
         if (game.currentPlayer.bone.isIntercept) {
           game.applyDamage()
           applyDamageEffect(charImage1)
+          playInjuredEffect()
         }
         else {
+          laughEffect()
           laughingAnimation()
         }
       }

@@ -51,7 +51,7 @@
                   </Button>
                </children>
             </StackPane>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Difficulty" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-text" text="Select Difficulty" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
          </children>
       </GridPane>
    </children>

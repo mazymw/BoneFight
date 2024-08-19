@@ -35,6 +35,7 @@ class ChooseCharacterController(
 
 
   def initialize(): Unit = {
+    playGameMusic()
     addClickListenersToStackPanes()
   }
 
