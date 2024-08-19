@@ -42,17 +42,18 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     val flightTime = bone.getFlightTime(velocity)
     val xCoordinates: ArrayBuffer[Double] = ArrayBuffer()
     val yCoordinates: ArrayBuffer[Double] = ArrayBuffer()
+    bone.isIntercept = false
 
 
     breakable {
       while (time < flightTime) {
-        val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time,direction : Double, wind)
+        val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time, direction : Double, wind)
 
         time += 0.1
 
         if(bone.checkIntersects(target, velocity, time, direction : Double, wind)){
           bone.isIntercept = true
-          println("HITYTTTTTTTTTTT")
+
           val interceptTime = time
           break()
         }
@@ -61,7 +62,6 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
         yCoordinates.append(simulatedYCoordinate(0))
       }
     }
-
     (xCoordinates, yCoordinates)
   }
 

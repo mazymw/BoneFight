@@ -12,6 +12,7 @@ class Game(val player : Character, val computer: Character) {
   var difficultyLevel: String = "Medium"
   val maxVelocity = 135
   val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
+  var playerIntersectionRange = (0,0)
 
 
   def resetVariables(): Unit = {
@@ -52,7 +53,7 @@ class Game(val player : Character, val computer: Character) {
 
   def takeTurn(velocity: Double,direction : Double, wind: Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     val target = if (currentPlayer == player) computer else player
-    val (x, y) =currentPlayer.throwBone(target, velocity, direction : Double, wind)
+    val (x, y) = currentPlayer.throwBone(target, velocity, direction : Double, wind)
     (x,y)
   }
 
@@ -61,23 +62,26 @@ class Game(val player : Character, val computer: Character) {
     if (currentPlayer.bone.isIntercept) {
       println(currentPlayer.atk)
       target.takeDamage(currentPlayer.atk)
-      currentPlayer.bone.isIntercept = false
+
     }
   }
 
-  def checkPlayerIntersectionRange(): Unit = {
+  def checkPlayerIntersectionRange(computer: Character, player: Character): Unit = {
+    currentPlayer = computer
     val hittingVelocities: ArrayBuffer[Int] = ArrayBuffer[Int]()
     for (velocity <- 0 to maxVelocity) {
-      computer.throwBone(player, velocity, -1, 0)
-//      println(computer.bone.isIntercept)
+      val _ = computer.throwBone(player, velocity, -1, 0)
+
       if (computer.bone.isIntercept) {
-        println("TEST!@#$%^")
         hittingVelocities.append(velocity)
         computer.bone.isIntercept = false
       }
     }
-    hittingVelocities.foreach(println)
+    currentPlayer = player
+    playerIntersectionRange = (hittingVelocities.head, hittingVelocities.last)
   }
+
+
 
 
   //  def takeTurn(velocity: Double,direction : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {

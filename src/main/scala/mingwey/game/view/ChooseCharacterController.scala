@@ -52,7 +52,7 @@ class ChooseCharacterController(
         allStackPane += stackPane
         val row = GridPane.getRowIndex(stackPane)
         val col = GridPane.getColumnIndex(stackPane)
-        println(row + col)
+
         stackPane.onMouseClicked = e => {
           handleCharacterSelection(row, col,stackPane)
           isCharacterSelected = true
