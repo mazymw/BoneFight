@@ -1,5 +1,5 @@
 package mingwey.game.view
-import mingwey.game.MainApp
+
 import scalafx.scene.control.Button
 import scalafx.scene.image.ImageView
 import scalafx.scene.text.Text
@@ -26,7 +26,7 @@ class DifficultyController(private val easyButton: Button,
 
   def setDifficultyAndStartGame(difficulty: String): Unit = {
     game.difficultyLevel = difficulty
-    MainApp.showGame()
+    showGame()
   }
 
 

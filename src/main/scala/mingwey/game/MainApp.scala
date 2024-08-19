@@ -9,13 +9,14 @@ import scalafx.scene.Scene
 import scalafx.Includes._
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
+import scalafx.scene.media.{Media, MediaPlayer}
 import scalafx.stage.{Modality, Stage, StageStyle}
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
 
 
 object MainApp extends JFXApp {
-
+  var mediaPlayer: MediaPlayer = null
 
   // transform path of RootLayout.fxml to URI for resource location.
   val rootResource = getClass.getResource("view/RootLayout.fxml")
@@ -130,6 +131,7 @@ object MainApp extends JFXApp {
         root = roots2
       }
     }
+    playVictoryEffect()
 
     controller.dialogStage = dialog
     dialog.showAndWait()
@@ -149,6 +151,7 @@ object MainApp extends JFXApp {
         root = roots2
       }
     }
+    playLoseEffect()
     controller.dialogStage = dialog
     dialog.showAndWait()
   }
@@ -162,6 +165,48 @@ object MainApp extends JFXApp {
     }
     alert.showAndWait()
   }
+
+
+  // BackGround Music
+  def playHomeMusic(): Unit = {
+    val musicResource = getClass.getResource("/audio/HomePageBackgroundMusic.mp3")
+    val media = new Media(musicResource.toString)
+    if (mediaPlayer != null) mediaPlayer.stop()
+    mediaPlayer = new MediaPlayer(media)
+    mediaPlayer.setCycleCount(MediaPlayer.Indefinite)
+    mediaPlayer.play()
+  }
+
+  def playGameMusic(): Unit = {
+    val musicResource = getClass.getResource("/audio/gameBackgroundMusic.mp3")
+    val media = new Media(musicResource.toString)
+    if (mediaPlayer != null) mediaPlayer.stop()
+    mediaPlayer = new MediaPlayer(media)
+    mediaPlayer.setCycleCount(MediaPlayer.Indefinite)
+    mediaPlayer.play()
+  }
+
+  def playVictoryEffect(): Unit = {
+    val musicResource = getClass.getResource("/audio/winEffect.wav")
+    val media = new Media(musicResource.toString)
+    if (mediaPlayer != null) mediaPlayer.stop()
+    mediaPlayer = new MediaPlayer(media)
+    mediaPlayer.setCycleCount(1)
+    mediaPlayer.play()
+  }
+
+  def playLoseEffect(): Unit = {
+    val musicResource = getClass.getResource("/audio/loseEffect.wav")
+    val media = new Media(musicResource.toString)
+    if (mediaPlayer != null) mediaPlayer.stop()
+    mediaPlayer = new MediaPlayer(media)
+    mediaPlayer.setCycleCount(1)
+    mediaPlayer.play()
+  }
+
+
+
+
 
   var player = Character.dinosaur
   var computer = Character.bulldog

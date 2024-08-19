@@ -40,25 +40,25 @@
                   <Insets top="20.0" />
                </GridPane.margin>
             </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cat Vs Dog" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="AnimalFight" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font size="36.0" />
                </font>
             </Text>
-            <ImageView fitHeight="178.0" fitWidth="303.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="150.0" fitWidth="187.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@../../../Image/hyena.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets bottom="30.0" right="20.0" />
+               </GridPane.margin>
+            </ImageView>
+            <ImageView fitWidth="191.0" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <image>
                   <Image url="@../../../Image/dog.png" />
                </image>
                <GridPane.margin>
-                  <Insets bottom="30.0" />
-               </GridPane.margin>
-            </ImageView>
-            <ImageView fitHeight="236.0" fitWidth="241.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <image>
-                  <Image url="@../../../Image/cat.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets bottom="30.0" />
+                  <Insets bottom="30.0" left="20.0" />
                </GridPane.margin>
             </ImageView>
          </children>

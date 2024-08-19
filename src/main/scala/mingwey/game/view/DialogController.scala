@@ -1,6 +1,5 @@
 package mingwey.game.view
 
-import mingwey.game.MainApp
 import mingwey.game.MainApp._
 import scalafx.scene.control.Button
 import scalafx.stage.Stage
@@ -18,13 +17,13 @@ class DialogController(
 
 
   def playAgain(): Unit = {
-    MainApp.showDifficulty()
+    showDifficulty()
     game.resetVariables()
     dialogStage.close()
   }
 
   def exit(): Unit = {
-    MainApp.showHome()
+    showHome()
     game.resetVariables()
     dialogStage.close()
   }

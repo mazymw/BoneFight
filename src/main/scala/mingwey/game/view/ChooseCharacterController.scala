@@ -1,5 +1,5 @@
 package mingwey.game.view
-import mingwey.game.MainApp
+
 import scalafx.scene.control.{Button, ProgressBar}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.text.Text
@@ -95,10 +95,10 @@ class ChooseCharacterController(
 
   def startGame(): Unit = {
     if (isCharacterSelected) {
-      MainApp.createGame(selectedCharacter)
-      MainApp.showDifficulty()
+      createGame(selectedCharacter)
+      showDifficulty()
     } else {
-      MainApp.showAlert()
+      showAlert()
     }
   }
 

@@ -1,5 +1,5 @@
 package mingwey.game.view
-import mingwey.game.MainApp
+import mingwey.game.MainApp._
 import scalafx.scene.image.ImageView
 import scalafx.scene.text.Text
 import scalafxml.core.macros.sfxml
@@ -9,8 +9,9 @@ class HomeController( private val title: Text,
                       private val catImage: ImageView
                     ){
 
+  playHomeMusic()
   def startGame(): Unit = {
-    MainApp.showChooseCharacter()
+    showChooseCharacter()
   }
 
   def initialize(): Unit = {
@@ -18,7 +19,7 @@ class HomeController( private val title: Text,
   }
 
   def showInstruction(): Unit = {
-    MainApp.showInstructionDialog()
+    showInstructionDialog()
   }
 
 

@@ -1,6 +1,5 @@
 package mingwey.game.view
 
-import mingwey.game.MainApp
 import mingwey.game.model.Character
 import mingwey.game.MainApp._
 import scalafx.animation.{KeyFrame, Timeline, TranslateTransition}
@@ -11,6 +10,7 @@ import scalafx.scene.effect.{Blend, BlendMode, ColorAdjust, ColorInput}
 import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.{AnchorPane, StackPane}
+import scalafx.scene.media.AudioClip
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.{Circle, Rectangle}
 import scalafx.util.Duration
@@ -49,6 +49,7 @@ class GameController(
                     ) {
 
   def initialize(): Unit = {
+    playGameMusic()
     handleCoordinates()
     game.checkPlayerIntersectionRange(computer, player)
     bindProgressBar()
@@ -220,12 +221,32 @@ class GameController(
 
   }
 
+  def playIncreaseDamageEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/increaseDamageEffect.wav").toString)
+    effect.play()
+
+  }
+
+  def playHealEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/healEffect.wav").toString)
+    effect.play()
+
+  }
+
+  def playAimEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/aimEffect.wav").toString)
+    effect.play()
+
+  }
+
   def bindPoisonButton(): Unit = {
     poisonButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
+
+        playIncreaseDamageEffect()
         game.currentPlayer.useSuperpower(0)
         if (game.currentPlayer.superpowers(0).isActive) {
-
+          playIncreaseDamageEffect()
           poisonButton.disable = true
         }
       }
@@ -238,6 +259,7 @@ class GameController(
         println("Heal button clicked")
         game.currentPlayer.useSuperpower(1)
         if (game.currentPlayer.superpowers(1).isActive){
+          playHealEffect()
           healButton.disable = true
         }
 
@@ -251,6 +273,7 @@ class GameController(
         println("Aim button clicked")
         game.currentPlayer.useSuperpower(2)
         if (game.currentPlayer.superpowers(2).isActive){
+          playAimEffect()
           aimButtonClicked = true
           aimButton.disable = true
         }
@@ -336,7 +359,7 @@ class GameController(
   }
 
   def pause(): Unit = {
-    MainApp.showPauseDialog()
+    showPauseDialog()
 
   }
 
@@ -503,10 +526,10 @@ class GameController(
     else {
       println("Game over!")
       if (game.player.isAlive){
-        Platform.runLater(() => MainApp.showVictoryDialog())
+        Platform.runLater(() => showVictoryDialog())
       }
       else{
-        Platform.runLater(() => MainApp.showLoseDialog())
+        Platform.runLater(() => showLoseDialog())
       }
     }
   }
