@@ -89,6 +89,9 @@ class GameController(
   bone2.fitWidth = computerBone.width.value
   bone2.fitHeight = computerBone.height.value
 
+//  charImage1.setFitWidth(charImage1.getFitWidth) // Ensure it fits the width
+
+
 
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {

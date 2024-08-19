@@ -19,17 +19,17 @@
             <Image url="@../../../../../../../../Downloads/1.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="32.0" layoutY="28.0" prefHeight="544.0" prefWidth="557.0">
+      <AnchorPane layoutX="468.0" layoutY="28.0" prefHeight="544.0" prefWidth="501.0">
          <children>
-            <GridPane fx:id="gridPane" prefHeight="544.0" prefWidth="557.0" styleClass="choose-character-gridpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="gridPane" layoutY="46.0" prefHeight="498.0" prefWidth="521.0" styleClass="choose-character-gridpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="stack-pane-cell" GridPane.rowIndex="2">
@@ -68,9 +68,9 @@
                         </ImageView>
                      </children>
                   </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="stack-pane-cell">
+                  <StackPane prefHeight="84.0" prefWidth="277.0" styleClass="stack-pane-cell">
                      <children>
-                        <ImageView fitHeight="161.0" fitWidth="288.0" mouseTransparent="true" preserveRatio="true">
+                        <ImageView fitHeight="130.0" fitWidth="191.0" mouseTransparent="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../Image/cat.png" />
                            </image>
@@ -90,34 +90,46 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="620.0" layoutY="33.0" prefHeight="532.0" prefWidth="342.0">
+      <GridPane layoutX="43.0" layoutY="28.0" prefHeight="544.0" prefWidth="405.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="222.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="478.0" minHeight="10.0" prefHeight="474.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <GridPane prefHeight="532.0" prefWidth="342.0" styleClass="choose-character-gridpane">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="218.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="148.0" minHeight="8.0" prefHeight="107.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="302.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="302.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="197.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="304.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <AnchorPane prefHeight="453.0" prefWidth="405.0" GridPane.rowIndex="1">
                <children>
-                  <ImageView fx:id="characterImg" fitHeight="143.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin></ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HP" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Atk" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <ProgressBar fx:id="hpProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ProgressBar fx:id="atkProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Text fx:id="characterName" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" text="Confrim" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <GridPane prefHeight="532.0" prefWidth="371.0" styleClass="choose-character-gridpane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="218.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="148.0" minHeight="8.0" prefHeight="107.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="302.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="302.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="319.0" minHeight="10.0" prefHeight="197.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="304.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HP" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Atk" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <ProgressBar fx:id="hpProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ProgressBar fx:id="atkProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Text fx:id="characterName" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#startGame" text="Confrim" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <ImageView fx:id="characterImg" fitHeight="151.0" fitWidth="274.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin></ImageView>
+                     </children>
+                  </GridPane>
                </children>
-            </GridPane>
+            </AnchorPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Character" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
-      </AnchorPane>
+      </GridPane>
    </children>
 </AnchorPane>

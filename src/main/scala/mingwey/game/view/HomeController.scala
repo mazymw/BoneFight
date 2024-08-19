@@ -10,7 +10,7 @@ class HomeController( private val title: Text,
                     ){
 
   def startGame(): Unit = {
-    MainApp.showChooseCharacter()
+    MainApp.showDifficulty()
   }
 
   def initialize(): Unit = {

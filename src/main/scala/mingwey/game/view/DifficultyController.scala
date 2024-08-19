@@ -19,20 +19,14 @@ class DifficultyController(private val easyButton: Button,
   }
 
   def bindDifficultyButtons(): Unit = {
-    easyButton.onMouseClicked = _ => {
-      game.difficultyLevel = "Easy"
-      MainApp.showGame()
-    }
+    easyButton.onMouseClicked = _ => setDifficultyAndStartGame("Easy")
+    mediumButton.onMouseClicked = _ => setDifficultyAndStartGame("Medium")
+    hardButton.onMouseClicked = _ => setDifficultyAndStartGame("Hard")
+  }
 
-    mediumButton.onMouseClicked = _ => {
-      game.difficultyLevel = "Medium"
-      MainApp.showGame()
-    }
-
-    hardButton.onMouseClicked = _ => {
-      game.difficultyLevel = "Hard"
-      MainApp.showGame()
-    }
+  def setDifficultyAndStartGame(difficulty: String): Unit = {
+    game.difficultyLevel = difficulty
+    MainApp.showChooseCharacter()
   }
 
 

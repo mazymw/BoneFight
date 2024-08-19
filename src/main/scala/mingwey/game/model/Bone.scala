@@ -48,7 +48,6 @@ class Bone() {
       }
     }
 
-
     val simulatedXCoordinate = ArrayBuffer[Double](xCoordinate(0), xCoordinate(1))
     val simulatedYCoordinate = ArrayBuffer[Double](yCoordinate(0), yCoordinate(1))
 

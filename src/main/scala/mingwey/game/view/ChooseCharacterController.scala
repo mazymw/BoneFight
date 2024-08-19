@@ -30,6 +30,8 @@ class ChooseCharacterController(
   val characters = Character.allCharacters
   val characterMap: Map[(Int, Int), Character] = createCharacterMap()
   var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()
+  var isCharacterSelected: Boolean = false // Variable to track if a character is selected
+
 
 
   def initialize(): Unit = {
@@ -53,8 +55,10 @@ class ChooseCharacterController(
         println(row + col)
         stackPane.onMouseClicked = e => {
           handleCharacterSelection(row, col,stackPane)
+          isCharacterSelected = true
         }
       case _ =>
+        isCharacterSelected = false
     }
   }
 
@@ -77,7 +81,6 @@ class ChooseCharacterController(
   }
 
   def displaySelectedCharacter(): Unit = {
-
     characterName.text = selectedCharacter.nameS
     hpProgressBar.progress = selectedCharacter.stats.hp.toDouble / Character.allCharacters.maxBy(_.stats.hp).stats.hp.toDouble
     atkProgressBar.progress = selectedCharacter.stats.atk.toDouble / Character.allCharacters.maxBy(_.stats.atk).stats.atk.toDouble
@@ -87,7 +90,16 @@ class ChooseCharacterController(
     characterImg.setPreserveRatio(true) // Maintain the aspect ratio
     characterImg.setFitWidth(characterImg.getFitWidth) // Ensure it fits the width
     characterImg.setFitHeight(characterImg.getFitHeight)
+  }
 
+
+  def startGame(): Unit = {
+    if (isCharacterSelected) {
+      MainApp.createGame(selectedCharacter)
+      MainApp.showGame()
+    } else {
+      MainApp.showAlert()
+    }
   }
 
 

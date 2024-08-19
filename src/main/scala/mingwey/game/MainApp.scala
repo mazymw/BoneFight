@@ -7,6 +7,8 @@ import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
 import scalafx.Includes._
+import scalafx.scene.control.Alert
+import scalafx.scene.control.Alert.AlertType
 import scalafx.stage.{Modality, Stage, StageStyle}
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
 
@@ -151,25 +153,28 @@ object MainApp extends JFXApp {
     dialog.showAndWait()
   }
 
+  def showAlert(): Unit = {
+    val alert = new Alert(AlertType.Warning) {
+      initOwner(MainApp.stage)
+      title = "No Character Selected"
+      headerText = "Character Selection Required"
+      contentText = "Please select a character before starting the game."
+    }
+    alert.showAndWait()
+  }
+
   var player = Character.dinosaur
   var computer = Character.bulldog
   var game = new Game(player,computer)
 
 
-//  def createGame(): Unit = {
-//    player = Character.dinosaur
-//    computer = Character.bulldog
-//
-//    game = new Game(player,computer)
-//
-//  }
+  def createGame(playerChar: Character): Unit = {
+    player = playerChar
+    computer = Character.bulldog
 
-//  val player = Character.dinosaur
-//  val computer = Character.bulldog
-//
-//  val game = new Game(player,computer)
+    game = new Game(player,computer)
 
-
+  }
 
 
   // call to display home when app start
