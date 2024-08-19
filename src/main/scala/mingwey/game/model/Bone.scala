@@ -53,8 +53,9 @@ class Bone() {
 
     simulatedXCoordinate(0) = simulatedXCoordinate(0) + horizontal_velocity * time
     simulatedXCoordinate(1) = simulatedXCoordinate(0) + boneWidth
-    simulatedYCoordinate(0) = simulatedYCoordinate(0) + vertical_velocity * time  - gravitational_force * time * time / 2
+    simulatedYCoordinate(0) = simulatedYCoordinate(0) - vertical_velocity * time  + gravitational_force * time * time / 2
     simulatedYCoordinate(1) = simulatedYCoordinate(0) + boneHeight
+
     (simulatedXCoordinate, simulatedYCoordinate)
   }
 
@@ -64,6 +65,19 @@ class Bone() {
     val overlapY = simulatedYCoordinate(0) < target.yCoordinate._2 && simulatedYCoordinate(1) > target.yCoordinate._1
     overlapX && overlapY
   }
+
+//  def checkIntersects(target: Character, velocity: Double, time: Double, direction: Double, wind: Double): Boolean = {
+//    // Get the simulated coordinates of the bone
+//    val (simulatedXCoordinate, simulatedYCoordinate) = simulateArc(velocity, time, direction, wind)
+//
+//    // Check if the X-coordinates of the bone intersect with the target's X-coordinates
+//    val overlapX = simulatedXCoordinate(0) < target.xCoordinate._2 && simulatedXCoordinate(1) > target.xCoordinate._1
+//    // Check if the Y-coordinates of the bone intersect with the target's Y-coordinates
+//    val overlapY = simulatedYCoordinate(1) > target.yCoordinate._1 && simulatedYCoordinate(0) < target.yCoordinate._2
+//
+//    // Return true if both X and Y overlap
+//    overlapX && overlapY
+//  }
 
 //  def findIntersectionTime(target: Character, velocity: Double, direction: Double, timeStep: Double = 0.01): Option[Double] = {
 //    val totalFlightTime = getFlightTime(velocity)

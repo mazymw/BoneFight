@@ -60,7 +60,7 @@ class GameController(
   }
 
   val random = new Random()
-  val maxVelocity = 135
+
   val maxDuration = 2
 
   var turnInProgress = false
@@ -77,32 +77,38 @@ class GameController(
   val computerBone = new Image(getClass.getResourceAsStream(computer.bone.img.value))
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
-
-  charImage1.fitWidth = playerImage.width.value
-  charImage1.fitHeight = playerImage.height.value
-//  testing.height = playerImage.height.value
-//  testing.width =playerImage.width.value
-  charImage2.fitWidth = computerImage.width.value
-  charImage2.fitHeight = computerImage.height.value
-  bone1.fitWidth = playerBone.width.value
-  bone1.fitHeight = playerBone.height.value
-  bone2.fitWidth = computerBone.width.value
-  bone2.fitHeight = computerBone.height.value
-
-//  charImage1.setFitWidth(charImage1.getFitWidth) // Ensure it fits the width
+  imageAdjust()
 
 
+
+  def imageAdjust(): Unit = {
+    charImage1.fitWidth = playerImage.width.value
+    if (playerImage.height.value < charImage1.fitHeight.value){
+      charImage1.fitHeight = playerImage.height.value
+    }
+    else{
+      charImage1.layoutY = charImage1.getLayoutY - (playerImage.height.value - charImage1.fitHeight.value)
+      charImage1.fitHeight = playerImage.height.value
+    }
+
+    charImage2.fitWidth = computerImage.width.value
+    charImage2.fitHeight = computerImage.height.value
+    bone1.fitWidth = playerBone.width.value
+    bone1.fitHeight = playerBone.height.value
+    bone2.fitWidth = computerBone.width.value
+    bone2.fitHeight = computerBone.height.value
+  }
 
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
     val xCoor = (imageView.layoutX.value, imageView.layoutX.value + imageView.getFitWidth)
-    val yCoor = (imageView.layoutY.value - imageView.getFitHeight, imageView.layoutY.value)
+    val yCoor = ( imageView.layoutY.value,imageView.layoutY.value + playerImage.height.value)
     (xCoor, yCoor)
   }
 
   private def getBoneCoordinates(bone: ImageView): (ArrayBuffer[Double], ArrayBuffer[Double], Double, Double) = {
     val xCoor = ArrayBuffer(bone.layoutX.value, bone.layoutX.value + bone.getFitWidth)
-    val yCoor = ArrayBuffer(bone.layoutY.value, bone.layoutY.value + bone.getFitHeight)
+    val yCoor = ArrayBuffer(bone.layoutY.value , bone.layoutY.value  + bone.getFitHeight)
     val width = bone.getFitWidth
     val height = bone.getFitHeight
     (xCoor, yCoor, width, height)
@@ -122,6 +128,8 @@ class GameController(
     game.setCharBoneCoor(computer, computerBoneXCoor, computerBoneYCoor, computerBoneWidth, computerBoneHeight)
 
     game.backgroundHeight = background.layoutY.value + background.fitHeight.value
+
+    println(game.player.yCoordinate)
   }
 
   def resetBonePosition(): Unit = {
@@ -147,7 +155,7 @@ class GameController(
       if (index < xCoordinates.length - 1) {
 
         val xDiff = xCoordinates(index + 1) - xCoordinates(index)
-        val yDiff = -(yCoordinates(index + 1) - yCoordinates(index))
+        val yDiff = -(yCoordinates(index) - yCoordinates(index + 1))
 
         val timeline = new Timeline {
           cycleCount = 1
@@ -276,7 +284,7 @@ class GameController(
         val upperBound = maxDuration // Upper bound for normalization
 
         // Normalize duration
-        val normalizedDuration = Math.min(duration, upperBound) / upperBound * maxVelocity
+        val normalizedDuration = Math.min(duration, upperBound) / upperBound * game.maxVelocity
         turnInProgress = false
         pressDurationBar.visible = false
         userInputPromise.success(normalizedDuration)
@@ -289,21 +297,21 @@ class GameController(
     case "Easy" =>
       println("THIS IS EASY MODE")
       val start = 60
-      val end = maxVelocity - 15
+      val end = game.maxVelocity - 15
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Medium" =>
       println("THIS IS MEDIUM MODE")
       val start = 80
-      val end = maxVelocity - 15
+      val end = game.maxVelocity - 15
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Hard" =>
       println("THIS IS HARD MODE")
-      val start = 95
-      val end = 105
+      val start = 100
+      val end = 100
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
@@ -381,6 +389,7 @@ class GameController(
       bone1.visible = true
       circlePane.visible = true
       println("Player shoots!")
+      game.checkPlayerIntersectionRange()
       println(player.hp)
 
       bone1.setImage(playerBone)

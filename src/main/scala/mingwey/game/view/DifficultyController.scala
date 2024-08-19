@@ -26,7 +26,7 @@ class DifficultyController(private val easyButton: Button,
 
   def setDifficultyAndStartGame(difficulty: String): Unit = {
     game.difficultyLevel = difficulty
-    MainApp.showChooseCharacter()
+    MainApp.showGame()
   }
 
 

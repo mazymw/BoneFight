@@ -71,7 +71,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <ImageView fx:id="charImage1" fitHeight="97.0" fitWidth="142.0" layoutX="116.0" layoutY="442.0" pickOnBounds="true" />
+      <ImageView fx:id="charImage1" fitHeight="97.0" fitWidth="142.0" layoutX="116.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="charImage2" fitHeight="97.0" fitWidth="142.0" layoutX="713.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" styleClass="characterImageView" />
       <ImageView fx:id="bone1" fitHeight="42.0" fitWidth="50.0" layoutX="269.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bone2" fitHeight="42.0" fitWidth="50.0" layoutX="663.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />

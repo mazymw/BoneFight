@@ -96,7 +96,7 @@ class ChooseCharacterController(
   def startGame(): Unit = {
     if (isCharacterSelected) {
       MainApp.createGame(selectedCharacter)
-      MainApp.showGame()
+      MainApp.showDifficulty()
     } else {
       MainApp.showAlert()
     }

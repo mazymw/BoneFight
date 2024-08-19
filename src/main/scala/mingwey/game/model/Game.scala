@@ -10,6 +10,7 @@ class Game(val player : Character, val computer: Character) {
   var currentPlayer: Character = player
   var backgroundHeight: Double = 0
   var difficultyLevel: String = "Medium"
+  val maxVelocity = 135
   val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
 
 
@@ -62,6 +63,20 @@ class Game(val player : Character, val computer: Character) {
       target.takeDamage(currentPlayer.atk)
       currentPlayer.bone.isIntercept = false
     }
+  }
+
+  def checkPlayerIntersectionRange(): Unit = {
+    val hittingVelocities: ArrayBuffer[Int] = ArrayBuffer[Int]()
+    for (velocity <- 0 to maxVelocity) {
+      computer.throwBone(player, velocity, -1, 0)
+//      println(computer.bone.isIntercept)
+      if (computer.bone.isIntercept) {
+        println("TEST!@#$%^")
+        hittingVelocities.append(velocity)
+        computer.bone.isIntercept = false
+      }
+    }
+    hittingVelocities.foreach(println)
   }
 
 

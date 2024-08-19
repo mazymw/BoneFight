@@ -37,7 +37,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     )
   }
 
-  def throwBone(target: Character, velocity: Double,direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
+  def throwBone(target: Character, velocity: Double, direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     var time: Double = 0
     val flightTime = bone.getFlightTime(velocity)
     val xCoordinates: ArrayBuffer[Double] = ArrayBuffer()
@@ -50,11 +50,13 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
         time += 0.1
 
-        if(bone.checkIntersects(target, velocity, time,direction : Double, wind)){
+        if(bone.checkIntersects(target, velocity, time, direction : Double, wind)){
           bone.isIntercept = true
+          println("HITYTTTTTTTTTTT")
           val interceptTime = time
           break()
         }
+
         xCoordinates.append(simulatedXCoordinate(0))
         yCoordinates.append(simulatedYCoordinate(0))
       }
