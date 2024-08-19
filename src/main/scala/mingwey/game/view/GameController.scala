@@ -3,6 +3,7 @@ package mingwey.game.view
 import mingwey.game.MainApp._
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.Platform
+import scalafx.beans.property.DoubleProperty
 import scalafx.scene.control.{Button, ProgressBar}
 import scalafx.scene.effect.{Blend, BlendMode, ColorInput}
 import scalafx.scene.image.{Image, ImageView}
@@ -20,7 +21,7 @@ import scala.concurrent.duration.{DurationDouble, DurationInt, FiniteDuration}
 
 @sfxml
 class GameController(
-                      private val circle: Circle,
+                      private val holdCircle: Circle,
                       private val circlePane: StackPane,
                       private val background: ImageView,
                       private val charImage1: ImageView,
@@ -49,29 +50,26 @@ class GameController(
     bindAimButton()
     resetBonePosition()
     resetSuperpowerState()
-
     handleTurns()
   }
 
   val random = new Random()
-  val maxDuration = 2
-
+  val maxMouseDuration = 2
   var turnInProgress = false
   var aimButtonClicked = false
   var boneInterceptTime : Double = 0
 
 
   // Load the character image
-
-
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
   val computerImage = new Image(getClass.getResourceAsStream(computer.img.value))
   val playerBone = new Image(getClass.getResourceAsStream(player.bone.img.value))
   val computerBone = new Image(getClass.getResourceAsStream(computer.bone.img.value))
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
+  bone1.setImage(playerBone)
+  bone2.setImage(computerBone)
   imageAdjust()
-
 
 
   def imageAdjust(): Unit = {
@@ -84,14 +82,13 @@ class GameController(
       charImage1.fitHeight = playerImage.height.value
     }
 
-    charImage2.fitWidth = computerImage.width.value
-    charImage2.fitHeight = computerImage.height.value
-    bone1.fitWidth = playerBone.width.value
-    bone1.fitHeight = playerBone.height.value
-    bone2.fitWidth = computerBone.width.value
-    bone2.fitHeight = computerBone.height.value
+//    charImage2.fitWidth = computerImage.width.value
+//    charImage2.fitHeight = computerImage.height.value
+//    bone1.fitWidth = playerBone.width.value
+//    bone1.fitHeight = playerBone.height.value
+//    bone2.fitWidth = computerBone.width.value
+//    bone2.fitHeight = computerBone.height.value
   }
-
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
     val xCoor = (imageView.layoutX.value, imageView.layoutX.value + imageView.getFitWidth)
@@ -121,7 +118,6 @@ class GameController(
     game.setCharBoneCoor(computer, computerBoneXCoor, computerBoneYCoor, computerBoneWidth, computerBoneHeight)
 
     game.backgroundHeight = background.layoutY.value + background.fitHeight.value
-
   }
 
   def resetBonePosition(): Unit = {
@@ -137,9 +133,7 @@ class GameController(
     imageView.layoutY = (imageView.layoutY + amountY).doubleValue()
   }
 
-
-  def createTranslateTransition(imageView: ImageView, x: ArrayBuffer[Double], y: ArrayBuffer[Double]): Unit = {
-    val (xCoordinates, yCoordinates) = (x,y)
+  def createTranslateTransition(imageView: ImageView, xCoordinates: ArrayBuffer[Double], yCoordinates: ArrayBuffer[Double]): Unit = {
     var index = 0
     val duration = 1.0
     boneInterceptTime = (xCoordinates.length * duration) / 60
@@ -168,16 +162,15 @@ class GameController(
 
   }
 
+  def updateHpBar(hpProperty: DoubleProperty, hpBar: ProgressBar, totalHp: Int): Unit = {
+    hpProperty.addListener((_, _, newValue) => {
+      hpBar.setProgress(newValue.doubleValue() / totalHp)
+    })
+  }
+
   def bindProgressBar(): Unit = {
-    // Add listener to update progress bar when hp changes
-    player.hp.addListener((_, _, newValue) => {
-        playerHpBar.setProgress(newValue.doubleValue() / player.stats.hp)
-    })
-
-    computer.hp.addListener((_, _, newValue) => {
-        computerHpBar.setProgress(newValue.doubleValue() / computer.stats.hp)
-    })
-
+    updateHpBar(player.hp, playerHpBar, player.stats.hp)
+    updateHpBar(computer.hp, computerHpBar, computer.stats.hp)
   }
 
   def updateWindBar(wind : Double): Unit = {
@@ -224,8 +217,6 @@ class GameController(
   def bindPoisonButton(): Unit = {
     poisonButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
-
-        playIncreaseDamageEffect()
         game.currentPlayer.useSuperpower(0)
         if (game.currentPlayer.superpowers(0).isActive) {
           playIncreaseDamageEffect()
@@ -238,7 +229,6 @@ class GameController(
   def bindHealButton(): Unit = {
     healButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
-
         game.currentPlayer.useSuperpower(1)
         if (game.currentPlayer.superpowers(1).isActive){
           playHealEffect()
@@ -252,7 +242,6 @@ class GameController(
   def bindAimButton(): Unit = {
     aimButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
-
         game.currentPlayer.useSuperpower(2)
         if (game.currentPlayer.superpowers(2).isActive){
           playAimEffect()
@@ -262,7 +251,6 @@ class GameController(
       }
     }
   }
-
 
   def getUserInput(): Future[Double] = {
     // Variables to track mouse press duration
@@ -278,31 +266,30 @@ class GameController(
         KeyFrame(updateInterval, onFinished = _ => {
           val currentTime = System.nanoTime()
           val duration = (currentTime - pressTime).toDouble / 1e9
-          val normalizedDuration = Math.min(duration / maxDuration, 1.0)
+          val normalizedDuration = Math.min(duration / maxMouseDuration, 1.0)
           pressDurationBar.progress = normalizedDuration
         })
       )
     }
 
     // Mouse event handlers
-    circle.onMousePressed = e => {
+    holdCircle.onMousePressed = e => {
       if (turnInProgress  && game.currentPlayer == player){
-
         pressTime = System.nanoTime()
         pressDurationBar.progress = 0
         pressDurationBar.visible = true
         timeline.play()
-
       }
     }
-    circle.onMouseReleased = e => {
+
+    holdCircle.onMouseReleased = e => {
       if (turnInProgress){
         timeline.stop()
         releaseTime = System.nanoTime()
 
         // Calculate the duration in seconds
         val duration = (releaseTime - pressTime).toDouble / 1e9
-        val upperBound = maxDuration // Upper bound for normalization
+        val upperBound = maxMouseDuration // Upper bound for normalization
 
         // Normalize duration
         val normalizedDuration = Math.min(duration, upperBound) / upperBound * game.maxVelocity
@@ -333,14 +320,7 @@ class GameController(
       val randomNumber = start + random.nextInt( (end - start) + 1 )
 
       randomNumber
-
   }
-
-  def pause(): Unit = {
-    showPauseDialog()
-
-  }
-
 
   def resetSuperpowerState(): Unit = {
     for (i <- 0 to game.currentPlayer.superpowers.length){
@@ -400,15 +380,23 @@ class GameController(
     promise.future
   }
 
-
+  def handleBoneIntercept(charImage: ImageView): Unit = {
+    if (game.currentPlayer.bone.isIntercept) {
+      game.applyDamage()
+      applyDamageEffect(charImage)
+      playInjuredEffect()
+    }
+    else {
+      laughEffect()
+      laughingAnimation()
+    }
+  }
 
   def handlePlayerTurn(): Future[Unit] = {
     turnInProgress = true
     bone2.visible = false
     bone1.visible = true
     circlePane.visible = true
-
-    bone1.setImage(playerBone)
 
     val wind = game.windValues(Random.nextInt(game.windValues.length))
     updateWindBar(wind)
@@ -417,28 +405,18 @@ class GameController(
       val velocity = normalizedDuration
 
       if (aimButtonClicked){
-        val (x, y) = game.takeTurn(100, 1, 0)
+        val (x, y) = game.takeTurn((game.playerIntersectionRange._1 + game.playerIntersectionRange._2 ) / 2, 0)
         createTranslateTransition(bone1, x, y)
         aimButtonClicked = false
       }
       else{
-        val (x, y) = game.takeTurn(velocity, 1, wind)
+        val (x, y) = game.takeTurn(velocity, wind)
         createTranslateTransition(bone1, x, y)
       }
 
       waitFor(boneInterceptTime.seconds).map { _ =>
-        if (game.currentPlayer.bone.isIntercept) {
-          game.applyDamage()
-          applyDamageEffect(charImage2)
-          playInjuredEffect()
-        }
-        else{
-          laughEffect()
-          laughingAnimation()
-        }
-
+        handleBoneIntercept(charImage2)
         resetSuperpowerState()
-
       }
     }
   }
@@ -446,30 +424,20 @@ class GameController(
 
 
   def handleComputerTurn(): Future[Unit] = {
-
     turnInProgress = true
     bone2.visible = true
     bone1.visible = false
     circlePane.visible = false
-    bone2.setImage(computerBone)
 
     val velocity = getComputerInput()
-    val (x, y) = game.takeTurn(velocity, -1, 0)
+    val (x, y) = game.takeTurn(velocity, 0)
 
     createTranslateTransition(bone2, x, y)
     turnInProgress = false
 
     waitFor(boneInterceptTime.seconds).map { _ =>
       Platform.runLater {
-        if (game.currentPlayer.bone.isIntercept) {
-          game.applyDamage()
-          applyDamageEffect(charImage1)
-          playInjuredEffect()
-        }
-        else {
-          laughEffect()
-          laughingAnimation()
-        }
+        handleBoneIntercept(charImage1)
       }
     }
   }
@@ -482,7 +450,6 @@ class GameController(
             waitFor(2.seconds).onComplete {
               case Success(_) =>
                 game.switchTurn()
-
                 Platform.runLater(handleTurns)
             }
         }

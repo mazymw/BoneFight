@@ -110,7 +110,7 @@
       </Button>
       <StackPane fx:id="circlePane" layoutX="324.0" layoutY="478.0" prefHeight="97.0" prefWidth="128.0">
          <children>
-            <Circle fx:id="circle" fill="DODGERBLUE" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="holdCircle" fill="DODGERBLUE" radius="44.0" stroke="BLACK" strokeType="INSIDE" />
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="character-text" text="HOLD" />
          </children>
       </StackPane>

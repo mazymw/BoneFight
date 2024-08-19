@@ -6,7 +6,6 @@ import scalafx.Includes._
 import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
-import scalafx.Includes._
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.media.{Media, MediaPlayer}
@@ -44,7 +43,6 @@ object MainApp extends JFXApp {
     this.roots.setCenter(roots)
 
     val controller = loader.getController[HomeController#Controller]
-    controller.initialize()
   }
 
   def showInstructionDialog(): Unit = {
@@ -167,46 +165,31 @@ object MainApp extends JFXApp {
   }
 
 
-  // BackGround Music
-  def playHomeMusic(): Unit = {
-    val musicResource = getClass.getResource("/audio/HomePageBackgroundMusic.mp3")
+  // Background Music
+  def playMusic(filePath: String, loop: Boolean = false): Unit = {
+    val musicResource = getClass.getResource(filePath)
     val media = new Media(musicResource.toString)
     if (mediaPlayer != null) mediaPlayer.stop()
     mediaPlayer = new MediaPlayer(media)
-    mediaPlayer.setCycleCount(MediaPlayer.Indefinite)
+    mediaPlayer.setCycleCount(if (loop) MediaPlayer.Indefinite else 1)
     mediaPlayer.play()
+  }
+
+  def playHomeMusic(): Unit = {
+    playMusic("/audio/HomePageBackgroundMusic.mp3", loop = true)
   }
 
   def playGameMusic(): Unit = {
-    val musicResource = getClass.getResource("/audio/gameBackgroundMusic.mp3")
-    val media = new Media(musicResource.toString)
-    if (mediaPlayer != null) mediaPlayer.stop()
-    mediaPlayer = new MediaPlayer(media)
-    mediaPlayer.setCycleCount(MediaPlayer.Indefinite)
-    mediaPlayer.play()
+    playMusic("/audio/gameBackgroundMusic.mp3", loop = true)
   }
 
   def playVictoryEffect(): Unit = {
-    val musicResource = getClass.getResource("/audio/winEffect.wav")
-    val media = new Media(musicResource.toString)
-    if (mediaPlayer != null) mediaPlayer.stop()
-    mediaPlayer = new MediaPlayer(media)
-    mediaPlayer.setCycleCount(1)
-    mediaPlayer.play()
+    playMusic("/audio/winEffect.wav")
   }
 
   def playLoseEffect(): Unit = {
-    val musicResource = getClass.getResource("/audio/loseEffect.wav")
-    val media = new Media(musicResource.toString)
-    if (mediaPlayer != null) mediaPlayer.stop()
-    mediaPlayer = new MediaPlayer(media)
-    mediaPlayer.setCycleCount(1)
-    mediaPlayer.play()
+    playMusic("/audio/loseEffect.wav")
   }
-
-
-
-
 
   var player = Character.dinosaur
   var computer = Character.bulldog
@@ -216,19 +199,9 @@ object MainApp extends JFXApp {
   def createGame(playerChar: Character): Unit = {
     player = playerChar
     computer = Character.bulldog
-
     game = new Game(player,computer)
-
   }
 
-
-  // call to display home when app start
   showHome()
-
-
-
-
-
-
 
 }

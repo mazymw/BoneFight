@@ -1,11 +1,9 @@
 package mingwey.game.view
 
 import scalafx.scene.control.Button
-import scalafx.scene.image.ImageView
-import scalafx.scene.text.Text
 import scalafxml.core.macros.sfxml
 import mingwey.game.MainApp._
-import scalafx.stage.Stage
+
 
 @sfxml
 class DifficultyController(private val easyButton: Button,

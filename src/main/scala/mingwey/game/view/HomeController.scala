@@ -14,10 +14,6 @@ class HomeController( private val title: Text,
     showChooseCharacter()
   }
 
-  def initialize(): Unit = {
-
-  }
-
   def showInstruction(): Unit = {
     showInstructionDialog()
   }
