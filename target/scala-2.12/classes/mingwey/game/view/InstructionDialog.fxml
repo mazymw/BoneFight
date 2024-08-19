@@ -42,7 +42,7 @@
                      <graphic>
                         <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/poison.png" />
+                              <Image url="@../../../image/poison.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -51,7 +51,7 @@
                      <graphic>
                         <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/Heart%20Healing.png" />
+                              <Image url="@../../../image/Heart%20Healing.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -60,7 +60,7 @@
                      <graphic>
                         <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/aim.png" />
+                              <Image url="@../../../image/aim.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -88,7 +88,7 @@
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="34.0">
                            <image>
-                              <Image url="@../../../Image/cross.png" />
+                              <Image url="@../../../image/cross.png" />
                            </image>
                         </ImageView>
                      </graphic>

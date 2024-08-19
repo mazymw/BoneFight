@@ -13,7 +13,6 @@ class DamageBoostSuperpower extends Superpower {
 
   def activate(character: Character): Unit = {
     if (!isActive && number > 0) {
-      println("Use Superpower")
       character.atk *= 2
       isActive = true
       number = number - 1
@@ -32,7 +31,6 @@ class HealingSuperpower(healAmount: Int) extends Superpower {
 
   def activate(character: Character): Unit = {
     if (!isActive && number > 0) {
-      println("heal effect applied")
       character.hp.value += healAmount
       if (character.hp.value > character.stats.hp) {
         character.hp.value = character.stats.hp

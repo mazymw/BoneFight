@@ -31,7 +31,7 @@
                <children>
                   <ImageView fitHeight="366.0" fitWidth="581.0">
                      <image>
-                        <Image url="@../../../Image/notificationBoard.png" />
+                        <Image url="@../../../image/notificationBoard.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="easyButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="343.0" text="Easy" textFill="WHITE">

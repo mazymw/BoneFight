@@ -1,18 +1,15 @@
 package mingwey.game.model
 
-import scalafx.beans.property.{DoubleProperty, ObjectProperty, StringProperty}
-
-import java.time.LocalDate
+import scalafx.beans.property.DoubleProperty
 import scala.collection.mutable.ArrayBuffer
-import scala.util.control.Breaks.{break, breakable}
 
 class Game(val player : Character, val computer: Character) {
   var currentPlayer: Character = player
   var backgroundHeight: Double = 0
   var difficultyLevel: String = "Medium"
   val maxVelocity = 135
-  val windValues = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
-  var playerIntersectionRange = (0,0)
+  val windValues: Seq[Int] = Seq(-12, - 9, -6, -3, 0, 3, 6, 9, 12)
+  var playerIntersectionRange: (Int, Int) = (0,0)
 
 
   def resetVariables(): Unit = {
@@ -32,12 +29,10 @@ class Game(val player : Character, val computer: Character) {
     character.bone.yCoordinate = yCoordinate
     character.bone.boneWidth = boneWidth
     character.bone.boneHeight = boneHeight
-
   }
 
   def switchTurn(): Unit = {
     currentPlayer = if (currentPlayer == player) computer else player
-    println(s"Turn switched. Current player: ${currentPlayer.nameS}")
   }
 
 
@@ -60,9 +55,7 @@ class Game(val player : Character, val computer: Character) {
   def applyDamage(): Unit = {
     val target = if (currentPlayer == player) computer else player
     if (currentPlayer.bone.isIntercept) {
-      println(currentPlayer.atk)
       target.takeDamage(currentPlayer.atk)
-
     }
   }
 

@@ -36,7 +36,7 @@
                      <children>
                         <ImageView fitHeight="161.0" fitWidth="288.0" mouseTransparent="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/gorilla.png" />
+                              <Image url="@../../../image/gorilla.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -45,7 +45,7 @@
                      <children>
                         <ImageView fitHeight="137.0" fitWidth="196.0" mouseTransparent="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/rat.png" />
+                              <Image url="@../../../image/rat.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -54,7 +54,7 @@
                      <children>
                         <ImageView fitHeight="146.0" fitWidth="165.0" mouseTransparent="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/Buffalo.png" />
+                              <Image url="@../../../image/Buffalo.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -63,7 +63,7 @@
                      <children>
                         <ImageView mouseTransparent="true">
                            <image>
-                              <Image url="@../../../Image/dinosaur.png" />
+                              <Image url="@../../../image/dinosaur.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -72,7 +72,7 @@
                      <children>
                         <ImageView fitHeight="130.0" fitWidth="191.0" mouseTransparent="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/cat.png" />
+                              <Image url="@../../../image/cat.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -81,7 +81,7 @@
                      <children>
                         <ImageView fitHeight="161.0" fitWidth="288.0" mouseTransparent="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Image/hyena.png" />
+                              <Image url="@../../../image/hyena.png" />
                            </image>
                         </ImageView>
                      </children>

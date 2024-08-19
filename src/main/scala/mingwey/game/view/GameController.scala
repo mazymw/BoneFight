@@ -1,28 +1,21 @@
 package mingwey.game.view
 
-import mingwey.game.model.Character
 import mingwey.game.MainApp._
-import scalafx.animation.{KeyFrame, Timeline, TranslateTransition}
+import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.Platform
-import scalafx.beans.property.DoubleProperty
 import scalafx.scene.control.{Button, ProgressBar}
-import scalafx.scene.effect.{Blend, BlendMode, ColorAdjust, ColorInput}
+import scalafx.scene.effect.{Blend, BlendMode, ColorInput}
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.input.MouseEvent
-import scalafx.scene.layout.{AnchorPane, StackPane}
+import scalafx.scene.layout.StackPane
 import scalafx.scene.media.AudioClip
 import scalafx.scene.paint.Color
-import scalafx.scene.shape.{Circle, Rectangle}
+import scalafx.scene.shape.Circle
 import scalafx.util.Duration
 import scalafxml.core.macros.sfxml
-
-import scala.util.control.Breaks._
-import java.time.Instant
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Future, Promise}
-import scala.util.{Failure, Random, Success}
-import scala.concurrent.ExecutionContext._
+import scala.util.{Random, Success}
 import scala.concurrent.duration.{DurationDouble, DurationInt, FiniteDuration}
 
 @sfxml
@@ -44,7 +37,6 @@ class GameController(
                       private val leftBubbleText: ImageView,
                       private val rightBubbleText: ImageView,
                       private val pressDurationBar: ProgressBar,
-//                      private val testing: Rectangle,
 
                     ) {
 
@@ -62,7 +54,6 @@ class GameController(
   }
 
   val random = new Random()
-
   val maxDuration = 2
 
   var turnInProgress = false
@@ -130,7 +121,7 @@ class GameController(
     game.setCharBoneCoor(computer, computerBoneXCoor, computerBoneYCoor, computerBoneWidth, computerBoneHeight)
 
     game.backgroundHeight = background.layoutY.value + background.fitHeight.value
-    println(game.player.yCoordinate)
+
   }
 
   def resetBonePosition(): Unit = {
@@ -247,7 +238,7 @@ class GameController(
   def bindHealButton(): Unit = {
     healButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
-        println("Heal button clicked")
+
         game.currentPlayer.useSuperpower(1)
         if (game.currentPlayer.superpowers(1).isActive){
           playHealEffect()
@@ -261,7 +252,7 @@ class GameController(
   def bindAimButton(): Unit = {
     aimButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
-        println("Aim button clicked")
+
         game.currentPlayer.useSuperpower(2)
         if (game.currentPlayer.superpowers(2).isActive){
           playAimEffect()
@@ -296,7 +287,7 @@ class GameController(
     // Mouse event handlers
     circle.onMousePressed = e => {
       if (turnInProgress  && game.currentPlayer == player){
-        println("Circle pressed")
+
         pressTime = System.nanoTime()
         pressDurationBar.progress = 0
         pressDurationBar.visible = true
@@ -307,7 +298,6 @@ class GameController(
     circle.onMouseReleased = e => {
       if (turnInProgress){
         timeline.stop()
-        println("Circle Released")
         releaseTime = System.nanoTime()
 
         // Calculate the duration in seconds
@@ -326,21 +316,18 @@ class GameController(
 
   def getComputerInput(): Double = game.difficultyLevel match {
     case "Easy" =>
-      println("THIS IS EASY MODE")
       val start = game.playerIntersectionRange._1 - 20
       val end = Math.min(game.playerIntersectionRange._2 + 20, game.maxVelocity)
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Medium" =>
-      println("THIS IS MEDIUM MODE")
       val start = game.playerIntersectionRange._1 - 10
       val end = Math.min(game.playerIntersectionRange._2 + 10, game.maxVelocity)
       val randomNumber = start + random.nextInt( (end - start) + 1 )
       randomNumber
 
     case "Hard" =>
-      println("THIS IS HARD MODE")
       val start = game.playerIntersectionRange._1 - 1
       val end = Math.min(game.playerIntersectionRange._2 + 1, game.maxVelocity)
       val randomNumber = start + random.nextInt( (end - start) + 1 )
@@ -420,9 +407,6 @@ class GameController(
     bone2.visible = false
     bone1.visible = true
     circlePane.visible = true
-    println("Player shoots!")
-
-    println(player.hp)
 
     bone1.setImage(playerBone)
 
@@ -435,12 +419,12 @@ class GameController(
       if (aimButtonClicked){
         val (x, y) = game.takeTurn(100, 1, 0)
         createTranslateTransition(bone1, x, y)
+        aimButtonClicked = false
       }
       else{
         val (x, y) = game.takeTurn(velocity, 1, wind)
         createTranslateTransition(bone1, x, y)
       }
-      println("bulldog hp is "+ Character.bulldog.stats.hp)
 
       waitFor(boneInterceptTime.seconds).map { _ =>
         if (game.currentPlayer.bone.isIntercept) {
@@ -464,12 +448,10 @@ class GameController(
   def handleComputerTurn(): Future[Unit] = {
 
     turnInProgress = true
-    println("Computer shoots!")
     bone2.visible = true
     bone1.visible = false
     circlePane.visible = false
     bone2.setImage(computerBone)
-    println(computer.hp)
 
     val velocity = getComputerInput()
     val (x, y) = game.takeTurn(velocity, -1, 0)
@@ -519,7 +501,6 @@ class GameController(
       }
     }
     else {
-      println("Game over!")
       if (game.player.isAlive){
         Platform.runLater(() => showVictoryDialog())
       }

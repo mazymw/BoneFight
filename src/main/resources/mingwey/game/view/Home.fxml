@@ -47,7 +47,7 @@
             </Text>
             <ImageView fitHeight="150.0" fitWidth="187.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../../Image/hyena.png" />
+                  <Image url="@../../../image/hyena.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="30.0" right="20.0" />
@@ -55,7 +55,7 @@
             </ImageView>
             <ImageView fitWidth="191.0" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../Image/dog.png" />
+                  <Image url="@../../../image/dog.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="30.0" left="20.0" />

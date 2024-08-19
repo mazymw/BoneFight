@@ -27,7 +27,7 @@ class ChooseCharacterController(
 
 
   var selectedCharacter: Character = Character.cat
-  val characters = Character.allCharacters
+  val characters: Seq[Character] = Character.allCharacters
   val characterMap: Map[(Int, Int), Character] = createCharacterMap()
   var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()
   var isCharacterSelected: Boolean = false // Variable to track if a character is selected
@@ -82,7 +82,7 @@ class ChooseCharacterController(
   }
 
   def displaySelectedCharacter(): Unit = {
-    characterName.text = selectedCharacter.nameS
+    characterName.text = selectedCharacter.name
     hpProgressBar.progress = selectedCharacter.stats.hp.toDouble / Character.allCharacters.maxBy(_.stats.hp).stats.hp.toDouble
     atkProgressBar.progress = selectedCharacter.stats.atk.toDouble / Character.allCharacters.maxBy(_.stats.atk).stats.atk.toDouble
     val characterImage = new Image(getClass.getResourceAsStream(selectedCharacter.img.value))

@@ -1,9 +1,6 @@
 package mingwey.game.model
 
-import javafx.beans.property.SimpleDoubleProperty
-import mingwey.game.MainApp.{computer, game}
-import scalafx.beans.property.{DoubleProperty, IntegerProperty, ObjectProperty, StringProperty}
-
+import scalafx.beans.property.{DoubleProperty, ObjectProperty, StringProperty}
 import scala.collection.mutable.ArrayBuffer
 import scala.util.control.Breaks.{break, breakable}
 
@@ -11,7 +8,7 @@ import scala.util.control.Breaks.{break, breakable}
 case class charStat(hp: Int, atk: Int)
 
 class Character(val nameS: String, val stats: charStat, val image: String) {
-  val Name: StringProperty = new StringProperty(nameS)
+  val name: String = nameS
   val img: ObjectProperty[String] = ObjectProperty(image)
   val bone  = new Bone()
   var xCoordinate :(Double, Double) = (0,0)
@@ -29,7 +26,7 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   }
 
   // To create the default set of superpowers
-  private def createDefaultSuperpowers(): ArrayBuffer[Superpower] = {
+  def createDefaultSuperpowers(): ArrayBuffer[Superpower] = {
     ArrayBuffer(
       new DamageBoostSuperpower(),
       new HealingSuperpower(this.stats.hp * 10 / 100),
@@ -44,16 +41,14 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
     val yCoordinates: ArrayBuffer[Double] = ArrayBuffer()
     bone.isIntercept = false
 
-
     breakable {
       while (time < flightTime) {
-        val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time, direction : Double, wind)
+        val (simulatedXCoordinate, simulatedYCoordinate) = bone.simulateArc(velocity, time, direction, wind)
 
         time += 0.1
 
-        if(bone.checkIntersects(target, velocity, time, direction : Double, wind)){
+        if(bone.checkIntersects(target, simulatedXCoordinate, simulatedYCoordinate)){
           bone.isIntercept = true
-
           val interceptTime = time
           break()
         }
@@ -87,13 +82,13 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
 object Character{
   def apply(nameS: String, stats: charStat, image: String) = new Character(nameS, stats, image)
-  val bulldog = Character("Dog", charStat(70, 10), "/Image/dog.png")
-  val cat = Character("Cat", charStat(50, 20), "/Image/cat.png")
-  val buffalo = Character("Buffalo",charStat(100, 5), "/Image/buffalo.png")
-  val rat = Character("Rat",charStat(40, 25), "/Image/rat.png")
-  val dinosaur = Character("Dinosaur", charStat(70, 20), "/Image/dinosaur.png")
-  val gorilla = Character("Gorilla", charStat(80, 10), "/Image/gorilla.png")
-  val hyena = Character("Hyena", charStat(35, 30), "/Image/hyena.png")
+  val bulldog: Character = Character("Dog", charStat(70, 10), "/image/dog.png")
+  val cat: Character = Character("Cat", charStat(50, 20), "/image/cat.png")
+  val buffalo :Character = Character("Buffalo",charStat(100, 5), "/image/buffalo.png")
+  val rat :Character = Character("Rat",charStat(40, 25), "/image/rat.png")
+  val dinosaur :Character = Character("Dinosaur", charStat(70, 20), "/image/dinosaur.png")
+  val gorilla :Character = Character("Gorilla", charStat(80, 10), "/image/gorilla.png")
+  val hyena :Character = Character("Hyena", charStat(35, 30), "/image/hyena.png")
 
   val allCharacters: List[Character] = List(cat, buffalo, rat, dinosaur, gorilla, hyena)
 
