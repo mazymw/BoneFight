@@ -118,8 +118,8 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-subTitle-text" text="Atk" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                         <ProgressBar fx:id="hpProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <ProgressBar fx:id="atkProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Text fx:id="characterName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subTitle-text" text="Text" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" onAction="#startGame" text="Confrim" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Text fx:id="characterName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subTitle-text" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#startGame" styleClass="start-game-button" text="Confrim" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                         <ImageView fx:id="characterImg" fitHeight="151.0" fitWidth="274.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets />

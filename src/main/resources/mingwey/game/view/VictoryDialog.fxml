@@ -27,7 +27,7 @@
          <children>
             <ImageView fitHeight="264.0" fitWidth="349.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../../image/Dancing%20Animal%20GIF.gif" />
+                  <Image url="@../../../image/dancingAnimalGIF.gif" />
                </image>
             </ImageView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victory!!!" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">

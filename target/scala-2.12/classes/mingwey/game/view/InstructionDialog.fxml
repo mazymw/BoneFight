@@ -15,7 +15,7 @@
 
 <ScrollPane accessibleRole="PARENT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="Victory-Anchor-Pane" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mingwey.game.view.DialogController">
    <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@Css.css">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="800.0" stylesheets="@Css.css">
          <children>
             <GridPane layoutX="101.0" layoutY="252.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="598.0" stylesheets="@Css.css">
                <columnConstraints>
@@ -95,7 +95,7 @@
                   </Button>
                </children>
             </GridPane>
-            <Text layoutX="42.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Click and hold the mouse button over your character during their turn. The power meter will increase as long as the button is held down. Keep an eye on the wind meter to gauge the strength and direction of your throw. When you're ready, release the mouse button to launch your item toward the opponent." wrappingWidth="715.931640625" />
+            <Text layoutX="42.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Click and hold the mouse button over your character during their turn. The power meter will increase as long as the button is held down. Keep an eye on the wind meter to gauge the strength and direction of your throw. When you're ready, release the mouse button to launch your bone toward the opponent. Whoever HP reaches 0 first Loses the game." wrappingWidth="715.931640625" />
          </children>
       </AnchorPane>
    </content>

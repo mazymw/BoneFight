@@ -46,7 +46,7 @@
                   </Button>
                   <Button fx:id="hardButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="343.0" text="Hard" textFill="WHITE">
                      <StackPane.margin>
-                        <Insets top="270.0" />
+                        <Insets top="260.0" />
                      </StackPane.margin>
                   </Button>
                </children>

@@ -35,6 +35,7 @@ class Bone {
     val timeMaxHeight = verticalVelocity / gravitationalForce
 
     // Calculate the maximum height the bone reaches
+    // 50 is to shift up the baseline of the floor to be at the same level as the character
     val hMax = (game.backgroundHeight - 50) - this.yCoordinate._1 + (Math.pow(verticalVelocity, 2) / (2 * gravitationalForce))
 
     // Time to fall from maximum height back to the ground

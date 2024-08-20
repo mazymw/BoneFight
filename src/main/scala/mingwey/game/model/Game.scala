@@ -8,7 +8,7 @@ import scala.util.Random
 
 class Game(val player: Character, val computer: Character) {
 
-  val random = new Random()
+  val Random = new Random()
   var currentPlayer: Character = player
   var backgroundHeight: Double = 0
   var difficultyLevel: String = "Medium"

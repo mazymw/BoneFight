@@ -76,12 +76,12 @@
       <ImageView fx:id="bone2" fitHeight="42.0" fitWidth="50.0" layoutX="663.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="rightBubbleText" fitHeight="155.0" fitWidth="200.0" layoutX="537.0" layoutY="250.0" visible="false">
          <image>
-            <Image url="@../../../image/right%20bubble%20box.png" />
+            <Image url="@../../../image/rightBubbleBox.png" />
          </image>
       </ImageView>
       <ImageView fx:id="leftBubbleText" fitHeight="158.0" fitWidth="200.0" layoutX="231.0" layoutY="250.0" visible="false">
          <image>
-            <Image url="@../../../image/left%20bubble%20box.png" />
+            <Image url="@../../../image/leftBubbleBox.png" />
          </image>
       </ImageView>
        <Button fx:id="poisonButton" layoutX="14.0" layoutY="160.0" styleClass="poison-button">
@@ -94,7 +94,7 @@
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../image/Heart%20Healing.png" />
+                  <Image url="@../../../image/heart.png" />
                </image>
             </ImageView>
          </graphic>
