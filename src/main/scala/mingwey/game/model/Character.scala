@@ -98,7 +98,7 @@ object Character {
   val cat: Character = Character("Cat", charStat(50, 20), "/image/cat.png")
   val buffalo: Character = Character("Buffalo", charStat(100, 5), "/image/buffalo.png")
   val rat: Character = Character("Rat", charStat(40, 25), "/image/rat.png")
-  val dinosaur: Character = Character("Dinosaur", charStat(70, 20), "/image/dinosaur.png")
+  val dinosaur: Character = Character("Dinosaur", charStat(70, 15), "/image/dinosaur.png")
   val gorilla: Character = Character("Gorilla", charStat(80, 10), "/image/gorilla.png")
   val hyena: Character = Character("Hyena", charStat(35, 30), "/image/hyena.png")
 

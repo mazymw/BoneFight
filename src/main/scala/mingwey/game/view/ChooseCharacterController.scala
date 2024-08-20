@@ -5,7 +5,6 @@ import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.text.Text
 import scalafxml.core.macros.sfxml
 import mingwey.game.MainApp._
-import scalafx.scene.input.MouseEvent
 import scalafx.scene.layout.{GridPane, StackPane}
 import scalafx.Includes._
 
@@ -30,6 +29,9 @@ class ChooseCharacterController(
   val characterMap: Map[(Int, Int), Character] = createCharacterMap()
   var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()
   var isCharacterSelected: Boolean = false
+  val maxHp: Double = Character.allCharacters.maxBy(_.stats.hp).stats.hp.toDouble
+  val maxAtk: Double = Character.allCharacters.maxBy(_.stats.atk).stats.atk.toDouble
+
 
   def initialize(): Unit = {
     playGameMusic()
@@ -71,8 +73,6 @@ class ChooseCharacterController(
     characterMap.get((row, col)) match {
       case Some(character) =>
         selectedCharacter = character
-      case _ =>
-
     }
     displaySelectedCharacter()
 
@@ -80,8 +80,8 @@ class ChooseCharacterController(
 
   def displaySelectedCharacter(): Unit = {
     characterName.text = selectedCharacter.name
-    hpProgressBar.progress = selectedCharacter.stats.hp.toDouble / Character.allCharacters.maxBy(_.stats.hp).stats.hp.toDouble
-    atkProgressBar.progress = selectedCharacter.stats.atk.toDouble / Character.allCharacters.maxBy(_.stats.atk).stats.atk.toDouble
+    hpProgressBar.progress = selectedCharacter.stats.hp.toDouble / maxHp
+    atkProgressBar.progress = selectedCharacter.stats.atk.toDouble / maxAtk
     val characterImage = new Image(getClass.getResourceAsStream(selectedCharacter.img.value))
     characterImg.setImage(characterImage)
 

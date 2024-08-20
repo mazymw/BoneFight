@@ -1,6 +1,7 @@
 package mingwey.game.view
 
 import mingwey.game.MainApp._
+import mingwey.game.view.GameConstants._
 import scalafx.animation.{KeyFrame, Timeline}
 import scalafx.application.Platform
 import scalafx.beans.property.DoubleProperty
@@ -13,6 +14,7 @@ import scalafx.scene.paint.Color
 import scalafx.scene.shape.Circle
 import scalafx.util.Duration
 import scalafxml.core.macros.sfxml
+
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.{Future, Promise}
@@ -54,7 +56,6 @@ class GameController(
   }
 
 //  val random = new Random()
-  val maxMouseDuration = 2
   var turnInProgress = false
   var boneInterceptTime : Double = 0
 
@@ -126,90 +127,9 @@ class GameController(
       bone2.layoutY = computer.bone.yCoordinate._1
   }
 
-  def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
-    imageView.layoutX = (imageView.layoutX + amountX).doubleValue()
-    imageView.layoutY = (imageView.layoutY + amountY).doubleValue()
-  }
-
-  def createTranslateTransition(imageView: ImageView, xCoordinates: ArrayBuffer[Double], yCoordinates: ArrayBuffer[Double]): Unit = {
-    var index = 0
-    val duration = 1.0
-    boneInterceptTime = (xCoordinates.length * duration) / 60
-
-    def nextTransition(): Unit = {
-      if (index < xCoordinates.length - 1) {
-
-        val xDiff = xCoordinates(index + 1) - xCoordinates(index)
-        val yDiff = -(yCoordinates(index) - yCoordinates(index + 1))
-
-        val timeline = new Timeline {
-          cycleCount = 1
-          keyFrames = Seq(
-            KeyFrame(Duration(duration), onFinished = _ => {
-              moveImageView(imageView, xDiff, yDiff)
-              index += 1
-              nextTransition()
-            })
-          )
-        }
-        timeline.play()
-      }
-    }
-
-    nextTransition()
-
-  }
-
-  def updateHpBar(hpProperty: DoubleProperty, hpBar: ProgressBar, totalHp: Int): Unit = {
-    hpProperty.addListener((_, _, newValue) => {
-      hpBar.setProgress(newValue.doubleValue() / totalHp)
-    })
-  }
-
   def bindProgressBar(): Unit = {
     updateHpBar(player.hp, playerHpBar, player.stats.hp)
     updateHpBar(computer.hp, computerHpBar, computer.stats.hp)
-  }
-
-  def updateWindBar(wind : Double): Unit = {
-    if (wind < 0){
-      leftWindBar.setProgress(-wind / game.windValues.max)
-      rightWindBar.setProgress(0)
-    }
-    else if(wind == 0) {
-      leftWindBar.setProgress(0)
-      rightWindBar.setProgress(0)
-    }
-    else{
-      leftWindBar.setProgress(0)
-      rightWindBar.setProgress(wind / game.windValues.max)
-    }
-
-  }
-
-  def playIncreaseDamageEffect(): Unit = {
-    val effect = new AudioClip(getClass.getResource("/audio/increaseDamageEffect.wav").toString)
-    effect.play()
-  }
-
-  def playHealEffect(): Unit = {
-    val effect = new AudioClip(getClass.getResource("/audio/healEffect.wav").toString)
-    effect.play()
-  }
-
-  def playAimEffect(): Unit = {
-    val effect = new AudioClip(getClass.getResource("/audio/aimEffect.wav").toString)
-    effect.play()
-  }
-
-  def playInjuredEffect(): Unit = {
-    val effect = new AudioClip(getClass.getResource("/audio/hitEffect.wav").toString)
-    effect.play()
-  }
-
-  def laughEffect(): Unit = {
-    val effect = new AudioClip(getClass.getResource("/audio/laughEffect.wav").toString)
-    effect.play()
   }
 
   def bindPoisonButton(): Unit = {
@@ -249,55 +169,57 @@ class GameController(
     }
   }
 
-  def getUserInput(): Future[Double] = {
-    // Variables to track mouse press duration
-    val userInputPromise = Promise[Double]()
-    var pressTime: Long = 0
-    var releaseTime: Long = 0
+  def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
+    imageView.layoutX = (imageView.layoutX + amountX).doubleValue()
+    imageView.layoutY = (imageView.layoutY + amountY).doubleValue()
+  }
 
-    // Timeline to update the progress bar
-    val updateInterval = Duration(100) // Update every 100ms
-    val timeline = new Timeline {
-      cycleCount = Timeline.Indefinite
-      keyFrames = Seq(
-        KeyFrame(updateInterval, onFinished = _ => {
-          val currentTime = System.nanoTime()
-          val duration = (currentTime - pressTime).toDouble / 1e9
-          val normalizedDuration = Math.min(duration / maxMouseDuration, 1.0)
-          pressDurationBar.progress = normalizedDuration
-        })
-      )
-    }
+  def createTranslateTransition(imageView: ImageView, xCoordinates: ArrayBuffer[Double], yCoordinates: ArrayBuffer[Double]): Unit = {
+    var index = 0
+    boneInterceptTime = (xCoordinates.length * AnimationDuration) / 60
 
-    // Mouse event handlers
-    holdCircle.onMousePressed = e => {
-      if (turnInProgress  && game.currentPlayer == player){
-        pressTime = System.nanoTime()
-        pressDurationBar.progress = 0
-        pressDurationBar.visible = true
+    def nextTransition(): Unit = {
+      if (index < xCoordinates.length - 1) {
+
+        val xDiff = xCoordinates(index + 1) - xCoordinates(index)
+        val yDiff = -(yCoordinates(index) - yCoordinates(index + 1))
+
+        val timeline = new Timeline {
+          cycleCount = 1
+          keyFrames = Seq(
+            KeyFrame(Duration(AnimationDuration), onFinished = _ => {
+              moveImageView(imageView, xDiff, yDiff)
+              index += 1
+              nextTransition()
+            })
+          )
+        }
         timeline.play()
       }
     }
-
-    holdCircle.onMouseReleased = e => {
-      if (turnInProgress){
-        timeline.stop()
-        releaseTime = System.nanoTime()
-
-        // Calculate the duration in seconds
-        val duration = (releaseTime - pressTime).toDouble / 1e9
-        val upperBound = maxMouseDuration // Upper bound for normalization
-
-        // Normalize duration
-        val normalizedDuration = Math.min(duration, upperBound) / upperBound * game.maxVelocity
-        turnInProgress = false
-        pressDurationBar.visible = false
-        userInputPromise.success(normalizedDuration)
-      }
-    }
-    userInputPromise.future
+    nextTransition()
   }
 
+  def updateHpBar(hpProperty: DoubleProperty, hpBar: ProgressBar, totalHp: Int): Unit = {
+    hpProperty.addListener((_, _, newValue) => {
+      hpBar.setProgress(newValue.doubleValue() / totalHp)
+    })
+  }
+
+  def updateWindBar(wind : Double): Unit = {
+    if (wind < 0){
+      leftWindBar.setProgress(-wind / game.windValues.max)
+      rightWindBar.setProgress(0)
+    }
+    else if(wind == 0) {
+      leftWindBar.setProgress(0)
+      rightWindBar.setProgress(0)
+    }
+    else{
+      leftWindBar.setProgress(0)
+      rightWindBar.setProgress(wind / game.windValues.max)
+    }
+  }
 
   def applyDamageEffect(imageView: ImageView): Unit = {
     // Create a semi-transparent red rectangle overlay
@@ -320,7 +242,7 @@ class GameController(
 
     val timeline = new Timeline {
       keyFrames = Seq(
-        KeyFrame(Duration(1000), onFinished = _ => imageView.effect = null)
+        KeyFrame(Duration(DamageEffectDurationMs), onFinished = _ => imageView.effect = null)
       )
     }
 
@@ -336,19 +258,35 @@ class GameController(
     bubbleText.visible = true
     val timeline = new Timeline {
       keyFrames = Seq(
-        KeyFrame(Duration(2000), onFinished = _ => bubbleText.visible = false)
+        KeyFrame(Duration(BubbleTextDisplayDurationMs), onFinished = _ => bubbleText.visible = false)
       )
     }
     timeline.play()
   }
 
-  def waitFor(duration: FiniteDuration): Future[Unit] = {
-    val promise = Promise[Unit]()
-    Future {
-      Thread.sleep(duration.toMillis)
-      promise.success(())
-    }
-    promise.future
+  def playIncreaseDamageEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/increaseDamageEffect.wav").toString)
+    effect.play()
+  }
+
+  def playHealEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/healEffect.wav").toString)
+    effect.play()
+  }
+
+  def playAimEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/aimEffect.wav").toString)
+    effect.play()
+  }
+
+  def playInjuredEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/hitEffect.wav").toString)
+    effect.play()
+  }
+
+  def laughEffect(): Unit = {
+    val effect = new AudioClip(getClass.getResource("/audio/laughEffect.wav").toString)
+    effect.play()
   }
 
   def handleBoneIntercept(charImage: ImageView): Unit = {
@@ -362,6 +300,67 @@ class GameController(
       laughingAnimation()
     }
   }
+
+  def waitFor(duration: FiniteDuration): Future[Unit] = {
+    val promise = Promise[Unit]()
+    Future {
+      Thread.sleep(duration.toMillis)
+      promise.success(())
+    }
+    promise.future
+  }
+
+
+  def getUserInput(): Future[Double] = {
+    // Variables to track mouse press duration
+    val userInputPromise = Promise[Double]()
+    var pressTime: Long = 0
+    var releaseTime: Long = 0
+
+    // Timeline to update the progress bar
+    val updateInterval = Duration(ProgressBarUpdateIntervalMs)
+    val timeline = new Timeline {
+      cycleCount = Timeline.Indefinite
+      keyFrames = Seq(
+        KeyFrame(updateInterval, onFinished = _ => {
+          val currentTime = System.nanoTime()
+          val duration = (currentTime - pressTime).toDouble / 1e9
+          val normalizedDuration = Math.min(duration / MaxMouseDuration, 1.0)
+          pressDurationBar.progress = normalizedDuration
+        })
+      )
+    }
+
+    // Mouse event handlers
+    holdCircle.onMousePressed = e => {
+      if (turnInProgress  && game.currentPlayer == player){
+        pressTime = System.nanoTime()
+        pressDurationBar.progress = 0
+        pressDurationBar.visible = true
+        timeline.play()
+      }
+    }
+
+    holdCircle.onMouseReleased = e => {
+      if (turnInProgress){
+        timeline.stop()
+        releaseTime = System.nanoTime()
+
+        // Calculate the duration in seconds
+        val duration = (releaseTime - pressTime).toDouble / 1e9
+        val upperBound = MaxMouseDuration // Upper bound for normalization
+
+        // Normalize duration
+        val normalizedDuration = Math.min(duration, upperBound) / upperBound * game.maxVelocity
+        turnInProgress = false
+        pressDurationBar.visible = false
+        userInputPromise.success(normalizedDuration)
+      }
+    }
+    userInputPromise.future
+  }
+
+
 
   def handlePlayerTurn(): Future[Unit] = {
     turnInProgress = true
@@ -415,7 +414,7 @@ class GameController(
       if (game.currentPlayer == player) {
         handlePlayerTurn().onComplete {
           case Success(_) =>
-            waitFor(2.seconds).onComplete {
+            waitFor(TurnTransitionDelaySec.seconds).onComplete {
               case Success(_) =>
                 game.switchTurn()
                 Platform.runLater(handleTurns)
@@ -425,7 +424,7 @@ class GameController(
       else {
         handleComputerTurn().onComplete {
           case Success(_) =>
-            waitFor(2.seconds).onComplete {
+            waitFor(TurnTransitionDelaySec.seconds).onComplete {
               case Success(_) =>
                 game.switchTurn()
                 resetBonePosition()
@@ -446,4 +445,14 @@ class GameController(
   }
 
 
+}
+
+object GameConstants {
+  // Constants defined
+  val MaxMouseDuration: Double = 2.0
+  val AnimationDuration: Double = 1.0
+  val ProgressBarUpdateIntervalMs: Int = 100
+  val BubbleTextDisplayDurationMs: Int = 2000
+  val DamageEffectDurationMs: Int = 1000
+  val TurnTransitionDelaySec: Int = 2
 }
