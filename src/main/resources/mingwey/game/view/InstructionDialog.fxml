@@ -15,7 +15,7 @@
 
 <ScrollPane accessibleRole="PARENT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="Victory-Anchor-Pane" stylesheets="@Css.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mingwey.game.view.DialogController">
    <content>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1001.0" prefWidth="800.0" stylesheets="@Css.css">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@Css.css">
          <children>
             <GridPane layoutX="101.0" layoutY="252.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="598.0" stylesheets="@Css.css">
                <columnConstraints>

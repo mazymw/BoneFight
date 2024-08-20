@@ -43,22 +43,20 @@ class GameController(
 
   def initialize(): Unit = {
     handleCoordinates()
-    game.checkPlayerIntersectionRange(computer, player)
+    game.checkPlayerIntersectionRange()
     bindProgressBar()
     bindPoisonButton()
     bindHealButton()
     bindAimButton()
     resetBonePosition()
-    resetSuperpowerState()
+    game.resetSuperpowerState()
     handleTurns()
   }
 
-  val random = new Random()
+//  val random = new Random()
   val maxMouseDuration = 2
   var turnInProgress = false
-  var aimButtonClicked = false
   var boneInterceptTime : Double = 0
-
 
   // Load the character image
   val playerImage = new Image(getClass.getResourceAsStream(player.img.value))
@@ -96,9 +94,9 @@ class GameController(
     (xCoor, yCoor)
   }
 
-  private def getBoneCoordinates(bone: ImageView): (ArrayBuffer[Double], ArrayBuffer[Double], Double, Double) = {
-    val xCoor = ArrayBuffer(bone.layoutX.value, bone.layoutX.value + bone.getFitWidth)
-    val yCoor = ArrayBuffer(bone.layoutY.value , bone.layoutY.value  + bone.getFitHeight)
+  private def getBoneCoordinates(bone: ImageView): ((Double, Double),  (Double, Double), Double, Double) = {
+    val xCoor = (bone.layoutX.value, bone.layoutX.value + bone.getFitWidth)
+    val yCoor = (bone.layoutY.value , bone.layoutY.value  + bone.getFitHeight)
     val width = bone.getFitWidth
     val height = bone.getFitHeight
     (xCoor, yCoor, width, height)
@@ -121,11 +119,11 @@ class GameController(
   }
 
   def resetBonePosition(): Unit = {
-      bone1.layoutX = player.bone.xCoordinate(0)
-      bone1.layoutY = player.bone.yCoordinate(0)
+      bone1.layoutX = player.bone.xCoordinate._1
+      bone1.layoutY = player.bone.yCoordinate._1
 
-      bone2.layoutX = computer.bone.xCoordinate(0)
-      bone2.layoutY = computer.bone.yCoordinate(0)
+      bone2.layoutX = computer.bone.xCoordinate._1
+      bone2.layoutY = computer.bone.yCoordinate._1
   }
 
   def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
@@ -245,7 +243,6 @@ class GameController(
         game.currentPlayer.useSuperpower(2)
         if (game.currentPlayer.superpowers(2).isActive){
           playAimEffect()
-          aimButtonClicked = true
           aimButton.disable = true
         }
       }
@@ -301,32 +298,6 @@ class GameController(
     userInputPromise.future
   }
 
-  def getComputerInput(): Double = game.difficultyLevel match {
-    case "Easy" =>
-      val start = game.playerIntersectionRange._1 - 20
-      val end = Math.min(game.playerIntersectionRange._2 + 20, game.maxVelocity)
-      val randomNumber = start + random.nextInt( (end - start) + 1 )
-      randomNumber
-
-    case "Medium" =>
-      val start = game.playerIntersectionRange._1 - 10
-      val end = Math.min(game.playerIntersectionRange._2 + 10, game.maxVelocity)
-      val randomNumber = start + random.nextInt( (end - start) + 1 )
-      randomNumber
-
-    case "Hard" =>
-      val start = game.playerIntersectionRange._1 - 1
-      val end = Math.min(game.playerIntersectionRange._2 + 1, game.maxVelocity)
-      val randomNumber = start + random.nextInt( (end - start) + 1 )
-
-      randomNumber
-  }
-
-  def resetSuperpowerState(): Unit = {
-    for (i <- 0 to game.currentPlayer.superpowers.length){
-      game.currentPlayer.deactivateSuperpower(i)
-    }
-  }
 
   def applyDamageEffect(imageView: ImageView): Unit = {
     // Create a semi-transparent red rectangle overlay
@@ -404,10 +375,9 @@ class GameController(
     getUserInput().flatMap { normalizedDuration =>
       val velocity = normalizedDuration
 
-      if (aimButtonClicked){
+      if (game.currentPlayer.superpowers(2).isActive){
         val (x, y) = game.takeTurn((game.playerIntersectionRange._1 + game.playerIntersectionRange._2 ) / 2, 0)
         createTranslateTransition(bone1, x, y)
-        aimButtonClicked = false
       }
       else{
         val (x, y) = game.takeTurn(velocity, wind)
@@ -416,12 +386,10 @@ class GameController(
 
       waitFor(boneInterceptTime.seconds).map { _ =>
         handleBoneIntercept(charImage2)
-        resetSuperpowerState()
+        game.resetSuperpowerState()
       }
     }
   }
-
-
 
   def handleComputerTurn(): Future[Unit] = {
     turnInProgress = true
@@ -429,7 +397,7 @@ class GameController(
     bone1.visible = false
     circlePane.visible = false
 
-    val velocity = getComputerInput()
+    val velocity = game.getComputerInput
     val (x, y) = game.takeTurn(velocity, 0)
 
     createTranslateTransition(bone2, x, y)
@@ -443,7 +411,7 @@ class GameController(
   }
 
   def handleTurns(): Unit = {
-    if (game.checkGameState()) {
+    if (game.isGameOngoing) {
       if (game.currentPlayer == player) {
         handlePlayerTurn().onComplete {
           case Success(_) =>

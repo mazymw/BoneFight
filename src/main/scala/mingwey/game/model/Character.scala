@@ -60,8 +60,8 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
         }
 
         // Store the coordinates of the bone's flight path
-        xCoordinates.append(simulatedXCoordinate(0))
-        yCoordinates.append(simulatedYCoordinate(0))
+        xCoordinates.append(simulatedXCoordinate._1)
+        yCoordinates.append(simulatedYCoordinate._1)
       }
     }
     (xCoordinates, yCoordinates) // Return the calculated flight path coordinates
