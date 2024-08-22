@@ -10,7 +10,6 @@ import scalafx.Includes._
 import mingwey.game.model.Character
 import scala.collection.mutable.ArrayBuffer
 
-
 @sfxml
 class ChooseCharacterController(
                                  private val gridPane: GridPane,
@@ -18,84 +17,98 @@ class ChooseCharacterController(
                                  private val hpProgressBar: ProgressBar,
                                  private val atkProgressBar: ProgressBar,
                                  private val characterImg: ImageView,
+                               ) {
 
-                          ){
+  // Variable to hold the selected character
+  var selectedCharacter: Option[Character] = None
 
-
-  var selectedCharacter: Character = Character.cat
+  // Map to store the characters' positions in the grid
   val characterMap: Map[(Int, Int), Character] = createCharacterMap()
+
+  // List to store all StackPane elements for easy access
   var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()
-  var isCharacterSelected: Boolean = false
+
+  // Maximum values for HP and ATK to normalize progress bars
   val maxHp: Double = Character.allCharacters.maxBy(_.stats.hp).stats.hp.toDouble
   val maxAtk: Double = Character.allCharacters.maxBy(_.stats.atk).stats.atk.toDouble
 
 
   def initialize(): Unit = {
-    playGameMusic()
-    addClickListenersToStackPanes()
+    playGameMusic() // Starts playing game background music
+    addClickListenersToStackPanes() // Adds click listeners to each StackPane
   }
 
+  // Method to create a map of grid positions to characters
   def createCharacterMap(): Map[(Int, Int), Character] = {
     Character.allCharacters.zipWithIndex.flatMap { case (character, index) =>
-      val row = index / 2//two columns
+      val row = index / 2 //2 columns
       val col = index % 2
-      Some((row, col) -> character)
+      Some((row, col) -> character) // Map the position to the character
     }.toMap
   }
 
+  // Method to add click listeners to all StackPane elements in the grid
   def addClickListenersToStackPanes(): Unit = {
     gridPane.getChildren.forEach {
       case stackPane: javafx.scene.layout.StackPane =>
-        allStackPane += stackPane
-        val row = GridPane.getRowIndex(stackPane)
-        val col = GridPane.getColumnIndex(stackPane)
+        allStackPane += stackPane // Store the StackPane in the list
+        val row = GridPane.getRowIndex(stackPane) // Get the row of the StackPane
+        val col = GridPane.getColumnIndex(stackPane) // Get the column of the StackPane
 
+        // Set up the click event handler for the StackPane
         stackPane.onMouseClicked = _ => {
-          handleCharacterSelection(row, col,stackPane)
-          isCharacterSelected = true
+          handleCharacterSelection(row, col, stackPane)
         }
       case _ =>
-        isCharacterSelected = false
     }
   }
 
-  def handleCharacterSelection(row: Int, col: Int, clickedPane: StackPane): Unit= {
+  // Method to handle character selection when a StackPane is clicked
+  def handleCharacterSelection(row: Int, col: Int, clickedPane: StackPane): Unit = {
 
+    // Remove the selected style from all StackPane elements
     for (stackPane <- allStackPane) {
       stackPane.getStyleClass.remove("stack-pane-selected")
     }
 
+    // Add the selected style to the clicked StackPane
     clickedPane.getStyleClass.add("stack-pane-selected")
 
+    // Update the selected character based on the clicked position
     characterMap.get((row, col)) match {
       case Some(character) =>
-        selectedCharacter = character
+        selectedCharacter = Some(character)
     }
+
+    // Display the selected character's details
     displaySelectedCharacter()
-
   }
 
+  // Method to display the selected character's details in the UI
   def displaySelectedCharacter(): Unit = {
-    characterName.text = selectedCharacter.name
-    hpProgressBar.progress = selectedCharacter.stats.hp.toDouble / maxHp
-    atkProgressBar.progress = selectedCharacter.stats.atk.toDouble / maxAtk
-    val characterImage = new Image(getClass.getResourceAsStream(selectedCharacter.img.value))
-    characterImg.setImage(characterImage)
+    selectedCharacter match {
+      case Some(character) =>
+        characterName.text = character.name // Set the character name
+        hpProgressBar.progress = character.stats.hp.toDouble / maxHp // Set HP progress
+        atkProgressBar.progress = character.stats.atk.toDouble / maxAtk // Set ATK progress
+        val characterImage = new Image(getClass.getResourceAsStream(character.img.value))
+        characterImg.setImage(characterImage) // Set the character image
 
-    characterImg.setPreserveRatio(true) // Maintain the aspect ratio
-    characterImg.setFitWidth(characterImg.getFitWidth) // Ensure it fits the width
-    characterImg.setFitHeight(characterImg.getFitHeight)
-  }
-
-
-  def startGame(): Unit = {
-    if (isCharacterSelected) {
-      createGame(selectedCharacter)
-      showDifficulty()
-    } else {
-      showAlert()
+        // Adjust image properties to fit and preserve the aspect ratio
+        characterImg.setPreserveRatio(true)
+        characterImg.setFitWidth(characterImg.getFitWidth)
+        characterImg.setFitHeight(characterImg.getFitHeight)
     }
   }
 
-
+  // Method to start the game with the selected character
+  def startGame(): Unit = {
+    selectedCharacter match {
+      case Some(character) =>
+        createGame(character) // Create a new game with the selected character
+        showDifficulty() // Show difficulty selection screen
+      case None =>
+        showAlert() // Show an alert if no character is selected
+    }
+  }
 }

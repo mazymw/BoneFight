@@ -55,8 +55,10 @@ class GameController(
     handleTurns()
   }
 
-//  val random = new Random()
+  //Flag to track if a turn is currently in progress.
   var turnInProgress = false
+
+  // Stores the time it takes for a bone to intercept.
   var boneInterceptTime : Double = 0
 
   // Load the character image
@@ -64,13 +66,15 @@ class GameController(
   val computerImage = new Image(getClass.getResourceAsStream(computer.img.value))
   val playerBone = new Image(getClass.getResourceAsStream(player.bone.img.value))
   val computerBone = new Image(getClass.getResourceAsStream(computer.bone.img.value))
+
+  // Set the loaded images to the respective ImageView elements.
   charImage1.setImage(playerImage)
   charImage2.setImage(computerImage)
   bone1.setImage(playerBone)
   bone2.setImage(computerBone)
   imageAdjust()
 
-
+  // Adjusts the player character's image to fit the appropriate dimensions.
   def imageAdjust(): Unit = {
     charImage1.fitWidth = playerImage.width.value
     if (playerImage.height.value < charImage1.fitHeight.value){
@@ -82,13 +86,15 @@ class GameController(
     }
   }
 
-  private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
+  // Retrieves the coordinates of a character's image
+  def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
     val xCoor = (imageView.layoutX.value, imageView.layoutX.value + imageView.getFitWidth)
     val yCoor = ( imageView.layoutY.value,imageView.layoutY.value + playerImage.height.value)
     (xCoor, yCoor)
   }
 
-  private def getBoneCoordinates(bone: ImageView): ((Double, Double),  (Double, Double), Double, Double) = {
+  // Retrieves the coordinates and dimensions of a bone's image
+  def getBoneCoordinates(bone: ImageView): ((Double, Double),  (Double, Double), Double, Double) = {
     val xCoor = (bone.layoutX.value, bone.layoutX.value + bone.getFitWidth)
     val yCoor = (bone.layoutY.value , bone.layoutY.value  + bone.getFitHeight)
     val width = bone.getFitWidth
@@ -96,6 +102,7 @@ class GameController(
     (xCoor, yCoor, width, height)
   }
 
+  // Setting the coordinates of the characters and bone retrieved from scene builder to perform calculation
   def handleCoordinates(): Unit = {
     val (playerXCoor, playerYCoor) = getCharCoordinates(charImage1)
     game.setCharCoor(player, playerXCoor, playerYCoor)
@@ -112,6 +119,7 @@ class GameController(
     game.backgroundHeight = background.layoutY.value + background.fitHeight.value
   }
 
+  // Resets the positions of the bones to their initial coordinates.
   def resetBonePosition(): Unit = {
       bone1.layoutX = player.bone.xCoordinate._1
       bone1.layoutY = player.bone.yCoordinate._1
@@ -120,11 +128,20 @@ class GameController(
       bone2.layoutY = computer.bone.yCoordinate._1
   }
 
+  // Binds the progress bars to reflect the player's and computer's HP.
   def bindProgressBar(): Unit = {
     updateHpBar(player.hp, playerHpBar, player.stats.hp)
     updateHpBar(computer.hp, computerHpBar, computer.stats.hp)
   }
 
+  // Update the HP bar based on the current HP value
+  def updateHpBar(hpProperty: DoubleProperty, hpBar: ProgressBar, totalHp: Int): Unit = {
+    hpProperty.addListener((_, _, newValue) => {
+      hpBar.setProgress(newValue.doubleValue() / totalHp)
+    })
+  }
+
+  // Binds the Poison button's action to apply the Poison superpower when clicked.
   def bindPoisonButton(): Unit = {
     poisonButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
@@ -137,6 +154,7 @@ class GameController(
     }
   }
 
+  // Binds the Heal button's action to apply the Heal superpower when clicked.
   def bindHealButton(): Unit = {
     healButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
@@ -150,6 +168,7 @@ class GameController(
     }
   }
 
+  // Binds the Aim button's action to apply the Aim superpower when clicked.
   def bindAimButton(): Unit = {
     aimButton.onMouseClicked = e => {
       if (turnInProgress && game.currentPlayer == player) {
@@ -162,15 +181,18 @@ class GameController(
     }
   }
 
+  // Move the ImageView by the specified X and Y amounts
   def moveImageView(imageView: ImageView, amountX: Double, amountY : Double): Unit = {
     imageView.layoutX = (imageView.layoutX + amountX).doubleValue()
     imageView.layoutY = (imageView.layoutY + amountY).doubleValue()
   }
 
+  // Create a translate transition for the bone's movement, updating position step by step
   def createTranslateTransition(imageView: ImageView, xCoordinates: ArrayBuffer[Double], yCoordinates: ArrayBuffer[Double]): Unit = {
     var index = 0
     boneInterceptTime = (xCoordinates.length * AnimationDuration) / 60
 
+    // Recursive function to handle the bone's continuous movement between coordinates
     def nextTransition(): Unit = {
       if (index < xCoordinates.length - 1) {
 
@@ -183,7 +205,7 @@ class GameController(
             KeyFrame(Duration(AnimationDuration), onFinished = _ => {
               moveImageView(imageView, xDiff, yDiff)
               index += 1
-              nextTransition()
+              nextTransition() // Continue to next movement step
             })
           )
         }
@@ -193,12 +215,7 @@ class GameController(
     nextTransition()
   }
 
-  def updateHpBar(hpProperty: DoubleProperty, hpBar: ProgressBar, totalHp: Int): Unit = {
-    hpProperty.addListener((_, _, newValue) => {
-      hpBar.setProgress(newValue.doubleValue() / totalHp)
-    })
-  }
-
+  // Update the wind bars based on the current wind value
   def updateWindBar(wind : Double): Unit = {
     if (wind < 0){
       leftWindBar.setProgress(-wind / game.windValues.max)
@@ -214,8 +231,8 @@ class GameController(
     }
   }
 
+  // Apply a red damage effect overlay on the character's image
   def applyDamageEffect(imageView: ImageView): Unit = {
-    // Create a semi-transparent red rectangle overlay
     val redOverlay = new ColorInput {
       x = 0
       y = 0
@@ -233,6 +250,7 @@ class GameController(
 
     imageView.effect = blend
 
+    // Remove the damage effect after a duration
     val timeline = new Timeline {
       keyFrames = Seq(
         KeyFrame(Duration(DamageEffectDurationMs), onFinished = _ => imageView.effect = null)
@@ -242,6 +260,7 @@ class GameController(
     timeline.play()
   }
 
+  // Show a laughing animation when the bone missed the character
   def laughingAnimation(): Unit = {
     val bubbleText = if (game.currentPlayer == player) rightBubbleText else leftBubbleText
     showBubbleText(bubbleText)
@@ -257,31 +276,37 @@ class GameController(
     timeline.play()
   }
 
+  // Play sound effect when increase damage superpower is used
   def playIncreaseDamageEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/increaseDamageEffect.wav").toString)
     effect.play()
   }
 
+  // Play sound effect when heal superpower is used
   def playHealEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/healEffect.wav").toString)
     effect.play()
   }
 
+  // Play sound effect when aim superpower is used
   def playAimEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/aimEffect.wav").toString)
     effect.play()
   }
 
+  // Play sound effect when character is damaged by the bone
   def playInjuredEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/hitEffect.wav").toString)
     effect.play()
   }
 
+  // Play sound effect when character misses their bone
   def playLaughEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/laughEffect.wav").toString)
     effect.play()
   }
 
+  // Handle the event when the bone intercepts the target
   def handleBoneIntercept(charImage: ImageView): Unit = {
     if (game.currentPlayer.bone.isIntercept) {
       game.applyDamage()
@@ -294,6 +319,7 @@ class GameController(
     }
   }
 
+  // Utility function to wait for a specified duration
   def waitFor(duration: FiniteDuration): Future[Unit] = {
     val promise = Promise[Unit]()
     Future {
@@ -303,7 +329,7 @@ class GameController(
     promise.future
   }
 
-
+  // Capture the player's input based on how long the mouse is pressed
   def getUserInput(): Future[Double] = {
     // Variables to track mouse press duration
     val userInputPromise = Promise[Double]()
@@ -324,7 +350,7 @@ class GameController(
       )
     }
 
-    // Mouse event handlers
+    // Mouse press and release handlers
     holdCircle.onMousePressed = e => {
       if (turnInProgress  && game.currentPlayer == player){
         pressTime = System.nanoTime()
@@ -354,7 +380,7 @@ class GameController(
   }
 
 
-
+  // Handle the player's turn in the game
   def handlePlayerTurn(): Future[Unit] = {
     turnInProgress = true
     bone2.visible = false
@@ -383,6 +409,7 @@ class GameController(
     }
   }
 
+  // Handle the computer's turn in the game
   def handleComputerTurn(): Future[Unit] = {
     turnInProgress = true
     bone2.visible = true
@@ -402,6 +429,7 @@ class GameController(
     }
   }
 
+  // Handle the alternating turns between the player and the computer
   def handleTurns(): Unit = {
     if (game.isGameOngoing) {
       if (game.currentPlayer == player) {
@@ -428,6 +456,7 @@ class GameController(
       }
     }
     else {
+      // Display victory or loss dialog based on game outcome
       if (game.player.isAlive){
         Platform.runLater(() => showVictoryDialog())
       }
