@@ -189,5 +189,4 @@ object MainApp extends JFXApp {
   }
 
   showHome()
-
 }

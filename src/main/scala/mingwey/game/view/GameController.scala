@@ -465,8 +465,6 @@ class GameController(
       }
     }
   }
-
-
 }
 
 object GameConstants {
