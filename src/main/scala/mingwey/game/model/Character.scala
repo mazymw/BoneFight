@@ -5,10 +5,10 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.control.Breaks.{break, breakable}
 
 // Case class to define character stats like HP and Attack
-case class charStat(hp: Int, atk: Int)
+case class CharStat(hp: Int, atk: Int)
 
 // Main class representing a Character in the game
-class Character(val nameS: String, val stats: charStat, val image: String) {
+class Character(val nameS: String, val stats: CharStat, val image: String) {
 
   // Properties of the character
   val name: String = nameS
@@ -39,12 +39,13 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
   }
 
   // Method for throwing a bone towards a target, calculating its trajectory
-  def throwBone(target: Character, velocity: Double, direction : Double, wind : Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
+  def throwBone(target: Character, velocity: Double, direction: Double, wind: Double): (ArrayBuffer[Double], ArrayBuffer[Double]) = {
     var time: Double = 0
     val flightTime = bone.getFlightTime(velocity) // Calculate the flight time of the bone
     val xCoordinates: ArrayBuffer[Double] = ArrayBuffer() // Store X coordinates of the bone during its flight
     val yCoordinates: ArrayBuffer[Double] = ArrayBuffer() // Store Y coordinates of the bone during its flight
     bone.isIntercept = false // Initially, no interception
+
 
     // Loop to simulate the bone's flight trajectory
     breakable {
@@ -53,10 +54,14 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
         time += 0.1
 
+        // If an intersection is detected and this is the extra iteration, break the loop
+        if (bone.isIntercept) {
+          break()
+        }
+
         // Check if the bone intersects with the target
-        if(bone.checkIntersects(target, simulatedXCoordinate, simulatedYCoordinate)){
+        if (bone.checkIntersects(target, simulatedXCoordinate, simulatedYCoordinate)) {
           bone.isIntercept = true
-          break() // Stop the loop if an intersection occurs
         }
 
         // Store the coordinates of the bone's flight path
@@ -91,17 +96,17 @@ class Character(val nameS: String, val stats: charStat, val image: String) {
 
 // Companion object for Character, providing predefined characters
 object Character {
-  def apply(nameS: String, stats: charStat, image: String) = new Character(nameS, stats, image)
+  def apply(nameS: String, stats: CharStat, image: String) = new Character(nameS, stats, image)
 
   // Predefined characters with their stats and associated images
-  val bulldog: Character = Character("Dog", charStat(70, 10), "/image/dog.png")
-  val cat: Character = Character("Cat", charStat(50, 20), "/image/cat.png")
-  val buffalo: Character = Character("Buffalo", charStat(100, 5), "/image/buffalo.png")
-  val rat: Character = Character("Rat", charStat(40, 25), "/image/rat.png")
-  val dinosaur: Character = Character("Dinosaur", charStat(70, 15), "/image/dinosaur.png")
-  val gorilla: Character = Character("Gorilla", charStat(80, 10), "/image/gorilla.png")
-  val hyena: Character = Character("Hyena", charStat(35, 30), "/image/hyena.png")
+  val bulldog: Character = Character("Dog", CharStat(70, 10), "/image/dog.png")
+  val cat: Character = Character("Cat", CharStat(50, 20), "/image/cat.png")
+  val buffalo: Character = Character("Buffalo", CharStat(100, 5), "/image/buffalo.png")
+  val rat: Character = Character("Rat", CharStat(40, 25), "/image/rat.png")
+  val dinosaur: Character = Character("Dinosaur", CharStat(70, 15), "/image/dinosaur.png")
+  val gorilla: Character = Character("Gorilla", CharStat(80, 10), "/image/gorilla.png")
+  val hyena: Character = Character("Hyena", CharStat(35, 30), "/image/hyena.png")
 
   // List of all available characters
-  val allCharacters: List[Character] = List(cat, buffalo, rat, dinosaur, gorilla, hyena)
+  val allCharacters: Seq[Character] = List(cat, buffalo, rat, dinosaur, gorilla, hyena)
 }

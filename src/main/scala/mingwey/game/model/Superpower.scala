@@ -3,10 +3,10 @@ package mingwey.game.model
 // Abstract class representing a Superpower that characters can use
 abstract class Superpower {
   // Flag indicating if the superpower is active
-  var isActive = false
+  var isActive: Boolean = false
 
   // Number of times the superpower can be used
-  var number = 1
+  var number : Int = 1
 
   // Common logic for activating a superpower
   def activate(character: Character): Unit = {

@@ -80,13 +80,6 @@ class GameController(
       charImage1.layoutY = charImage1.getLayoutY - (playerImage.height.value - charImage1.fitHeight.value)
       charImage1.fitHeight = playerImage.height.value
     }
-
-//    charImage2.fitWidth = computerImage.width.value
-//    charImage2.fitHeight = computerImage.height.value
-//    bone1.fitWidth = playerBone.width.value
-//    bone1.fitHeight = playerBone.height.value
-//    bone2.fitWidth = computerBone.width.value
-//    bone2.fitHeight = computerBone.height.value
   }
 
   private def getCharCoordinates(imageView: ImageView): ((Double, Double), (Double, Double)) = {
@@ -284,7 +277,7 @@ class GameController(
     effect.play()
   }
 
-  def laughEffect(): Unit = {
+  def playLaughEffect(): Unit = {
     val effect = new AudioClip(getClass.getResource("/audio/laughEffect.wav").toString)
     effect.play()
   }
@@ -296,7 +289,7 @@ class GameController(
       playInjuredEffect()
     }
     else {
-      laughEffect()
+      playLaughEffect()
       laughingAnimation()
     }
   }
@@ -448,7 +441,6 @@ class GameController(
 }
 
 object GameConstants {
-  // Constants defined
   val MaxMouseDuration: Double = 2.0
   val AnimationDuration: Double = 1.0
   val ProgressBarUpdateIntervalMs: Int = 100

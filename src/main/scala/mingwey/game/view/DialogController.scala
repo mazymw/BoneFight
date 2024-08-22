@@ -15,7 +15,6 @@ class DialogController(
 {
   var dialogStage : Stage  = null
 
-
   def playAgain(): Unit = {
     showChooseCharacter()
     game.resetVariables()
@@ -28,8 +27,8 @@ class DialogController(
     dialogStage.close()
   }
 
-  def continueGame(): Unit = {
-    dialogStage.close()
-  }
 
 }
+
+
+

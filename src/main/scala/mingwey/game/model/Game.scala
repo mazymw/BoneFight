@@ -7,14 +7,13 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 class Game(val player: Character, val computer: Character) {
-
-  val Random = new Random()
   var currentPlayer: Character = player
   var backgroundHeight: Double = 0
   var difficultyLevel: String = "Medium"
-  val maxVelocity = 135
+  val maxVelocity: Int = 135
   val windValues: Seq[Int] = Seq(-12, -9, -6, -3, 0, 3, 6, 9, 12)
   var playerIntersectionRange: (Int, Int) = (0, 0)
+  val random = new Random()
 
   // Resets game variables
   def resetVariables(): Unit = {
@@ -80,7 +79,7 @@ class Game(val player: Character, val computer: Character) {
     def getRandomWithinRange(offset: Int): Double = {
       val start = playerIntersectionRange._1 - offset
       val end = Math.min(playerIntersectionRange._2 + offset, maxVelocity)
-      start + Random.nextInt((end - start) + 1)
+      start + random.nextInt((end - start) + 1)
     }
 
     difficultyLevel match {

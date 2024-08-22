@@ -7,9 +7,7 @@ import scalafxml.core.macros.sfxml
 import mingwey.game.MainApp._
 import scalafx.scene.layout.{GridPane, StackPane}
 import scalafx.Includes._
-
 import mingwey.game.model.Character
-
 import scala.collection.mutable.ArrayBuffer
 
 
@@ -25,7 +23,6 @@ class ChooseCharacterController(
 
 
   var selectedCharacter: Character = Character.cat
-  val characters: Seq[Character] = Character.allCharacters
   val characterMap: Map[(Int, Int), Character] = createCharacterMap()
   var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()
   var isCharacterSelected: Boolean = false
@@ -38,8 +35,8 @@ class ChooseCharacterController(
     addClickListenersToStackPanes()
   }
 
-  private def createCharacterMap(): Map[(Int, Int), Character] = {
-    characters.zipWithIndex.flatMap { case (character, index) =>
+  def createCharacterMap(): Map[(Int, Int), Character] = {
+    Character.allCharacters.zipWithIndex.flatMap { case (character, index) =>
       val row = index / 2//two columns
       val col = index % 2
       Some((row, col) -> character)

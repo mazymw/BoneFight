@@ -9,7 +9,10 @@ class HomeController( private val title: Text,
                       private val catImage: ImageView
                     ){
 
-  playHomeMusic()
+  def initialize(): Unit = {
+    playHomeMusic()
+  }
+
   def startGame(): Unit = {
     showChooseCharacter()
   }
