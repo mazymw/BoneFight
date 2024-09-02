@@ -1,34 +1,21 @@
-[debug] [zinc] IncrementalCompile -----------
-[debug] IncrementalCompile.incrementalCompile
-[debug] previous = Stamps for: 5 products, 2 sources, 3 libraries
-[debug] current source = Set(${BASE}/src/main/scala/mingwey/game/view/GameController.scala, ${BASE}/src/main/scala/mingwey/game/view/RootLayoutController.scala, ${BASE}/src/main/scala/mingwey/game/MainApp.scala, ${BASE}/src/main/scala/mingwey/game/view/DifficultyController.scala, ${BASE}/src/main/scala/mingwey/game/view/HomeController.scala, ${BASE}/src/main/scala/MyApp.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(${BASE}/src/main/scala/mingwey/game/view/GameController.scala, ${BASE}/src/main/scala/mingwey/game/view/RootLayoutController.scala, ${BASE}/src/main/scala/mingwey/game/MainApp.scala, ${BASE}/src/main/scala/mingwey/game/view/HomeController.scala, ${BASE}/src/main/scala/mingwey/game/view/DifficultyController.scala), removed = Set(${BASE}/src/main/scala/mingwey/game/view/MainApp.scala), changed = Set(), unmodified = ...),Set(${BASE}/target/scala-2.12/classes/mingwey/game/MainApp$.class, ${BASE}/target/scala-2.12/classes/mingwey/game/MainApp.class),Set(),API Changes: Set())
-[debug] 
-[debug] Initial source changes:
-[debug] 	removed: Set(${BASE}/src/main/scala/mingwey/game/view/MainApp.scala)
-[debug] 	added: Set(${BASE}/src/main/scala/mingwey/game/view/GameController.scala, ${BASE}/src/main/scala/mingwey/game/view/RootLayoutController.scala, ${BASE}/src/main/scala/mingwey/game/MainApp.scala, ${BASE}/src/main/scala/mingwey/game/view/DifficultyController.scala, ${BASE}/src/main/scala/mingwey/game/view/HomeController.scala)
-[debug] 	modified: Set()
-[debug] Invalidated products: Set(${BASE}/target/scala-2.12/classes/mingwey/game/MainApp$.class, ${BASE}/target/scala-2.12/classes/mingwey/game/MainApp.class)
-[debug] External API changes: API Changes: Set()
-[debug] Modified binary dependencies: Set()
-[debug] Initial directly invalidated classes: Set(mingwey.game.MainApp)
-[debug] Sources indirectly invalidated by:
-[debug] 	product: Set(${BASE}/src/main/scala/mingwey/game/view/MainApp.scala)
-[debug] 	binary dep: Set()
-[debug] 	external source: Set()
-[debug] All initially invalidated classes: Set(mingwey.game.MainApp)
-[debug] All initially invalidated sources:Set(${BASE}/src/main/scala/mingwey/game/view/GameController.scala, ${BASE}/src/main/scala/mingwey/game/view/RootLayoutController.scala, ${BASE}/src/main/scala/mingwey/game/MainApp.scala, ${BASE}/src/main/scala/mingwey/game/view/DifficultyController.scala, ${BASE}/src/main/scala/mingwey/game/view/HomeController.scala, ${BASE}/src/main/scala/mingwey/game/view/MainApp.scala)
-[debug] Initial set of included nodes: mingwey.game.MainApp
-[debug] Recompiling all sources: number of invalidated sources > 50.0 percent of all sources
-[debug] compilation cycle 1
-[info] compiling 6 Scala sources to C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes ...
-[debug] Getting org.scala-sbt:compiler-bridge_2.12:1.9.5:compile for Scala 2.12.19
-[debug] [zinc] Running cached compiler 175ea1cf for Scala compiler version 2.12.19
-[debug] [zinc] The Scala compiler is invoked with:
-[debug] 	-Xplugin:C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalamacros\paradise_2.12.19\2.1.1\paradise_2.12.19-2.1.1.jar
-[debug] 	-bootclasspath
-[debug] 	C:\Program Files\Java\jdk-1.8\jre\lib\resources.jar;C:\Program Files\Java\jdk-1.8\jre\lib\rt.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jsse.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jce.jar;C:\Program Files\Java\jdk-1.8\jre\lib\charsets.jar;C:\Program Files\Java\jdk-1.8\jre\lib\jfr.jar;C:\Program Files\Java\jdk-1.8\jre\classes;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.12.19\scala-library-2.12.19.jar
-[debug] 	-classpath
-[debug] 	C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalafx\scalafx_2.12\12.0.2-R18\scalafx_2.12-12.0.2-R18.jar;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalafx\scalafxml-core-sfx8_2.12\0.5\scalafxml-core-sfx8_2.12-0.5.jar;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-reflect\2.12.19\scala-reflect-2.12.19.jar;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalafx\scalafxml-core-macros-sfx8_2.12\0.5\scalafxml-core-macros-sfx8_2.12-0.5.jar
-[debug] Scala compilation took 7.3769438 s
-[info] done compiling
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] IncrementalCompile -----------[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
+[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 0 products, 0 sources, 0 libraries[0m
+[0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/mingwey/game/view/ChooseCharacterController.scala, ${BASE}/src/main/scala/mingwey/game/view/GameController.scala, ${BASE}/src/main/scala/mingwey/game/model/Character.scala, ${BASE}/src/main/scala/mingwey/game/view/RootLayoutController.scala, ${BASE}/src/main/scala/mingwey/game/model/Game.scala, ${BASE}/src/main/scala/mingwey/game/MainApp.scala, ${BASE}/src/main/scala/mingwey/game/view/DifficultyController.scala, ${BASE}/src/main/scala/mingwey/game/model/Superpower.scala, ${BASE}/src/main/scala/mingwey/game/view/DialogController.scala, ${BASE}/src/main/scala/mingwey/game/model/Bone.scala, ${BASE}/src/main/scala/mingwey/game/view/HomeController.scala, ${BASE}/src/main/scala/MyApp.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(${BASE}/src/main/scala/mingwey/game/view/DialogController.scala, ${BASE}/src/main/scala/mingwey/game/model/Superpower.scala, ${BASE}/src/main/scala/mingwey/game/view/RootLayoutController.scala, ${BASE}/src/main/scala/MyApp.scala, ${BASE}/src/main/scala/mingwey/game/model/Character.scala, ${BASE}/src/main/scala/mingwey/game/model/Bone.scala, ${BASE}/src/main/scala/mingwey/game/MainApp.scala, ${BASE}/src/main/scala/mingwey/game/model/Game.scala, ${BASE}/src/main/scala/mingwey/game/view/HomeController.scala, ${BASE}/src/main/scala/mingwey/game/view/DifficultyController.scala, ${BASE}/src/main/scala/mingwey/game/view/ChooseCharacterController.scala, ${BASE}/src/main/scala/mingwey/game/view/GameController.scala), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())[0m
+[0m[[0m[0mdebug[0m] [0m[0mFull compilation, no sources in previous analysis.[0m
+[0m[[0m[0mdebug[0m] [0m[0mall 12 sources are invalidated[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
+[0m[[0m[0mdebug[0m] [0m[0mRecompiling all sources: number of invalidated sources > 50.0 percent of all sources[0m
+[0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 12 Scala sources to C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.9.5:compile for Scala 2.12.19[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 3714435e for Scala compiler version 2.12.19[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalamacros\paradise_2.12.19\2.1.1\paradise_2.12.19-2.1.1.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-library\2.12.19\scala-library-2.12.19.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalafx\scalafx_2.12\12.0.2-R18\scalafx_2.12-12.0.2-R18.jar;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalafx\scalafxml-core-sfx8_2.12\0.5\scalafxml-core-sfx8_2.12-0.5.jar;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-lang\scala-reflect\2.12.19\scala-reflect-2.12.19.jar;C:\Users\mazym\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scalafx\scalafxml-core-macros-sfx8_2.12\0.5\scalafxml-core-macros-sfx8_2.12-0.5.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCompilation failed (CompilerInterface)[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m

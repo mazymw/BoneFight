@@ -1,27 +1,7 @@
-[debug] Created transactional ClassFileManager with tempDir = C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes.bak
-[debug] About to delete class files:
-[debug] 	MainApp$delayedInit$body.class
-[debug] 	MainApp$$anon$1.class
-[debug] 	MainApp$.class
-[debug] 	MainApp$$anon$1$$anon$2.class
-[debug] 	MainApp.class
-[debug] We backup class files:
-[debug] 	MainApp$delayedInit$body.class
-[debug] 	MainApp$$anon$1.class
-[debug] 	MainApp$.class
-[debug] 	MainApp$$anon$1$$anon$2.class
-[debug] 	MainApp.class
-[debug] Registering generated classes:
-[debug] 	DifficultyController$Controller.class
-[debug] 	MainApp$delayedInit$body.class
-[debug] 	GameController.class
-[debug] 	MainApp$$anon$1.class
-[debug] 	RootLayoutController.class
-[debug] 	HomeController$Controller.class
-[debug] 	HomeController.class
-[debug] 	MainApp$.class
-[debug] 	MainApp$$anon$1$$anon$2.class
-[debug] 	DifficultyController.class
-[debug] 	RootLayoutController$Controller.class
-[debug] 	MainApp.class
-[debug] Removing the temporary directory used for backing up class files: C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes.bak
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mRolling back changes to class files.[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0mRestoring class files: [0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\target\scala-2.12\classes.bak[0m

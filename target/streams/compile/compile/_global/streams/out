@@ -1,2 +1,345 @@
-[debug] Acquiring lock on file C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\project\target\.sbt-compilation-infos\root-compile\.sbt-idea-lock ...
-[debug] Releasing lock on file C:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\project\target\.sbt-compilation-infos\root-compile\.sbt-idea-lock.
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:3:8: not found: object javafx[0m
+[0m[[0m[31merror[0m] [0m[0mimport javafx.{scene => jfxs}[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:23:20: Symbol 'type javafx.fxml.FXMLLoader' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'class scalafxml.core.FXMLLoader'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type FXMLLoader is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'FXMLLoader.class' was compiled against an incompatible version of javafx.fxml.[0m
+[0m[[0m[31merror[0m] [0m[0m  val loader = new FXMLLoader(rootResource, NoDependencyResolver)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:25:10: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m  loader.load();[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:27:22: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m  val roots = loader.getRoot[jfxs.layout.BorderPane][0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:27:30: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m  val roots = loader.getRoot[jfxs.layout.BorderPane][0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:25:3: Symbol 'type javafx.event.EventTarget' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'class scalafx.stage.Window'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type EventTarget is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'Window.class' was compiled against an incompatible version of javafx.event.[0m
+[0m[[0m[31merror[0m] [0m[0m  loader.load();[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:40:12: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    loader.load()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:41:24: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:41:32: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\HomeController.scala:7:2: exception during macro expansion: [0m
+[0m[[0m[31merror[0m] [0m[0mscala.ScalaReflectionException: object javafx.scene.text.Text in compiler mirror not found.[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:141)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:29)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.determineInputType$1(sfxmlMacro.scala:119)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.$anonfun$impl$8(sfxmlMacro.scala:165)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.collection.immutable.List.map(List.scala:293)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.impl(sfxmlMacro.scala:163)[0m
+[0m[[0m[31merror[0m] [0m[0m@sfxml[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:45:58: type Controller is not a member of mingwey.game.view.HomeController[0m
+[0m[[0m[31merror[0m] [0m[0m    val controller = loader.getController[HomeController#Controller][0m
+[0m[[0m[31merror[0m] [0m[0m                                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:53:12: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    loader.load()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:54:25: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots2 = loader.getRoot[jfxs.Parent][0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:54:33: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots2 = loader.getRoot[jfxs.Parent][0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\DialogController.scala:10:2: exception during macro expansion: [0m
+[0m[[0m[31merror[0m] [0m[0mscala.ScalaReflectionException: object javafx.scene.control.Button in compiler mirror not found.[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:141)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:29)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.determineInputType$1(sfxmlMacro.scala:119)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.$anonfun$impl$8(sfxmlMacro.scala:165)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.collection.immutable.List.map(List.scala:293)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.impl(sfxmlMacro.scala:163)[0m
+[0m[[0m[31merror[0m] [0m[0m@sfxml[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:55:60: type Controller is not a member of mingwey.game.view.DialogController[0m
+[0m[[0m[31merror[0m] [0m[0m    val controller = loader.getController[DialogController#Controller][0m
+[0m[[0m[31merror[0m] [0m[0m                                                           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:56:22: Symbol 'type javafx.stage.StageStyle' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'value scalafx.stage.Stage.style'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type StageStyle is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'Stage.class' was compiled against an incompatible version of javafx.stage.[0m
+[0m[[0m[31merror[0m] [0m[0m    val dialog = new Stage() {[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:73:12: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    loader.load()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:74:24: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:74:32: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:13:2: exception during macro expansion: [0m
+[0m[[0m[31merror[0m] [0m[0mscala.ScalaReflectionException: object javafx.scene.layout.GridPane in compiler mirror not found.[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:141)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:29)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.determineInputType$1(sfxmlMacro.scala:119)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.$anonfun$impl$8(sfxmlMacro.scala:165)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.collection.immutable.List.map(List.scala:293)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.impl(sfxmlMacro.scala:163)[0m
+[0m[[0m[31merror[0m] [0m[0m@sfxml[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:76:69: type Controller is not a member of mingwey.game.view.ChooseCharacterController[0m
+[0m[[0m[31merror[0m] [0m[0m    val controller = loader.getController[ChooseCharacterController#Controller][0m
+[0m[[0m[31merror[0m] [0m[0m                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:84:12: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    loader.load()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:85:24: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:85:32: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\DifficultyController.scala:8:2: exception during macro expansion: [0m
+[0m[[0m[31merror[0m] [0m[0mscala.ScalaReflectionException: object javafx.scene.control.Button in compiler mirror not found.[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:141)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:29)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.determineInputType$1(sfxmlMacro.scala:119)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.$anonfun$impl$8(sfxmlMacro.scala:165)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.collection.immutable.List.map(List.scala:293)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.impl(sfxmlMacro.scala:163)[0m
+[0m[[0m[31merror[0m] [0m[0m@sfxml[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:87:64: type Controller is not a member of mingwey.game.view.DifficultyController[0m
+[0m[[0m[31merror[0m] [0m[0m    val controller = loader.getController[DifficultyController#Controller][0m
+[0m[[0m[31merror[0m] [0m[0m                                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:95:12: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    loader.load();[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:96:24: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:96:32: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:24:2: exception during macro expansion: [0m
+[0m[[0m[31merror[0m] [0m[0mscala.ScalaReflectionException: object javafx.scene.shape.Circle in compiler mirror not found.[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:141)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.reflect.internal.Mirrors$RootsBase.staticClass(Mirrors.scala:29)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.determineInputType$1(sfxmlMacro.scala:119)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.$anonfun$impl$8(sfxmlMacro.scala:165)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.collection.immutable.List.map(List.scala:293)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scalafxml.core.macros.sfxmlMacro$.impl(sfxmlMacro.scala:163)[0m
+[0m[[0m[31merror[0m] [0m[0m@sfxml[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:98:58: type Controller is not a member of mingwey.game.view.GameController[0m
+[0m[[0m[31merror[0m] [0m[0m    val controller = loader.getController[GameController#Controller][0m
+[0m[[0m[31merror[0m] [0m[0m                                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:106:12: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    loader.load()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:107:25: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots2 = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:107:33: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots2 = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:108:60: type Controller is not a member of mingwey.game.view.DialogController[0m
+[0m[[0m[31merror[0m] [0m[0m    val controller = loader.getController[DialogController#Controller][0m
+[0m[[0m[31merror[0m] [0m[0m                                                           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:126:12: value load is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    loader.load()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:127:25: value getRoot is not a member of scalafxml.core.FXMLLoader[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots2 = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:127:33: not found: value jfxs[0m
+[0m[[0m[31merror[0m] [0m[0m    val roots2 = loader.getRoot[jfxs.layout.AnchorPane][0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:128:60: type Controller is not a member of mingwey.game.view.DialogController[0m
+[0m[[0m[31merror[0m] [0m[0m    val controller = loader.getController[DialogController#Controller][0m
+[0m[[0m[31merror[0m] [0m[0m                                                           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:18:20: Symbol 'term javafx.scene' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'class scalafx.scene.media.MediaPlayer'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that term scene is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'MediaPlayer.class' was compiled against an incompatible version of javafx.[0m
+[0m[[0m[31merror[0m] [0m[0m  var mediaPlayer: MediaPlayer = null[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:158:42: value stop is not a member of scalafx.scene.media.MediaPlayer[0m
+[0m[[0m[31merror[0m] [0m[0m    if (mediaPlayer != null) mediaPlayer.stop()[0m
+[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:160:17: value setCycleCount is not a member of scalafx.scene.media.MediaPlayer[0m
+[0m[[0m[31merror[0m] [0m[0m    mediaPlayer.setCycleCount(if (loop) MediaPlayer.Indefinite else 1)[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\MainApp.scala:161:17: value play is not a member of scalafx.scene.media.MediaPlayer[0m
+[0m[[0m[31merror[0m] [0m[0m    mediaPlayer.play()[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:29:33: not found: value javafx[0m
+[0m[[0m[31merror[0m] [0m[0m  var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:29:78: not found: value javafx[0m
+[0m[[0m[31merror[0m] [0m[0m  var allStackPane: ArrayBuffer[javafx.scene.layout.StackPane] = ArrayBuffer[javafx.scene.layout.StackPane]()[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:52:14: value getChildren is not a member of scalafx.scene.layout.GridPane[0m
+[0m[[0m[31merror[0m] [0m[0m    gridPane.getChildren.forEach {[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:53:23: not found: value javafx[0m
+[0m[[0m[31merror[0m] [0m[0m      case stackPane: javafx.scene.layout.StackPane =>[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:75:17: value getStyleClass is not a member of scalafx.scene.layout.StackPane[0m
+[0m[[0m[31merror[0m] [0m[0m    clickedPane.getStyleClass.add("stack-pane-selected")[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:95:22: value setImage is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m        characterImg.setImage(characterImage) // Set the character image[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:98:22: value setPreserveRatio is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m        characterImg.setPreserveRatio(true)[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:99:22: value setFitWidth is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m        characterImg.setFitWidth(characterImg.getFitWidth)[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:99:47: value getFitWidth is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m        characterImg.setFitWidth(characterImg.getFitWidth)[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:100:22: value setFitHeight is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m        characterImg.setFitHeight(characterImg.getFitHeight)[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\ChooseCharacterController.scala:100:48: value getFitHeight is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m        characterImg.setFitHeight(characterImg.getFitHeight)[0m
+[0m[[0m[31merror[0m] [0m[0m                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\DifficultyController.scala:20:5: Symbol 'type javafx.event.EventHandler' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'method scalafx.scene.Node.onMouseClicked'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type EventHandler is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'Node.class' was compiled against an incompatible version of javafx.event.[0m
+[0m[[0m[31merror[0m] [0m[0m    easyButton.onMouseClicked = _ => setDifficultyAndStartGame("Easy")[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\DifficultyController.scala:20:33: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    easyButton.onMouseClicked = _ => setDifficultyAndStartGame("Easy")[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\DifficultyController.scala:21:35: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    mediumButton.onMouseClicked = _ => setDifficultyAndStartGame("Medium")[0m
+[0m[[0m[31merror[0m] [0m[0m                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\DifficultyController.scala:22:33: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    hardButton.onMouseClicked = _ => setDifficultyAndStartGame("Hard")[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:71:14: value setImage is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m  charImage1.setImage(playerImage)[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:72:14: value setImage is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m  charImage2.setImage(computerImage)[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:73:9: value setImage is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m  bone1.setImage(playerBone)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:74:9: value setImage is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m  bone2.setImage(computerBone)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:84:39: value getLayoutY is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m      charImage1.layoutY = charImage1.getLayoutY - (playerImage.height.value - charImage1.fitHeight.value)[0m
+[0m[[0m[31merror[0m] [0m[0m                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:91:79: value getFitWidth is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m    val xCoor = (imageView.layoutX.value, imageView.layoutX.value + imageView.getFitWidth)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:98:64: value getFitWidth is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m    val xCoor = (bone.layoutX.value, bone.layoutX.value + bone.getFitWidth)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:99:66: value getFitHeight is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m    val yCoor = (bone.layoutY.value , bone.layoutY.value  + bone.getFitHeight)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:100:22: value getFitWidth is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m    val width = bone.getFitWidth[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:101:23: value getFitHeight is not a member of scalafx.scene.image.ImageView[0m
+[0m[[0m[31merror[0m] [0m[0m    val height = bone.getFitHeight[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\model\Bone.scala:9:37: Symbol 'type javafx.beans.value.ObservableValue' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'trait scalafx.beans.value.ObservableValue'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type ObservableValue is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'ObservableValue.class' was compiled against an incompatible version of javafx.beans.value.[0m
+[0m[[0m[31merror[0m] [0m[0m  var img: ObjectProperty[String] = ObjectProperty("/image/bone.png")[0m
+[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:139:5: Symbol 'type javafx.beans.value.ObservableMapValue' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'method scalafx.beans.value.ObservableValue.sfxObservableValue2jfxMapValue'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type ObservableMapValue is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'ObservableValue.class' was compiled against an incompatible version of javafx.beans.value.[0m
+[0m[[0m[31merror[0m] [0m[0m    hpProperty.addListener((_, _, newValue) => {[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:139:16: value addListener is not a member of scalafx.beans.property.DoubleProperty[0m
+[0m[[0m[31merror[0m] [0m[0m    hpProperty.addListener((_, _, newValue) => {[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:140:13: value setProgress is not a member of scalafx.scene.control.ProgressBar[0m
+[0m[[0m[31merror[0m] [0m[0m      hpBar.setProgress(newValue.doubleValue() / totalHp)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:146:35: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    poisonButton.onMouseClicked = e => {[0m
+[0m[[0m[31merror[0m] [0m[0m                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:159:33: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    healButton.onMouseClicked = e => {[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:173:32: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    aimButton.onMouseClicked = e => {[0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:186:46: Symbol 'type javafx.beans.binding.NumberBinding' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'method scalafx.beans.binding.NumberBinding.sfxNumberBinding2jfx'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type NumberBinding is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'NumberBinding.class' was compiled against an incompatible version of javafx.beans.binding.[0m
+[0m[[0m[31merror[0m] [0m[0m    imageView.layoutX = (imageView.layoutX + amountX).doubleValue()[0m
+[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:186:55: value doubleValue is not a member of scalafx.beans.binding.NumberBinding[0m
+[0m[[0m[31merror[0m] [0m[0m    imageView.layoutX = (imageView.layoutX + amountX).doubleValue()[0m
+[0m[[0m[31merror[0m] [0m[0m                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:187:55: value doubleValue is not a member of scalafx.beans.binding.NumberBinding[0m
+[0m[[0m[31merror[0m] [0m[0m    imageView.layoutY = (imageView.layoutY + amountY).doubleValue()[0m
+[0m[[0m[31merror[0m] [0m[0m                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:205:13: Symbol 'type javafx.event.EventHandler' is missing from the classpath.[0m
+[0m[[0m[31merror[0m] [0m[0mThis symbol is required by 'value scalafx.animation.KeyFrame.onFinished'.[0m
+[0m[[0m[31merror[0m] [0m[0mMake sure that type EventHandler is in your classpath and check for conflicting dependencies with `-Ylog-classpath`.[0m
+[0m[[0m[31merror[0m] [0m[0mA full rebuild may help if 'KeyFrame.class' was compiled against an incompatible version of javafx.event.[0m
+[0m[[0m[31merror[0m] [0m[0m            KeyFrame(Duration(AnimationDuration), onFinished = _ => {[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:221:19: value setProgress is not a member of scalafx.scene.control.ProgressBar[0m
+[0m[[0m[31merror[0m] [0m[0m      leftWindBar.setProgress(-wind / game.windValues.max)[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:222:20: value setProgress is not a member of scalafx.scene.control.ProgressBar[0m
+[0m[[0m[31merror[0m] [0m[0m      rightWindBar.setProgress(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:225:19: value setProgress is not a member of scalafx.scene.control.ProgressBar[0m
+[0m[[0m[31merror[0m] [0m[0m      leftWindBar.setProgress(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:226:20: value setProgress is not a member of scalafx.scene.control.ProgressBar[0m
+[0m[[0m[31merror[0m] [0m[0m      rightWindBar.setProgress(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:229:19: value setProgress is not a member of scalafx.scene.control.ProgressBar[0m
+[0m[[0m[31merror[0m] [0m[0m      leftWindBar.setProgress(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:230:20: value setProgress is not a member of scalafx.scene.control.ProgressBar[0m
+[0m[[0m[31merror[0m] [0m[0m      rightWindBar.setProgress(wind / game.windValues.max)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:282:12: value play is not a member of scalafx.scene.media.AudioClip[0m
+[0m[[0m[31merror[0m] [0m[0m    effect.play()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:288:12: value play is not a member of scalafx.scene.media.AudioClip[0m
+[0m[[0m[31merror[0m] [0m[0m    effect.play()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:294:12: value play is not a member of scalafx.scene.media.AudioClip[0m
+[0m[[0m[31merror[0m] [0m[0m    effect.play()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:300:12: value play is not a member of scalafx.scene.media.AudioClip[0m
+[0m[[0m[31merror[0m] [0m[0m    effect.play()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:306:12: value play is not a member of scalafx.scene.media.AudioClip[0m
+[0m[[0m[31merror[0m] [0m[0m    effect.play()[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:354:33: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    holdCircle.onMousePressed = e => {[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\GameController.scala:363:34: missing parameter type[0m
+[0m[[0m[31merror[0m] [0m[0m    holdCircle.onMouseReleased = e => {[0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\mazym\IdeaProjects\finalprojectv2-mazymw2\src\main\scala\mingwey\game\view\RootLayoutController.scala:4:2: not found: value javafx[0m
+[0m[[0m[31merror[0m] [0m[0m@sfxml[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0m94 errors found[0m

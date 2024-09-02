@@ -1,17 +1,17 @@
 package mingwey.game
-import javafx.{scene => jfxs}
-import mingwey.game.model.{Bone, Character, Game}
-import mingwey.game.view.{ChooseCharacterController, DialogController, DifficultyController, GameController, HomeController}
-import scalafx.Includes._
+
 import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
+import javafx.{scene => jfxs}
+import mingwey.game.model._
+import mingwey.game.view.{ChooseCharacterController, DialogController, DifficultyController, GameController, HomeController}
+import scalafx.Includes._
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.media.{Media, MediaPlayer}
 import scalafx.stage.{Modality, Stage, StageStyle}
 import scalafxml.core.{FXMLLoader, NoDependencyResolver}
-
 
 
 object MainApp extends JFXApp {
